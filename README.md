@@ -1,13 +1,12 @@
-/*==========================================   QUANTUM Framework   =========================================*/
-/*  Core:                             |  OLLYXAR ENGINE                                                     */
-/*  Company:                          |  Q-WEB Integration (q@q-web.com.ua)                                 */
-/*  Author:                           |  Olexy Sviridenko (aka Alex Slipknot | alexslipknot@europe.com)     */
-/*  PHP, Database and JS development: |  Olexy Sviridenko                                                   */
-/*  HTML and CSS design:              |  Olexandra Bespalova, Olexy Sviridenko, Olexander Sharin            */
+QUANTUM Framework
+======================
++ Version: 2.0.1
++ Author: Olexy Sviridenko (aka Alex Slipknot | alexslipknot@europe.com)
++ HTML and CSS design: Olexandra Bespalova, Olexy Sviridenko, Olexander Sharin
++ URL: http://ollyxar.com
++ Created: 2014
 
-/*==========================================   SPECIAL THANKS TO   =========================================*/
-/*  PHP - Hypertext Preprocessor                                                           http://php.net/  */
-/*  jQuery - JavaScript (ECMAScript) framework                                          http://jquery.com/  */
-/*  Bootstrap - css framework                                                     http://getbootstrap.com/  */
-/*  CKEditor - web text editor                                                        http://ckeditor.com/  */
-/*  CodeMirror - web text editor                                                    http://codemirror.net/  */
+Description
+-----------
+QUANTUM is a fast and light framework for building websites or web-applications.
+With QUANTUM You can build site with any difficulty level. It may Personal website, E-commerce website or Highload project.
