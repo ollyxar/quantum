@@ -9,4 +9,4 @@ QUANTUM Framework
 Description
 -----------
 QUANTUM is a fast and light framework for building websites or web-applications.
-With QUANTUM You can build site with any difficulty level. It may Personal website, E-commerce website or Highload project.
+With QUANTUM You can build site with any difficulty level. It may be Personal website, E-commerce website or Highload project.
