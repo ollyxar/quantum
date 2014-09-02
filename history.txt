@@ -1,0 +1,138 @@
+/*==========================================   QUANTUM Framework   =========================================*/
+/*  Core:                             |  OLLYXAR ENGINE                                                     */
+/*  Company:                          |  Q-WEB Integration (q@q-web.com.ua)                                 */
+/*  Author:                           |  Olexy Sviridenko (aka Alex Slipknot | alexslipknot@europe.com)     */
+/*  PHP, Database and JS development: |  Olexy Sviridenko                                                   */
+/*  HTML and CSS design:              |  Olexandra Bespalova, Olexy Sviridenko, Olexander Sharin            */
+/*  Date:                             |  31.08.2014                                                         */
+/*==========================================================================================================*/
+
+/*==========================================   SPECIAL THANKS TO   =========================================*/
+/*  PHP - Hypertext Preprocessor                                                           http://php.net/  */
+/*  jQuery - JavaScript (ECMAScript) framework                                          http://jquery.com/  */
+/*  Bootstrap - css framework                                                     http://getbootstrap.com/  */
+/*  CKEditor - web text editor                                                        http://ckeditor.com/  */
+/*  CodeMirror - web text editor                                                    http://codemirror.net/  */
+/*===============================================   HISTORY   ==============================================*/
+
+F - Frontend; B - Backend; C - Core; M - Modules
+
+2.0.1:
+- C: Modified QCaptcha;
+- M: Added captcha support for Feedback module;
+- C: Modified QOllyxar->sendMail() - added additional parameters to work with attachment;
+- B: Improved compatibility for servers without mod_rewrite - links that contains ADM_PATH now has index.php;
+- C: Modified QCache - added optional $path_to_system - to call cache from other directories;
+- B: Added "Manage" button on Modules page;
+- M: Improved Reviews - multilanguage system;
+- B: Added Ukrainian localization;
+- F: Added Russian localization;
+- C: Modified printPagination - added additional parameter for old stylesheet;
+- F: Replaced old template with new;
+- C: Removed unused methods from QImage;
+- M: Removed redundant query in addLanguage, removeLanguage;
+
+2.0.0:
+- C: Modified routing system:
+     - Modified database structure;
+     - Removed buildURL from QModule;
+     - Modified doRoute in QOllyxar;
+     - Added method link in QUrl;
+     - Added method fillGET in QUrl;
+     - Added method callMethod in QOllyxar;
+- M: Added variable route;
+- C: Added ROOT_DIR constant;
+- C: Moved rarely used variables;
+- C: Renamed QHeader to QDocument;
+- C: Added method QUrl->redirect;
+- C: Added method QUrl->correctUrl;
+- C: Replaced substr(TEMPLATE, 1) with TEMPLATE;
+- C: Moved QModule->execute;
+- C: Renamed QModule->onRoute to Qmodule->index;
+- C: Added compress function;
+- M: Moved variable QModule->can_execute;
+- C: Added const USE_COMPRESSION;
+- C: Fixed addLanguage (settings for site meta-data undefined in new language);
+- M: Added addLanguage to modules that should have it;
+- C: Added support for application/x-zip-compressed QInstaller;
+- M: Modified MainMenu (added path-hint select box);
+- B: Added breadcrumbs;
+- C: Improved compatibility for root directories that is not '/';
+
+1.1.4:
+- C: Added function resizeImage;
+- C: Modified method resize of QImage;
+- C: Modified function resizeImage - added no-image value, added mode Crop;
+- M: Modified Photos and Materials module - added resizeImage function;
+- C: Fixed error when language deleted and user still has session with deleted language;
+- C: Moved code from init of QModule to __construct;
+- C: Removed method initModules from QOllyxar;
+- B: Backend: Replaced KCFinder with QFinder;
+- B: Modified displaying of file manager - in main frame of CMS;
+- B: Modified module slider: added additional buttons for pictures;
+- B: Fixed displaying none of elements of "system" in main menu for Moderator or lower;
+- B: Modified language system. Replaced php-files with ini-files;
+
+1.1.3:
+- C: Modified response for not-found-pages;
+- C: Added config-value "USE_404_REDIRECT";
+- C: Fixed 302 response for SEO-Multilanguage system;
+- C: Fixed default meta-data for SEO-Multilanguage system;
+- C: Added rewrite condition for non php-files;
+- C: Fixed page 404 when current link has slash (directory);
+
+1.1.2:
+- C: Modified security system for templates: added rule for .tpl - files, changed template extensions;
+- C: Fixed incompatible $_GET parameters in QUrl;
+- C: Fixed QUrl->is_category;
+- M: Modified CLEAN_URL for Materials;
+- C: Modified QModule::output (replaced foreach() code with extract() function);
+
+1.1.1:
+- M: Fixed displaying home page (StaticPages);
+- C: Added class QUrl;
+- M: Modified onRoute methods of modules: Photos, Slider, StaticPages;
+- C: Added new instance of QUrl in QOllyxar::doRoute;
+- M: Modified Materials: optimized file structure, added breadcrumbs;
+- C: Added class QCaptcha;
+- B: Modified AMaterials;
+- M: Fixed onRoute methods of StaticPages, Materials when CLEAN_URL is turned off;
+- B: Added site settings: added default meta data, modified control panel in back-end;
+- M: Modified Materials and StaticPages - filled with default meta data if not defined;
+
+1.1.0:
+- C: Renamed method "doRoute" of QModule to "onRoute";
+- M: Modified "addLanguage" in MainMenu: new data will filled with default values;
+- M: Modified "addLanguage" in StaticPages: new data will filled with default values;
+- M: Modified "addLanguage" in Materials: new data will filled with default values;
+- M: Fixed StaticPage "page detection": now 'http://site.name/page-name/' return 404;
+- C: Modified QModule: Added variables to better backend integration;
+- C: Replaced pattern "adm_system" with "adm_units" in QInstaller;
+
+1.0.4:
+- C: Replaced TRUE and FALSE with lowercase characters;
+- C: Fixed printPagination function when $_GET['lang'] does not exists;
+- C: Added pattern "adm_tpl" in QInstaller;
+- C: Replaced pattern "adm_template" with "adm_system" in QInstaller;
+- C: Increased version of QInstaller to 1.1;
+
+1.0.3:
+- C: Added property "version" and method "getVersion" for QModule library;
+- C: Added "PRTCL" constant in configuration file;
+- C: Added QInstaller library;
+- C: Added protected function "buildURL" for QModule library;
+- C: Renamed constant "CURL" to "CLEAN_URL";
+- C: Added optional parameter $load_all_modules in QOllyxar::__construct;
+- C: Removed optional parameter $start_exit in QOllyxar::__construct;
+- C: Added exception when "mysqli_fetch_all" does not exists;
+- C: Added ability to install/uninstall modules;
+- C: Added function "magicQuotesFix";
+
+1.0.2:
+- C: Fixed "db_queries error" for PHP 5.4+;
+
+1.0.1:
+- C: Fixed "non object error" for MySQL_i library;
+
+1.0:
+- First release;

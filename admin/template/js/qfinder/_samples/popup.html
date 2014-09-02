@@ -1,0 +1,52 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>QFinder - Sample - Popup</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta name="robots" content="noindex, nofollow" />
+	<link href="sample.css" rel="stylesheet" type="text/css" />
+	<script type="text/javascript" src="../qfinder.js"></script>
+	<script type="text/javascript">
+
+function BrowseServer()
+{
+	// You can use the "QFinder" class to render QFinder in a page:
+	var finder = new QFinder();
+	finder.basePath = '../';	// The path for the installation of QFinder (default = "/qfinder/").
+	finder.selectActionFunction = SetFileField;
+	finder.popup();
+
+	// It can also be done in a single line, calling the "static"
+	// popup( basePath, width, height, selectFunction ) function:
+	// QFinder.popup( '../', null, null, SetFileField ) ;
+	//
+	// The "popup" function can also accept an object as the only argument.
+	// QFinder.popup( { basePath : '../', selectActionFunction : SetFileField } ) ;
+}
+
+// This is a sample function which is called when a file is selected in QFinder.
+function SetFileField( fileUrl )
+{
+	document.getElementById( 'xFilePath' ).value = fileUrl;
+}
+
+	</script>
+</head>
+<body>
+	<h1 class="samples">
+		QFinder - Sample - Popup<br />
+	</h1>
+	<div class="description">
+		QFinder may be used in a popup. You may define a custom JavaScript function to be called when
+		an image is selected (double-clicked).</div>
+	<p>
+		Selected File URL<br />
+		<input id="xFilePath" name="FilePath" type="text" size="60" />
+		<input type="button" value="Browse Server" onclick="BrowseServer();" />
+	</p>
+	<div id="footer">
+		<hr />
+	</div>
+</body>
+</html>

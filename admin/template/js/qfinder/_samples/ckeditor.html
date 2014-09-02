@@ -1,0 +1,48 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>QFinder - Sample - CKEditor Integration</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta name="robots" content="noindex, nofollow" />
+	<link href="sample.css" rel="stylesheet" type="text/css" />
+	<script type="text/javascript" src="/ckeditor/ckeditor.js"></script>
+	<script type="text/javascript" src="../qfinder.js"></script>
+</head>
+<body>
+	<h1 class="samples">
+		QFinder - Sample - CKEditor Integration
+	</h1>
+	<textarea id="editor1" name="editor1" rows="10" cols="80"></textarea>
+
+		<script type="text/javascript">
+
+// This is a check for the CKEditor class. If not defined, the paths must be checked.
+if ( typeof CKEDITOR == 'undefined' )
+{
+	document.write(
+		'<strong><span style="color: #ff0000">Error</span>: CKEditor not found</strong>.' +
+		'This sample assumes that CKEditor (not included with QFinder) is installed in' +
+		'the "/ckeditor/" path. If you have it installed in a different place, just edit' +
+		'this file, changing the wrong paths in the &lt;head&gt; (line 5) and the "BasePath"' +
+		'value (line 32).' ) ;
+}
+else
+{
+	var editor = CKEDITOR.replace( 'editor1' );
+	editor.setData( '<p>Just click the <b>Image</b> or <b>Link</b> button, and then <b>&quot;Browse Server&quot;</b>.</p>' );
+
+	// Just call QFinder.setupCKEditor and pass the CKEditor instance as the first argument.
+	// The second parameter (optional), is the path for the QFinder installation (default = "/qfinder/").
+	QFinder.setupCKEditor( editor, '../' ) ;
+
+	// It is also possible to pass an object with selected QFinder properties as a second argument.
+	// QFinder.setupCKEditor( editor, { basePath : '../', skin : 'v1' } ) ;
+}
+
+		</script>
+	</p>
+	<div id="footer">
+		<hr />
+	</div>
+</body>
+</html>

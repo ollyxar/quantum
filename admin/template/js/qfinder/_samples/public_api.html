@@ -1,0 +1,110 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>QFinder - Sample - Public API</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta name="robots" content="noindex, nofollow" />
+	<link href="sample.css" rel="stylesheet" type="text/css" />
+	<script type="text/javascript" src="../qfinder.js"></script>
+</head>
+<body>
+	<h1 class="samples">
+		QFinder - Sample - API examples
+	</h1>
+	<div class="description">
+
+	<p>
+		In this example, please check the <strong>file and folder context menu</strong> and <strong>toolbar in the Basket folder</strong>.
+	</p>
+	</div>
+	<p style="padding-left: 30px; padding-right: 30px;">
+		<script type="text/javascript">
+
+			// See http://docs.cksource.com/qfinder_2.x_api/symbols/QFinder.html#.addPlugin
+			// See http://docs.cksource.com/QFinder_2.x/Developers_Guide/PHP/Plugins/Writing_JavaScript
+			QFinder.addPlugin('basketTest',
+			{
+				basketToolbar :
+				[
+					[
+						// UI type have to be in string form.
+						'basketTest',
+						{
+							label : 'Basket Test',
+							icon : false,
+							onClick : function()
+							{
+								alert( 'My own function executed after pressing Basket Test.' );
+							}
+						}
+					]
+				],
+				basketFileContextMenu :
+				[
+					[
+						'basketTest',
+						{
+							label : 'Basket Test',
+							onClick : function()
+							{
+								alert( 'My own function executed after selecting Basket Test in the context menu.' );
+							},
+							group : 'file1'
+						}
+					]
+				]
+			});
+
+			// You can use the "QFinder" class to render QFinder in a page:
+			var finder = new QFinder();
+			finder.extraPlugins = 'basketTest';
+			finder.basePath = '../';	// The path for the installation of QFinder (default = "/qfinder/").
+			finder.callback = function( api )
+			{
+				// Add new sidebar tool space (with layout).
+				var toolId = api.addToolPanel();
+				api.hideTool( toolId );
+
+				// Add new file context menu option.
+				var sampleFileContextMenu =
+				{
+					label : 'API test',
+					command : 'test',
+					group : 'file3'
+				};
+				api.addFileContextMenuOption( sampleFileContextMenu, function( api, file )
+				{
+					var markup = "<h3>Selected file</h3><p>You've selected file &quot;" + file.folder.getPath() + file.name + "&quot;</p>";
+
+					api.document.getElementById( toolId ).innerHTML = markup;
+					api.showTool( toolId );
+
+					api.openMsgDialog( "", "Take a look at the bottom of left sidebar - it contains information about selected file." );
+				});
+
+				// Add new folder context menu option.
+				var sampleFolderContextMenu =
+				{
+					label : 'API test',
+					command : 'test',
+					group : 'folder3'
+				};
+				api.addFolderContextMenuOption( sampleFolderContextMenu, function( api, folder )
+				{
+					var markup = "<h3>Selected folder</h3><p>You've selected folder &quot;" + folder.getPath() + "&quot;</p>";
+
+					api.document.getElementById( toolId ).innerHTML = markup;
+					api.showTool( toolId );
+
+					api.openMsgDialog( "", "Take a look at the bottom of left sidebar - it contains information about selected folder." );
+				});
+			};
+			finder.create();
+		</script>
+	</p>
+	<div id="footer">
+		<hr />
+	</div>
+</body>
+</html>
