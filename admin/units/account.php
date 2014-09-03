@@ -15,12 +15,9 @@ class Account extends \AUnit {
                 $params_arr['title_account_' . $lang['name']]        = $_POST['title_account_' . $lang['name']];
                 $params_arr['log_in_' . $lang['name']]               = $_POST['log_in_' . $lang['name']];
                 $params_arr['log_out_' . $lang['name']]              = $_POST['log_out_' . $lang['name']];
+                $params_arr['confirm_' . $lang['name']]              = $_POST['confirm_' . $lang['name']];
             }
             $params_arr['captcha_required'] = $_POST['captcha_required'];
-            $params_arr['email_required']   = $_POST['email_required'];
-            $params_arr['name_required']    = $_POST['name_required'];
-            $params_arr['phone_required']   = $_POST['phone_required'];
-            $params_arr['message_required'] = $_POST['message_required'];
 
             $this->engine->db->query("UPDATE " . DB_PREF . "modules SET `params`='" .
                 $this->engine->db->escape(serialize($params_arr)) . "' WHERE name='account'");

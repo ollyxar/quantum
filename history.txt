@@ -16,7 +16,7 @@
 /*===============================================   HISTORY   ==============================================*/
 
 F - Frontend; B - Backend; C - Core; M - Modules
-test
+
 2.0.1:
 - C: Modified QCaptcha;
 - M: Added captcha support for Feedback module;
