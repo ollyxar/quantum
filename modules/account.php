@@ -18,7 +18,7 @@ class Account extends QModule {
     public function index() {
         $this->engine->ERROR_404 = FALSE;
         if ($_GET['action'] == 'register') {
-            $this->engine->document->setTitle("User registration");
+            $this->engine->document->setTitle($this->params['title_registration_' . $_SESSION['lang']]);
 
             if (isset($_SESSION['msg'])) {
                 if ($_SESSION['msg'] == 'sent') {
@@ -39,12 +39,14 @@ class Account extends QModule {
                 $_SESSION['captcha'] = $captcha->getCode();
                 unset($captcha);
             }
-            $this->data['caption']              = 'User registration';
-            $this->data['name_placeholder']     = 'Name';
-            $this->data['email_placeholder']    = 'Email';
-            $this->data['password_placeholder'] = 'Password';
+            $this->data['caption']              = $this->params['title_registration_' . $_SESSION['lang']];
+            $this->data['placeholder_name']     = $this->params['placeholder_name_' . $_SESSION['lang']];
+            $this->data['placeholder_email']    = $this->params['placeholder_email_' . $_SESSION['lang']];
+            $this->data['placeholder_password'] = $this->params['placeholder_password_' . $_SESSION['lang']];
+            $this->data['confirm']              = $this->params['confirm_' . $_SESSION['lang']];
             $this->data['agree']                = sprintf('I agree with <a href="%s" target="_blank">Agreement</a>', htmlspecialchars($this->engine->url->link('route=pages&page_id=1')));
             $this->data['name']                 = isset($_POST['name']) ? htmlspecialchars($_POST['name']) : '';
+            $this->data['password']             = isset($_POST['name']) ? htmlspecialchars($_POST['password']) : '';
             $this->data['phone']                = isset($_POST['phone']) ? htmlspecialchars($_POST['phone']) : '';
             $this->data['email']                = isset($_POST['email']) ? htmlspecialchars($_POST['email']) : '';
             $this->data['message']              = isset($_POST['message']) ? htmlspecialchars($_POST['message']) : '';

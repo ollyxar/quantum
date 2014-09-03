@@ -11,18 +11,18 @@
         <input type="hidden" name="register" value="1">
 
         <div class="form-group">
-            <label><?php echo $name_placeholder ?></label>
-            <input class="form-control" name="name" type="text" placeholder="<?php echo $name_placeholder ?>" value="<?php echo $name ?>">
+            <label><?php echo $placeholder_name ?></label>
+            <input class="form-control" name="name" type="text" placeholder="<?php echo $placeholder_name ?>" value="<?php echo $name ?>">
         </div>
 
         <div class="form-group">
-            <label><?php echo $email_placeholder ?></label>
-            <input class="form-control" name="email" type="email" placeholder="<?php echo $email_placeholder ?>" value="<?php echo $email ?>">
+            <label><?php echo $placeholder_email ?></label>
+            <input class="form-control" name="email" type="email" placeholder="<?php echo $placeholder_email ?>" value="<?php echo $email ?>">
         </div>
 
         <div class="form-group">
-            <label><?php echo $password_placeholder ?></label>
-            <input class="form-control" name="email" type="password" placeholder="<?php echo $password_placeholder ?>" value="<?php echo $password ?>">
+            <label><?php echo $placeholder_password ?></label>
+            <input class="form-control" name="email" type="password" placeholder="<?php echo $placeholder_password ?>" value="<?php echo $password ?>">
         </div>
 
         <?php if (isset($captcha)) { ?>
@@ -37,7 +37,13 @@
             </div>
         <?php } ?>
 
-        <input type="button" id="send" class="btn btn-primary form-control" value="<?php echo $send ?>">
+        <div class="form-group">
+            <label style="cursor: pointer; font-weight: normal">
+                <input type="checkbox" name="agree" value="1">&nbsp;<?php echo $agree ?>
+            </label>
+        </div>
+
+        <input type="button" id="send" class="btn btn-primary form-control" value="<?php echo $confirm ?>">
     </form>
 </div>
 

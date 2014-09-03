@@ -16,6 +16,7 @@ class Account extends \AUnit {
                 $params_arr['log_in_' . $lang['name']]               = $_POST['log_in_' . $lang['name']];
                 $params_arr['log_out_' . $lang['name']]              = $_POST['log_out_' . $lang['name']];
                 $params_arr['confirm_' . $lang['name']]              = $_POST['confirm_' . $lang['name']];
+                $params_arr['save_' . $lang['name']]                 = $_POST['save_' . $lang['name']];
             }
             $params_arr['captcha_required'] = $_POST['captcha_required'];
 
