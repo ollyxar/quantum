@@ -137,44 +137,10 @@
                                 <label class="control-label"><?php echo $language['account_page'] ?></label>
                                 <div class="controls">
                                     <input type="text" class="span12" name="title_account_<?php echo $lang['name'] ?>"
-                                           value="<?php echo $settings['title_raccount_' . $lang['name']] ?>"/>
+                                           value="<?php echo $settings['title_account_' . $lang['name']] ?>"/>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                </div>
-                <div class="row-fluid">
-                    <div class="span12">
-                        <div class="span6">
-                            <div class="control-group">
-                                <label class="control-label"><?php echo $language['title'] ?></label>
-
-                                <div class="controls">
-                                    <input type="text" class="span12" name="title_<?php echo $lang['name'] ?>"
-                                           value="<?php echo $settings['title_' . $lang['name']] ?>"/>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="span6">
-                            <div class="control-group">
-                                <label class="control-label"><?php echo $language['btn_send'] ?></label>
-
-                                <div class="controls">
-                                    <input type="text" class="span12"
-                                           name="send_<?php echo $lang['name'] ?>"
-                                           value="<?php echo $settings['send_' . $lang['name']] ?>"/>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="clearfix"></div>
-                <div class="control-group">
-                    <label class="control-label"><?php echo $language['descr'] ?></label>
-
-                    <div class="controls">
-                        <textarea name="descr_<?php echo $lang['name'] ?>"
-                                  style="width:99%; min-height: 100px"><?php echo $settings['descr_' . $lang['name']] ?></textarea>
                     </div>
                 </div>
                 <div class="clearfix"></div>
@@ -183,35 +149,46 @@
 
                     <div class="row-fluid">
                         <div class="span12">
-                            <div class="span4">
+                            <div class="span3">
                                 <div class="control-group">
                                     <label class="control-label"><?php echo $language['log_in'] ?></label>
 
                                     <div class="controls">
-                                        <input type="text" class="span12" name="sent_<?php echo $lang['name'] ?>"
-                                               value="<?php echo $settings['sent_' . $lang['name']] ?>"/>
+                                        <input type="text" class="span12" name="log_in_<?php echo $lang['name'] ?>"
+                                               value="<?php echo $settings['log_in_' . $lang['name']] ?>"/>
                                     </div>
                                 </div>
                             </div>
-                            <div class="span4">
+                            <div class="span3">
                                 <div class="control-group">
                                     <label class="control-label"><?php echo $language['log_out'] ?></label>
 
                                     <div class="controls">
                                         <input type="text" class="span12"
-                                               name="empty_vars_<?php echo $lang['name'] ?>"
-                                               value="<?php echo $settings['empty_vars_' . $lang['name']] ?>"/>
+                                               name="log_out_<?php echo $lang['name'] ?>"
+                                               value="<?php echo $settings['log_out_' . $lang['name']] ?>"/>
                                     </div>
                                 </div>
                             </div>
-                            <div class="span4">
+                            <div class="span3">
                                 <div class="control-group">
-                                    <label class="control-label"><?php echo $language['message_fail'] ?></label>
+                                    <label class="control-label"><?php echo $language['confirm'] ?></label>
 
                                     <div class="controls">
                                         <input type="text" class="span12"
-                                               name="message_fail_<?php echo $lang['name'] ?>"
-                                               value="<?php echo $settings['message_fail_' . $lang['name']] ?>"/>
+                                               name="confirm_<?php echo $lang['name'] ?>"
+                                               value="<?php echo $settings['confirm_' . $lang['name']] ?>"/>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="span3">
+                                <div class="control-group">
+                                    <label class="control-label"><?php echo $language['save'] ?></label>
+
+                                    <div class="controls">
+                                        <input type="text" class="span12"
+                                               name="save_<?php echo $lang['name'] ?>"
+                                               value="<?php echo $settings['save_' . $lang['name']] ?>"/>
                                     </div>
                                 </div>
                             </div>

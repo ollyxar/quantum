@@ -6,15 +6,15 @@ class Account extends \AUnit {
     private function update() {
         if ($this->access['rw'] >= $_SESSION['access']) {
             foreach ($this->engine->languages as $lang) {
-                $params_arr['register_caption_' . $lang['name']]    = $_POST['register_caption_' . $lang['name']];
-                $params_arr['send_' . $lang['name']]                = $_POST['send_' . $lang['name']];
-                $params_arr['sent_' . $lang['name']]                = $_POST['sent_' . $lang['name']];
-                $params_arr['message_fail_' . $lang['name']]        = $_POST['message_fail_' . $lang['name']];
-                $params_arr['empty_vars_' . $lang['name']]          = $_POST['empty_vars_' . $lang['name']];
-                $params_arr['email_placeholder_' . $lang['name']]   = $_POST['email_placeholder_' . $lang['name']];
-                $params_arr['name_placeholder_' . $lang['name']]    = $_POST['name_placeholder_' . $lang['name']];
-                $params_arr['phone_placeholder_' . $lang['name']]   = $_POST['phone_placeholder_' . $lang['name']];
-                $params_arr['message_placeholder_' . $lang['name']] = $_POST['message_placeholder_' . $lang['name']];
+                $params_arr['placeholder_name_' . $lang['name']]     = $_POST['placeholder_name_' . $lang['name']];
+                $params_arr['placeholder_email_' . $lang['name']]    = $_POST['placeholder_email_' . $lang['name']];
+                $params_arr['placeholder_password_' . $lang['name']] = $_POST['placeholder_password_' . $lang['name']];
+                $params_arr['old_pass_' . $lang['name']]             = $_POST['old_pass_' . $lang['name']];
+                $params_arr['new_pass_' . $lang['name']]             = $_POST['new_pass_' . $lang['name']];
+                $params_arr['title_registration_' . $lang['name']]   = $_POST['title_registration_' . $lang['name']];
+                $params_arr['title_account_' . $lang['name']]        = $_POST['title_account_' . $lang['name']];
+                $params_arr['log_in_' . $lang['name']]               = $_POST['log_in_' . $lang['name']];
+                $params_arr['log_out_' . $lang['name']]              = $_POST['log_out_' . $lang['name']];
             }
             $params_arr['captcha_required'] = $_POST['captcha_required'];
             $params_arr['email_required']   = $_POST['email_required'];
