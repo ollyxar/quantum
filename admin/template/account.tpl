@@ -30,18 +30,30 @@
         </div>
     <?php } ?>
     <div class="row-fluid">
-        <div class="span12">
-            <div class="control-group">
-                <label class="control-label"><?php echo $language['captcha_register'] ?></label>
+        <div class="hero-unit">
+            <div class="span6">
+                <div class="control-group">
+                    <label class="control-label"><?php echo $language['captcha_register'] ?></label>
 
-                <div class="controls">
-                    <label>
-                        <input type="hidden" name="captcha_required" value="<?php echo $settings['captcha_required'] ?>">
-                        <input type="checkbox" class="switcher" <?php if ((int)$settings['captcha_required'] == 1) { ?>
-                            checked="checked"<?php } ?>> <?php echo $language['required'] ?>
-                    </label>
+                    <div class="controls">
+                        <label>
+                            <input type="hidden" name="captcha_required" value="<?php echo $settings['captcha_required'] ?>">
+                            <input type="checkbox" class="switcher" <?php if ((int)$settings['captcha_required'] == 1) { ?>
+                                checked="checked"<?php } ?>> <?php echo $language['required'] ?>
+                        </label>
+                    </div>
                 </div>
             </div>
+            <div class="span6">
+                <div class="control-group">
+                    <label class="control-label"><?php echo $language['agreement_link'] ?></label>
+
+                    <div class="controls">
+                        <input type="text"  name="agreement" value="<?php echo $settings['agreement'] ?>" />
+                    </div>
+                </div>
+            </div>
+            <div class="clearfix"></div>
         </div>
     </div>
     <ul class="nav nav-tabs">
@@ -97,7 +109,7 @@
                         </div>
                     </div>
                     <div class="row-fluid">
-                        <div class="span6">
+                        <div class="span4">
                             <div class="control-group">
                                 <label class="control-label"><?php echo $language['old_pass'] ?></label>
 
@@ -107,13 +119,23 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="span6">
+                        <div class="span4">
                             <div class="control-group">
                                 <label class="control-label"><?php echo $language['new_pass'] ?></label>
 
                                 <div class="controls">
                                     <input type="text" class="span12" name="new_pass_<?php echo $lang['name'] ?>"
                                            value="<?php echo $settings['new_pass_' . $lang['name']] ?>"/>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="span4">
+                            <div class="control-group">
+                                <label class="control-label"><?php echo $language['agree_text'] ?></label>
+
+                                <div class="controls">
+                                    <input type="text" class="span12" name="agree_<?php echo $lang['name'] ?>"
+                                           value="<?php echo $settings['agree_' . $lang['name']] ?>"/>
                                 </div>
                             </div>
                         </div>

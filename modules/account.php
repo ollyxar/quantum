@@ -44,7 +44,7 @@ class Account extends QModule {
             $this->data['placeholder_email']    = $this->params['placeholder_email_' . $_SESSION['lang']];
             $this->data['placeholder_password'] = $this->params['placeholder_password_' . $_SESSION['lang']];
             $this->data['confirm']              = $this->params['confirm_' . $_SESSION['lang']];
-            $this->data['agree']                = sprintf('I agree with <a href="%s" target="_blank">Agreement</a>', htmlspecialchars($this->engine->url->link('route=pages&page_id=1')));
+            $this->data['agree']                = sprintf(html_entity_decode($this->params['agree_' . $_SESSION['lang']]), htmlspecialchars($this->engine->url->link($this->params['agreement'])));
             $this->data['name']                 = isset($_POST['name']) ? htmlspecialchars($_POST['name']) : '';
             $this->data['password']             = isset($_POST['name']) ? htmlspecialchars($_POST['password']) : '';
             $this->data['phone']                = isset($_POST['phone']) ? htmlspecialchars($_POST['phone']) : '';

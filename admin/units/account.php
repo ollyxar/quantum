@@ -17,11 +17,12 @@ class Account extends \AUnit {
                 $params_arr['log_out_' . $lang['name']]              = $_POST['log_out_' . $lang['name']];
                 $params_arr['confirm_' . $lang['name']]              = $_POST['confirm_' . $lang['name']];
                 $params_arr['save_' . $lang['name']]                 = $_POST['save_' . $lang['name']];
+                $params_arr['agree_' . $lang['name']]                = htmlspecialchars($_POST['agree_' . $lang['name']], ENT_QUOTES, "UTF-8");
             }
             $params_arr['captcha_required'] = $_POST['captcha_required'];
+            $params_arr['agreement']        = $_POST['agreement'];
 
-            $this->engine->db->query("UPDATE " . DB_PREF . "modules SET `params`='" .
-                $this->engine->db->escape(serialize($params_arr)) . "' WHERE name='account'");
+            $this->engine->db->query("UPDATE " . DB_PREF . "modules SET `params`='" . $this->engine->db->escape(serialize($params_arr)) . "' WHERE name='account'");
 
             $_SESSION['msg'] = 'success';
         } else $_SESSION['msg'] = 'denied';

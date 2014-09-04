@@ -7,7 +7,7 @@
 
 <h2><?php echo $caption ?></h2>
 <div class="row">
-    <form id="contact-form" method="post" style="margin:0 auto;width:300px">
+    <form id="register-form" method="post" style="margin:0 auto;width:300px">
         <input type="hidden" name="register" value="1">
 
         <div class="form-group">
@@ -49,6 +49,6 @@
 
 <script type="text/javascript">
     jQuery('#send').click(function () {
-        jQuery('#contact-form').submit();
+        jQuery('#register-form').submit();
     });
 </script>                                        
