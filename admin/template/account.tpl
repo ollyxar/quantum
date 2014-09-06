@@ -217,6 +217,57 @@
                         </div>
                     </div>
                 </div>
+                <div class="hero-unit">
+                    <h4><?php echo $language['messages'] ?></h4>
+
+                    <div class="row-fluid">
+                        <div class="span12">
+                            <div class="span3">
+                                <div class="control-group">
+                                    <label class="control-label"><?php echo $language['account_exists'] ?></label>
+
+                                    <div class="controls">
+                                        <input type="text" class="span12" name="account_exists_<?php echo $lang['name'] ?>"
+                                               value="<?php echo $settings['account_exists_' . $lang['name']] ?>"/>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="span3">
+                                <div class="control-group">
+                                    <label class="control-label"><?php echo $language['not_valid_email'] ?></label>
+
+                                    <div class="controls">
+                                        <input type="text" class="span12"
+                                               name="not_valid_email_<?php echo $lang['name'] ?>"
+                                               value="<?php echo $settings['not_valid_email_' . $lang['name']] ?>"/>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="span3">
+                                <div class="control-group">
+                                    <label class="control-label"><?php echo $language['not_valid_name'] ?></label>
+
+                                    <div class="controls">
+                                        <input type="text" class="span12"
+                                               name="not_valid_name_<?php echo $lang['name'] ?>"
+                                               value="<?php echo $settings['not_valid_name_' . $lang['name']] ?>"/>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="span3">
+                                <div class="control-group">
+                                    <label class="control-label"><?php echo $language['not_valid_password'] ?></label>
+
+                                    <div class="controls">
+                                        <input type="text" class="span12"
+                                               name="not_valid_password_<?php echo $lang['name'] ?>"
+                                               value="<?php echo $settings['not_valid_password_' . $lang['name']] ?>"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         <?php } ?>
     </div>
