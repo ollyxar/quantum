@@ -60,8 +60,8 @@ class SiteReviews extends QModule {
         if (!$this->engine->url->is_category) {
             $this->engine->ERROR_404 = false;
             $this->engine->document->setTitle($this->params['title_' . $_SESSION['lang']]);
-            $this->engine->document->setMKeywords($this->params['kw_' . $_SESSION['lang']]);
-            $this->engine->document->setMDescription($this->params['descr_' . $_SESSION['lang']]);
+            $this->engine->document->setKeywords($this->params['kw_' . $_SESSION['lang']]);
+            $this->engine->document->setDescription($this->params['descr_' . $_SESSION['lang']]);
             $this->data['leave_review_btn']     = $this->params['leave_review_btn_' . $_SESSION['lang']];
             $this->data['form_caption']         = $this->params['form_caption_' . $_SESSION['lang']];
             $this->data['name_placeholder']     = $this->params['name_placeholder_' . $_SESSION['lang']];

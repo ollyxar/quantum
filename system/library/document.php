@@ -14,11 +14,11 @@ class QDocument {
         $this->title = $str;
     }
 
-    public function setMDescription($str) {
+    public function setDescription($str) {
         $this->meta_description = $str;
     }
 
-    public function setMKeywords($str) {
+    public function setKeywords($str) {
         $this->meta_keywords = $str;
     }
 

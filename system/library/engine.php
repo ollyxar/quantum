@@ -220,8 +220,8 @@ final class QOllyxar {
         // set default meta
         $settings = $this->getSetting();
         $this->document->setTitle($settings['site_name_' . $_SESSION['lang']]);
-        $this->document->setMDescription($settings['site_descr_' . $_SESSION['lang']]);
-        $this->document->setMKeywords($settings['site_kw_' . $_SESSION['lang']]);
+        $this->document->setDescription($settings['site_descr_' . $_SESSION['lang']]);
+        $this->document->setKeywords($settings['site_kw_' . $_SESSION['lang']]);
 
         if ($_GET['route'] == 'home') {
             // starting home page from StaticPages.

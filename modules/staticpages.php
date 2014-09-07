@@ -15,10 +15,10 @@ class StaticPages extends QModule {
                 $this->engine->document->setTitle($page['title']);
             }
             if ($page['kw'] != '') {
-                $this->engine->document->setMKeywords($page['kw']);
+                $this->engine->document->setKeywords($page['kw']);
             }
             if ($page['descr'] != '') {
-                $this->engine->document->setMDescription($page['descr']);
+                $this->engine->document->setDescription($page['descr']);
             }
             return true;
         } else {

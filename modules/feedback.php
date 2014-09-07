@@ -56,8 +56,8 @@ class Feedback extends QModule {
 
         $this->engine->ERROR_404 = FALSE;
         $this->engine->document->setTitle($this->params['title_' . $_SESSION['lang']]);
-        $this->engine->document->setMKeywords($this->params['kw_' . $_SESSION['lang']]);
-        $this->engine->document->setMDescription($this->params['descr_' . $_SESSION['lang']]);
+        $this->engine->document->setKeywords($this->params['kw_' . $_SESSION['lang']]);
+        $this->engine->document->setDescription($this->params['descr_' . $_SESSION['lang']]);
 
         if ((bool)$this->params['captcha_required']) {
             $captcha = new QCaptcha();

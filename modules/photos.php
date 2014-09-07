@@ -47,8 +47,8 @@ class Photos extends QModule {
         if (!$this->engine->url->is_category) {
             $this->engine->ERROR_404 = false;
             $this->engine->document->setTitle($this->params['title_' . $_SESSION['lang']]);
-            $this->engine->document->setMKeywords($this->params['kw_' . $_SESSION['lang']]);
-            $this->engine->document->setMDescription($this->params['descr_' . $_SESSION['lang']]);
+            $this->engine->document->setKeywords($this->params['kw_' . $_SESSION['lang']]);
+            $this->engine->document->setDescription($this->params['descr_' . $_SESSION['lang']]);
             $this->engine->document->addHeaderString('<script src="' . TEMPLATE .'js/jquery.colorbox.js"></script>');
             $this->engine->document->addHeaderString('<link rel="stylesheet" href="' . TEMPLATE . 'css/colorbox.css" />');
             $this->findPhoto();

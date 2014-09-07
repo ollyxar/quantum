@@ -57,10 +57,10 @@ class Materials extends QModule {
                 $this->engine->document->setTitle($category['title']);
             }
             if ($category['kw'] != '') {
-                $this->engine->document->setMKeywords($category['kw']);
+                $this->engine->document->setKeywords($category['kw']);
             }
             if ($category['descr'] != '') {
-                $this->engine->document->setMDescription($category['descr']);
+                $this->engine->document->setDescription($category['descr']);
             }
 
             $categories = $this->engine->db->query("SELECT id, caption_" . $_SESSION['lang'] . " as caption, description_" . $_SESSION['lang'] . " as description, text_" . $_SESSION['lang'] . " as text, preview FROM " . DB_PREF . "materials WHERE parent_id=" . (int)$category_id . " AND enabled=1 AND is_category = 1 ORDER BY  date_added DESC")->rows;
@@ -129,10 +129,10 @@ class Materials extends QModule {
                 $this->engine->document->setTitle($material['title']);
             }
             if ($material['kw'] != '') {
-                $this->engine->document->setMKeywords($material['kw']);
+                $this->engine->document->setKeywords($material['kw']);
             }
             if ($material['descr'] != '') {
-                $this->engine->document->setMDescription($material['descr']);
+                $this->engine->document->setDescription($material['descr']);
             }
             $this->engine->ERROR_404 = false;
             $this->mode = 2;
