@@ -245,41 +245,63 @@
                             </div>
                             <div class="span3">
                                 <div class="control-group">
-                                    <label class="control-label"><?php echo $language['not_valid_name'] ?></label>
+                                    <label class="control-label"><?php echo $language['registration_finished'] ?></label>
 
                                     <div class="controls">
                                         <input type="text" class="span12"
-                                               name="not_valid_name_<?php echo $lang['name'] ?>"
-                                               value="<?php echo $settings['not_valid_name_' . $lang['name']] ?>"/>
+                                               name="registration_finished_<?php echo $lang['name'] ?>"
+                                               value="<?php echo $settings['registration_finished_' . $lang['name']] ?>"/>
                                     </div>
                                 </div>
                             </div>
                             <div class="span3">
                                 <div class="control-group">
-                                    <label class="control-label"><?php echo $language['not_valid_password'] ?></label>
+                                    <label class="control-label"><?php echo $language['account_confirmed'] ?></label>
 
                                     <div class="controls">
                                         <input type="text" class="span12"
-                                               name="not_valid_password_<?php echo $lang['name'] ?>"
-                                               value="<?php echo $settings['not_valid_password_' . $lang['name']] ?>"/>
+                                               name="account_confirmed_<?php echo $lang['name'] ?>"
+                                               value="<?php echo $settings['account_confirmed_' . $lang['name']] ?>"/>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div class="row-fluid">
-                        <div class="span4">
+                        <div class="span2">
                             <div class="control-group">
-                                <label class="control-label"><?php echo $language['registration_finished'] ?></label>
+                                <label class="control-label"><?php echo $language['not_valid_captcha'] ?></label>
 
                                 <div class="controls">
                                     <input type="text" class="span12"
-                                           name="registration_finished_<?php echo $lang['name'] ?>"
-                                           value="<?php echo $settings['registration_finished_' . $lang['name']] ?>"/>
+                                           name="not_valid_captcha_<?php echo $lang['name'] ?>"
+                                           value="<?php echo $settings['not_valid_captcha_' . $lang['name']] ?>"/>
                                 </div>
                             </div>
                         </div>
-                        <div class="span8">
+                        <div class="span2">
+                            <div class="control-group">
+                                <label class="control-label"><?php echo $language['not_valid_name'] ?></label>
+
+                                <div class="controls">
+                                    <input type="text" class="span12"
+                                           name="not_valid_name_<?php echo $lang['name'] ?>"
+                                           value="<?php echo $settings['not_valid_name_' . $lang['name']] ?>"/>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="span2">
+                            <div class="control-group">
+                                <label class="control-label"><?php echo $language['not_valid_password'] ?></label>
+
+                                <div class="controls">
+                                    <input type="text" class="span12"
+                                           name="not_valid_password_<?php echo $lang['name'] ?>"
+                                           value="<?php echo $settings['not_valid_password_' . $lang['name']] ?>"/>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="span6">
                             <div class="control-group">
                                 <label class="control-label"><?php echo $language['additional_text'] ?></label>
 

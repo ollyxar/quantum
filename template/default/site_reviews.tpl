@@ -62,7 +62,7 @@
         var go = true;
         jQuery('#r_results').html();
         if (jQuery('input[name=review_name]').val() == "") {
-            jQuery('#r_results').html('<div class="alert bg-danger"><?php echo $error_name ?></div>');
+            jQuery('#r_results').html('<div class="alert bg-danger"><?php echo addslashes($error_name) ?></div>');
             jQuery('input[name=review_name]').parent().addClass('has-error has-feedback').append('<span class="glyphicon glyphicon-remove form-control-feedback"></span>');
             go = false;
         } else {
@@ -70,7 +70,7 @@
             jQuery('span.glyphicon-remove').remove();
         }
         if (jQuery('textarea[name=review-post]').val() == "") {
-            jQuery('#r_results').html('<div class="alert bg-danger"><?php echo $error_text ?></div>');
+            jQuery('#r_results').html('<div class="alert bg-danger"><?php echo addslashes($error_text) ?></div>');
             jQuery('textarea[name=review-post]').parent().addClass('has-error has-feedback').append('<span class="glyphicon glyphicon-remove form-control-feedback"></span>');
             go = false;
         } else {

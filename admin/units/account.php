@@ -22,8 +22,10 @@ class Account extends \AUnit {
                 $params_arr['not_valid_email_' . $lang['name']]      = $_POST['not_valid_email_' . $lang['name']];
                 $params_arr['not_valid_name_' . $lang['name']]       = $_POST['not_valid_name_' . $lang['name']];
                 $params_arr['not_valid_password_' . $lang['name']]   = $_POST['not_valid_password_' . $lang['name']];
+                $params_arr['not_valid_captcha_' . $lang['name']]    = $_POST['not_valid_captcha_' . $lang['name']];
                 $params_arr['registration_finished_' . $lang['name']]= $_POST['registration_finished_' . $lang['name']];
                 $params_arr['additional_text_' . $lang['name']]      = htmlspecialchars($_POST['additional_text_' . $lang['name']]);
+                $params_arr['account_confirmed_' . $lang['name']]    = $_POST['account_confirmed_' . $lang['name']];
             }
             $params_arr['captcha_required'] = $_POST['captcha_required'];
             $params_arr['agreement']        = $_POST['agreement'];

@@ -48,6 +48,33 @@
 </div>
 
 <script type="text/javascript">
+    var timeout;
+    function validator(elem) {
+        clearTimeout(timeout);
+        var value = jQuery(elem).attr('value');
+        var name = jQuery(elem).attr('name');
+        var parent = jQuery(elem).parent();
+        timeout = setTimeout(function () {
+            var notice = parent.find('div.notice');
+            jQuery.ajax({
+                type: 'POST',
+                dataType: 'json',
+                url: '?module=account/' + name + 'Check',
+                data: name + '=' + value,
+                beforeSend: function () {
+                    notice.remove();
+                },
+                success: function (data) {
+                    if (data != '') {
+                        parent.append('<div class="notice">' + data + '</div>');
+                    }
+                }
+            });
+        }, 500);
+    }
+    jQuery('input[name="name"], input[name="email"]').keyup(function() {
+        validator(this);
+    });
     jQuery('#send').click(function () {
         jQuery('#register-form').submit();
     });
