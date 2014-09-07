@@ -267,6 +267,29 @@
                             </div>
                         </div>
                     </div>
+                    <div class="row-fluid">
+                        <div class="span4">
+                            <div class="control-group">
+                                <label class="control-label"><?php echo $language['registration_finished'] ?></label>
+
+                                <div class="controls">
+                                    <input type="text" class="span12"
+                                           name="registration_finished_<?php echo $lang['name'] ?>"
+                                           value="<?php echo $settings['registration_finished_' . $lang['name']] ?>"/>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="span8">
+                            <div class="control-group">
+                                <label class="control-label"><?php echo $language['additional_text'] ?></label>
+
+                                <div class="controls">
+                                    <textarea class="span12"
+                                           name="additional_text_<?php echo $lang['name'] ?>"><?php echo $settings['additional_text_' . $lang['name']] ?></textarea>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         <?php } ?>

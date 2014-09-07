@@ -22,7 +22,7 @@
 
         <div class="form-group">
             <label><?php echo $placeholder_password ?></label>
-            <input class="form-control" name="email" type="password" placeholder="<?php echo $placeholder_password ?>" value="<?php echo $password ?>">
+            <input class="form-control" name="password" type="password" placeholder="<?php echo $placeholder_password ?>" value="<?php echo $password ?>">
         </div>
 
         <?php if (isset($captcha)) { ?>

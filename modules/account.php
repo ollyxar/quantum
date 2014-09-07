@@ -21,6 +21,8 @@ class Account extends QModule {
         $this->params['not_valid_email_' . $lang]       = $this->params['not_valid_email_' . DEF_LANG];
         $this->params['not_valid_name_' . $lang]        = $this->params['not_valid_name_' . DEF_LANG];
         $this->params['not_valid_password_' . $lang]    = $this->params['not_valid_password_' . DEF_LANG];
+        $this->params['registration_finished_' . $lang] = $this->params['registration_finished_' . DEF_LANG];
+        $this->params['additional_text_' . $lang]       = $this->params['additional_text_' . DEF_LANG];
         $q = $this->engine->db->query("UPDATE " . DB_PREF . "modules SET `params`='" . $this->engine->db->escape(serialize($this->params)) . "' WHERE name='account'");
         if ($q) return true; else return false;
     }
@@ -59,7 +61,7 @@ class Account extends QModule {
             $result .= $this->params['not_valid_password_' . $_SESSION['lang']] . '<br />';
         }
 
-        return (int)$result;
+        return $result;
     }
 
     private function sendConfirm($email) {
@@ -69,7 +71,7 @@ class Account extends QModule {
         $message .= '<p>To finish your registration just follow the link.</p>';
         $message .= '<p><a href="' . $this->engine->url->link('route=account&action=register&amp;confirm_key=' . $confirm_key) . '">Confirm registration</a></p>';
         $message .= '<p>If it was not You just ignore this message.</p>';
-        $this->engine->sendMail($email, 'system@' . $_SERVER['HTTP_HOST'], $_SERVER['HTTP_HOST'] . ' - Notification system', 'Подтверждение регистрации на "Блабла"', $message);
+        $this->engine->sendMail($email, 'system@' . $_SERVER['HTTP_HOST'], $_SERVER['HTTP_HOST'] . ' - Notification system', 'Please confirm your account', $message);
     }
 
     public function confirm() {
@@ -79,10 +81,25 @@ class Account extends QModule {
     public function index() {
         $this->engine->ERROR_404 = FALSE;
         if ($_GET['action'] == 'register') {
+
+            if (isset($_POST['register'])) {
+                if (((bool)$this->params['captcha_required'] && $_SESSION['captcha'] == $_POST['captcha']) || !(bool)$this->params['captcha_required']) {
+                    $result = $this->register($_POST['name'], $_POST['email'], $_POST['password']);
+                    if ($result === true) {
+                        $_SESSION['msg'] = 'success';
+                        $this->engine->url->redirect($this->engine->url->full);
+                    } else {
+                        $_SESSION['msg'] = 'fail';
+                    }
+                } else {
+                    $_SESSION['msg'] = 'captcha_not_valid';
+                }
+            }
+
             $this->engine->document->setTitle($this->params['title_registration_' . $_SESSION['lang']]);
 
             if (isset($_SESSION['msg'])) {
-                if ($_SESSION['msg'] == 'sent') {
+                if ($_SESSION['msg'] == 'success') {
                     $this->data['text_message'] = $this->params['sent_' . $_SESSION['lang']];
                     $this->data['class_message'] = 'success';
                 } elseif ($_SESSION['msg'] == 'message_fail') {
@@ -107,7 +124,7 @@ class Account extends QModule {
             $this->data['confirm']              = $this->params['confirm_' . $_SESSION['lang']];
             $this->data['agree']                = sprintf(html_entity_decode($this->params['agree_' . $_SESSION['lang']]), htmlspecialchars($this->engine->url->link($this->params['agreement'])));
             $this->data['name']                 = isset($_POST['name']) ? htmlspecialchars($_POST['name']) : '';
-            $this->data['password']             = isset($_POST['name']) ? htmlspecialchars($_POST['password']) : '';
+            $this->data['password']             = isset($_POST['password']) ? htmlspecialchars($_POST['password']) : '';
             $this->data['phone']                = isset($_POST['phone']) ? htmlspecialchars($_POST['phone']) : '';
             $this->data['email']                = isset($_POST['email']) ? htmlspecialchars($_POST['email']) : '';
             $this->data['message']              = isset($_POST['message']) ? htmlspecialchars($_POST['message']) : '';
