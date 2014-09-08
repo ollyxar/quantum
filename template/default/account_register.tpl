@@ -63,10 +63,12 @@
                 data: name + '=' + value,
                 beforeSend: function () {
                     notice.remove();
+                    parent.removeClass('has-error');
                 },
                 success: function (data) {
                     if (data != '') {
                         parent.append('<div class="notice">' + data + '</div>');
+                        parent.addClass('has-error');
                     }
                 }
             });
@@ -75,7 +77,30 @@
     jQuery('input[name="name"], input[name="email"]').keyup(function() {
         validator(this);
     });
+    jQuery('input[name="password"]').keyup(function() {
+        var value = jQuery(this).attr('value');
+        var parent = jQuery(this).parent();
+        parent.find('div.notice').remove();
+        parent.removeClass('has-error');
+        if (value.length < 5 || value.length > 20) {
+            parent.append('<div class="notice"><?php echo $password_not_valid ?></div>');
+            parent.addClass('has-error');
+        }
+    });
+    jQuery('input[name="agree"]').change(function() {
+        if (!jQuery(this).is(':checked')) {
+            jQuery(this).parent().css('color', 'red');
+        } else {
+            jQuery(this).parent().css('color', '');
+        }
+    });
     jQuery('#send').click(function () {
-        jQuery('#register-form').submit();
+        jQuery('input[name="name"], input[name="email"], input[name="password"]').trigger('keyup');
+        jQuery('input[name="agree"]').trigger('change');
+        var form = jQuery('#register-form');
+        if (form.find('div.has-error').length > 0 || !jQuery('input[name="agree"]').is(':checked')) {
+        } else {
+            form.submit();
+        }
     });
 </script>                                        

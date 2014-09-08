@@ -144,6 +144,7 @@ class Account extends QModule {
             $this->data['placeholder_password'] = $this->params['placeholder_password_' . $_SESSION['lang']];
             $this->data['confirm']              = $this->params['confirm_' . $_SESSION['lang']];
             $this->data['agree']                = sprintf(html_entity_decode($this->params['agree_' . $_SESSION['lang']]), htmlspecialchars($this->engine->url->link($this->params['agreement'])));
+            $this->data['password_not_valid']   = $this->params['not_valid_password_' . $_SESSION['lang']];
             $this->data['name']                 = isset($_POST['name']) ? htmlspecialchars($_POST['name']) : '';
             $this->data['password']             = isset($_POST['password']) ? htmlspecialchars($_POST['password']) : '';
             $this->data['phone']                = isset($_POST['phone']) ? htmlspecialchars($_POST['phone']) : '';
