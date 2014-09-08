@@ -196,10 +196,11 @@ function captionToLink($str) {
 }
 
 function resizeImage($filename, $width, $height, $crop = true, $use_urldecode = true, $noimage = '/upload/images/no-image.jpg') {
+    $root_dir = dirname(dirname(__FILE__)) . ROOT_DIR;
     if ($use_urldecode) {
         $filename = urldecode($filename);
     }
-    if (!file_exists($_SERVER['DOCUMENT_ROOT'] . ROOT_DIR . $filename) || !is_file($_SERVER['DOCUMENT_ROOT'] . ROOT_DIR . $filename)) {
+    if (!file_exists($root_dir . $filename) || !is_file($root_dir . $filename)) {
         if ($noimage == '') {
             return null;
         } else {
@@ -215,7 +216,7 @@ function resizeImage($filename, $width, $height, $crop = true, $use_urldecode = 
     $old_image = $filename;
     $new_image = str_replace('upload/images', 'upload/cache/images', substr($filename, 0, strrpos($filename, '.')) . '-' . $width . 'x' . $height . $in_name . '.' . $extension);
 
-    if (!file_exists($_SERVER['DOCUMENT_ROOT'] . ROOT_DIR . $new_image) || (filemtime($_SERVER['DOCUMENT_ROOT'] . ROOT_DIR . $old_image) > filemtime($_SERVER['DOCUMENT_ROOT'] . ROOT_DIR . $new_image))) {
+    if (!file_exists($root_dir . $new_image) || (filemtime($root_dir . $old_image) > filemtime($root_dir . $new_image))) {
         $path = '';
 
         $directories = explode('/', dirname(str_replace('../', '', $new_image)));
@@ -223,14 +224,14 @@ function resizeImage($filename, $width, $height, $crop = true, $use_urldecode = 
         foreach ($directories as $directory) {
             $path = $path . '/' . $directory;
 
-            if (!file_exists($_SERVER['DOCUMENT_ROOT'] . ROOT_DIR . $path)) {
-                @mkdir($_SERVER['DOCUMENT_ROOT'] . ROOT_DIR . $path, 0777);
+            if (!file_exists($root_dir . $path)) {
+                @mkdir($root_dir . $path, 0777);
             }
         }
 
-        $image = new QImage($_SERVER['DOCUMENT_ROOT'] . ROOT_DIR . $old_image);
+        $image = new QImage($root_dir . $old_image);
         $image->resize($width, $height, $crop);
-        $image->save($_SERVER['DOCUMENT_ROOT'] . ROOT_DIR . $new_image);
+        $image->save($root_dir . $new_image);
         unset($image);
     }
 

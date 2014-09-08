@@ -33,6 +33,12 @@ F - Frontend; B - Backend; C - Core; M - Modules
 - M: Removed redundant query in addLanguage, removeLanguage;
 - C: Renamed methods in QDocument;
 - M: Fixed SiteReviews validation error in Ukrainian localization;
+- C: Optimized resizeImage for shared hosts;
+- F: Created common.js;
+- F: Removed styles that was not used;
+- C: Added QOllyxar::reloadCaptcha;
+- C: Added system methods caller via "?system=methodName";
+- C: Renamed language code "UA" to "UK";
 
 2.0.0:
 - C: Modified routing system:

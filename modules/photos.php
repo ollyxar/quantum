@@ -11,7 +11,7 @@ class Photos extends QModule {
     }
 
     private function findPhoto($start = 1, $limit = 20) {
-        $dir = $_SERVER['DOCUMENT_ROOT'] . ROOT_DIR . 'upload/images/photos/';
+        $dir = dirname(dirname(__FILE__)) . ROOT_DIR . 'upload/images/photos/';
         $photos = array();
         $i = 0;
         foreach (glob($dir . "*.*") as $filename) {

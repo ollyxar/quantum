@@ -19,7 +19,7 @@ class Tpl_Manager extends \AUnit {
         if ($_SESSION['access'] > 2) {
             die('Access denied');
         }
-        $this->templates_path = $_SERVER['DOCUMENT_ROOT'] . ROOT_DIR . 'template';
+        $this->templates_path = dirname(dirname(dirname(__FILE__))) . ROOT_DIR . 'template';
         $this->tpl_file = isset($_GET['file']) ? $this->templates_path . $_GET['file'] : false;
 
         if (isset($_POST['action']) && $_POST['action'] == 'save' && ($this->tpl_file != false)) {
@@ -32,7 +32,7 @@ class Tpl_Manager extends \AUnit {
             unset($_SESSION['msg']);
         }
         if (isset($_SESSION['msg']) && $_SESSION['msg'] == 'denied') {
-            $this->data['text_message'] = $this->language['perm_denied'] . ' ' . $this->language['cur_perm'] . getPermission($this->tpl_file);;
+            $this->data['text_message'] = $this->language['perm_denied'] . ' ' . $this->language['cur_perm'] . getPermission($this->tpl_file);
             $this->data['class_message'] = 'error';
             unset($_SESSION['msg']);
         }

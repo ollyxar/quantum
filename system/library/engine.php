@@ -140,7 +140,22 @@ final class QOllyxar {
         $this->modules[$module_name]->$method();
     }
 
+    private function publicReloadCaptcha() {
+        $captcha = new QCaptcha();
+        $_SESSION['captcha'] = $captcha->getCode();
+        die(json_encode($captcha->getContent()));
+    }
+
     public function doRoute() {
+        // call system methods
+        if (isset($_GET['system'])) {
+            $method = 'public' . $_GET['system'];
+            if (method_exists($this, $method)) {
+                $this->$method();
+                exit();
+            }
+        }
+
         // call method of module if exists
         if (isset($_GET['module'])) {
             $module_name = substr($_GET['module'], 0, strpos($_GET['module'], '/'));

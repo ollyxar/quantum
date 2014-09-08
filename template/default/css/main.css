@@ -43,7 +43,7 @@ body {
 
 .logo {
     float: left;
-    background: url(/template/default/images/logo.png) no-repeat;
+    background: url(../images/logo.png) no-repeat;
     width: 200px;
     height: 95px;
     margin: 10px;
@@ -126,4 +126,10 @@ div.inner {
 .category-block img {
     margin: 0 10px 10px 0;
     float: left;
+}
+#captcha {
+    cursor: pointer;
+}
+#captcha:hover {
+    opacity: 0.5;
 }

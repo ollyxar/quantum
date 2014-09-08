@@ -34,7 +34,7 @@
             <label>Captcha</label>
             <div class="form-group row">
                 <div class="col-md-6 col-xs-6">
-                    <img src="<?php echo $captcha ?>" alt="captcha" style="display: block; margin: 0 auto" />
+                    <img id="captcha" src="<?php echo $captcha ?>" alt="captcha" style="display: block; margin: 0 auto" />
                 </div>
                 <div class="col-md-6 col-xs-6">
                     <input name="captcha" type="text" class="form-control">
