@@ -23,9 +23,11 @@
                 url: '?module=photos/find',
                 type: 'POST',
                 dataType: 'json',
-                data: 'photo_id='+photo_id,
+                data: 'photo_id=' + photo_id,
                 success: function(data) {
-                    jQuery('#bottom').before(data);
+                    jQuery.each(data, function() {
+                        jQuery('#bottom').before('<a href="' + this.src + '" class="photo cboxElement" style="background: url(\'' + this.thumb + '\') no-repeat center"></a>');
+                    })
                 },
                 complete: function() {
                     go = true;

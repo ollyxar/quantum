@@ -34,12 +34,7 @@ class Photos extends QModule {
     public function find() {
         if (isset($_POST['photo_id'])) {
             $photos = $this->findPhoto(intval($_POST['photo_id']), 10);
-            $data = '';
-            foreach ($photos as $photo) {
-                $data .= '<a href="' . $photo['src'] . '" class="photo cboxElement" style="background: url(\'' .
-                    $photo['thumb'] . '\') no-repeat center"></a>';
-            }
-            die(json_encode($data));
+            die(json_encode($photos));
         }
     }
 
