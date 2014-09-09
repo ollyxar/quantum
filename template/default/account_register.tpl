@@ -51,7 +51,7 @@
     var timeout;
     function validator(elem) {
         clearTimeout(timeout);
-        var value = jQuery(elem).attr('value');
+        var value = jQuery(elem).val();
         var name = jQuery(elem).attr('name');
         var parent = jQuery(elem).parent();
         timeout = setTimeout(function () {
