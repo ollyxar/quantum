@@ -78,7 +78,7 @@
         validator(this);
     });
     jQuery('input[name="password"]').keyup(function() {
-        var value = jQuery(this).attr('value');
+        var value = jQuery(this).val();
         var parent = jQuery(this).parent();
         parent.find('div.notice').remove();
         parent.removeClass('has-error');
