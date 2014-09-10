@@ -108,7 +108,7 @@ class QUrl {
         return isset($aliases[$query]) ? (bool)$aliases[$query]['is_dir'] : false;
     }
 
-    public function link($query) {
+    public function link($query, $get_vars = '') {
         if (CLEAN_URL) {
             $keyword = $this->getKeyword($query);
             $is_dir = $this->getType($query);
@@ -178,6 +178,13 @@ class QUrl {
                 }
             } else {
                 $link = $query;
+            }
+        }
+        if (strlen($get_vars) > 0) {
+            if (strpos($link, '?') !== false) {
+                $link .= '&' . $get_vars;
+            } else {
+                $link .= '?' . $get_vars;
             }
         }
         return $link;

@@ -39,6 +39,7 @@ F - Frontend; B - Backend; C - Core; M - Modules
 - C: Added QOllyxar::reloadCaptcha;
 - C: Added system methods caller via "?system=methodName";
 - C: Renamed language code "UA" to "UK";
+- C: Modified QUrl::link - added optional $get_vars;
 
 2.0.0:
 - C: Modified routing system:

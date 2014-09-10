@@ -102,13 +102,13 @@ class Account extends QModule {
         $this->engine->db->query("UPDATE " . DB_PREF . "users SET `confirm` = '" . $confirm_key . "' WHERE LOWER(email) = '" . strtolower($email) . "' ");
         $message = '<h1>Congratulations! You have successfully registered on ' . $_SERVER['HTTP_HOST'] . '</h1>';
         $message .= '<p>To finish your registration just follow the link.</p>';
-        $message .= '<p><a href="' . $this->engine->url->link('route=account&action=confirm&confirm_key=' . $confirm_key) . '">Confirm registration</a></p>';
+        $message .= '<p><a href="' . $this->engine->url->link('route=account&action=confirm' , 'confirm_key=' . $confirm_key) . '">Confirm registration</a></p>';
         $message .= '<p>If it was not You just ignore this message.</p>';
         $this->engine->sendMail($email, 'system@' . $_SERVER['HTTP_HOST'], $_SERVER['HTTP_HOST'] . ' - Notification system', 'Please confirm your account', $message);
     }
 
-    public function confirm() {
-        $this->engine->db->query("UPDATE " . DB_PREF . "users SET `confirm` = '' WHERE `confirm` = '" . $_GET['confirm_key'] . "'");
+    public function confirm($key) {
+        $this->engine->db->query("UPDATE " . DB_PREF . "users SET `confirm` = '' WHERE `confirm` = '" . $this->engine->db->escape($key) . "'");
     }
 
     public function index() {
@@ -166,7 +166,10 @@ class Account extends QModule {
                 unset($_SESSION['msg']);
             }
         } elseif ($_GET['action'] == 'confirm') {
-            $this->confirm();
+            if (!isset($_GET['confirm_key']) || $_GET['confirm_key'] == '') {
+                $this->engine->url->redirect(PRTCL . '://' . $this->engine->host . '/');
+            }
+            $this->confirm($_GET['confirm_key']);
             $this->data['caption'] = $this->params['account_confirmed_' . $_SESSION['lang']];
             $this->data['text'] = '';
             $template = 'success.tpl';
