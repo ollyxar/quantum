@@ -8,7 +8,7 @@ function reloadCaptcha() {
     })
 }
 jQuery(document).ready(function() {
-    jQuery('#captcha').on('click', function() {
+    jQuery('form').on('click', '#captcha', function() {
         reloadCaptcha();
     })
 });
