@@ -167,7 +167,7 @@ class Account extends QModule {
             }
         } elseif ($_GET['action'] == 'confirm') {
             if (!isset($_GET['confirm_key']) || $_GET['confirm_key'] == '') {
-                $this->engine->url->redirect(PRTCL . '://' . $this->engine->host . '/');
+                $this->engine->url->redirect($this->engine->url->link('route=home'));
             }
             $this->confirm($_GET['confirm_key']);
             $this->data['caption'] = $this->params['account_confirmed_' . $_SESSION['lang']];
