@@ -40,6 +40,7 @@ F - Frontend; B - Backend; C - Core; M - Modules
 - C: Added system methods caller via "?system=methodName";
 - C: Renamed language code "UA" to "UK";
 - C: Modified QUrl::link - added optional $get_vars;
+- C: Fixed error when cache directory does not exists;
 
 2.0.0:
 - C: Modified routing system:

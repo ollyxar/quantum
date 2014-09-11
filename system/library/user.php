@@ -21,7 +21,7 @@ class QUser {
     public function login($email, $password) {
         $email = $this->engine->db->escape(strtolower($email));
         $password = md5(md5($this->engine->db->escape($password)));
-        $user = $this->engine->db->query("SELECT id FROM " . DB_PREF . "users WHERE LOWER(email)='" . $email . "' AND password='" . $password . "' AND enabled=1")->row;
+        $user = $this->engine->db->query("SELECT id, confirm FROM " . DB_PREF . "users WHERE LOWER(email) = '" . $email . "' AND password='" . $password . "' AND enabled = '1'")->row;
         if (!empty($user)) {
             $_SESSION['user_id'] = $user['id'];
             $this->logged = true;

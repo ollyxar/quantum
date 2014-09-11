@@ -23,6 +23,9 @@ class QCache {
 
     public function set($key, $value) {
         $this->delete($key);
+        if (!file_exists($this->path_to_system . 'system/cache')) {
+            mkdir($this->path_to_system . 'system/cache', 0777);
+        }
         $file = $this->path_to_system . 'system/cache/cache.' . preg_replace('/[^A-Z0-9\._-]/i', '', $key) . '.' . (time() + $this->expire);
         $handle = fopen($file, 'w');
         fwrite($handle, serialize($value));
