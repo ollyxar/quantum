@@ -247,32 +247,17 @@ final class QOllyxar {
 
         $this->loadRouters();
 
-        // looking for 404 - parsing cURL only!
-        if ((CLEAN_URL == true && $this->uri == ROOT_DIR . $_SESSION['lang'] . "/404" . PAGE_SUFFIX) ||
-                (CLEAN_URL == false && SEO_MULTILANG == true && $this->uri == ROOT_DIR . "?route=404&lang=" . $_SESSION['lang']) ||
-                (CLEAN_URL == false && SEO_MULTILANG == false && $this->uri == ROOT_DIR . "?route=404")) {
-            $this->ERROR_404 = false;
-            header("HTTP/1.1 404 Not Found");
-            header("Status: 404 Not Found");
-        }
-
         // rewrite function for 404 THIS CODE MUST BE IN THE BOTTOM OF METHOD!
-        if ($this->ERROR_404) {
+        if ($this->ERROR_404 || $_GET['route'] == '404') {
+            if (USE_404_REDIRECT && $_GET['route'] != '404') {
+                $this->url->redirect($this->url->link('route=404'));
+            }
             $this->ERROR_404 = false;
             $this->url->is_category = false;
             $_GET['page_id'] = 4;
             $this->modules['staticpages']->index();
             header("HTTP/1.1 404 Not Found");
             header("Status: 404 Not Found");
-            if (USE_404_REDIRECT) {
-                if (SEO_MULTILANG == true && CLEAN_URL == false) {
-                    $this->url->redirect(PRTCL . "://" . $this->host . ROOT_DIR . "?route=404&lang=" . $_SESSION['lang']);
-                } elseif (CLEAN_URL == false && SEO_MULTILANG == false) {
-                    $this->url->redirect(PRTCL . "://" . $this->host . ROOT_DIR . "?route=404");
-                } elseif (CLEAN_URL == true) {
-                    $this->url->redirect(PRTCL . "://" . $this->host . ROOT_DIR . $_SESSION['lang'] . "/404" . PAGE_SUFFIX);
-                }
-            }
         }
     }
 }
