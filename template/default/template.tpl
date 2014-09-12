@@ -5,13 +5,13 @@
     <meta name="robots" content="index,follow"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <base href="<?php echo PRTCL ?>://<?php echo $engine->host . ROOT_DIR ?>" />
+    <link href="<?php echo TEMPLATE ?>css/main.css" rel="stylesheet" media="screen">
+    <link href="<?php echo TEMPLATE ?>css/bootstrap3.css" rel="stylesheet" media="screen">
     <script src="<?php echo TEMPLATE ?>js/jquery-1.11.1.min.js"></script>
     <script src="<?php echo TEMPLATE ?>js/common.js"></script>
     <script src="<?php echo TEMPLATE ?>js/jquery-ui-1.10.4.custom.min.js"></script>
     <script src="<?php echo TEMPLATE ?>js/bootstrap.min.js"></script>
     <?php echo $engine->document->render(); ?>
-    <link href="<?php echo TEMPLATE ?>css/main.css" rel="stylesheet" media="screen">
-    <link href="<?php echo TEMPLATE ?>css/bootstrap3.css" rel="stylesheet" media="screen">
 </head>
 <body>
 

@@ -6,8 +6,8 @@ class Slider extends QModule {
 
     public function index() {
         if ($_GET['route'] == 'home') {
-            $this->engine->document->addHeaderString('<script src="' . TEMPLATE . 'js/jquery.bxslider.min.js"></script>');
-            $this->engine->document->addHeaderString('<link href="' . TEMPLATE . 'css/jquery.bxslider.css" rel="stylesheet" media="screen">');
+            $this->engine->document->addScript(TEMPLATE . 'js/jquery.bxslider.min.js');
+            $this->engine->document->addStyle(TEMPLATE . 'css/jquery.bxslider.css');
             $this->data['slides']    = $this->params['slides'];
             $this->template          = TEMPLATE . 'slider.tpl';
         }

@@ -42,6 +42,7 @@ F - Frontend; B - Backend; C - Core; M - Modules
 - C: Modified QUrl::link - added optional $get_vars;
 - C: Fixed error when cache directory does not exists;
 - C: Optimized redirect from not existing pages to 404;
+- C: Added methods QDocument::addScript and QDocument::addStyle;
 
 2.0.0:
 - C: Modified routing system:

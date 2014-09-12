@@ -44,8 +44,8 @@ class Photos extends QModule {
             $this->engine->document->setTitle($this->params['title_' . $_SESSION['lang']]);
             $this->engine->document->setKeywords($this->params['kw_' . $_SESSION['lang']]);
             $this->engine->document->setDescription($this->params['descr_' . $_SESSION['lang']]);
-            $this->engine->document->addHeaderString('<script src="' . TEMPLATE .'js/jquery.colorbox.js"></script>');
-            $this->engine->document->addHeaderString('<link rel="stylesheet" href="' . TEMPLATE . 'css/colorbox.css" />');
+            $this->engine->document->addScript(TEMPLATE .'js/jquery.colorbox.js');
+            $this->engine->document->addStyle(TEMPLATE . 'css/colorbox.css');
             $this->findPhoto();
             $this->data['photos'] = $this->findPhoto();
             $this->template = TEMPLATE . 'photos.tpl';
