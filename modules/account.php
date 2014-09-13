@@ -12,6 +12,7 @@ class Account extends QModule {
         $this->params['new_pass_' . $lang]              = $this->params['new_pass_' . DEF_LANG];
         $this->params['title_registration_' . $lang]    = $this->params['title_registration_' . DEF_LANG];
         $this->params['title_account_' . $lang]         = $this->params['title_account_' . DEF_LANG];
+        $this->params['title_login_' . $lang]           = $this->params['title_login_' . DEF_LANG];
         $this->params['log_in_' . $lang]                = $this->params['log_in_' . DEF_LANG];
         $this->params['log_out_' . $lang]               = $this->params['log_out_' . DEF_LANG];
         $this->params['confirm_' . $lang]               = $this->params['confirm_' . DEF_LANG];
@@ -185,7 +186,7 @@ class Account extends QModule {
             if ($this->engine->user->logged) {
                 $this->engine->url->redirect($this->engine->url->link('route=account'));
             }
-            $template = 'template/account/account_login.tpl';
+            $template = 'template/account/login.tpl';
         } else {
             if (!$this->engine->user->logged) {
                 $this->engine->url->redirect($this->engine->url->link('route=account', 'action=login'));

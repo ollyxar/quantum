@@ -13,6 +13,7 @@ class Account extends \AUnit {
                 $params_arr['new_pass_' . $lang['name']]             = $_POST['new_pass_' . $lang['name']];
                 $params_arr['title_registration_' . $lang['name']]   = $_POST['title_registration_' . $lang['name']];
                 $params_arr['title_account_' . $lang['name']]        = $_POST['title_account_' . $lang['name']];
+                $params_arr['title_login_' . $lang['name']]          = $_POST['title_login_' . $lang['name']];
                 $params_arr['log_in_' . $lang['name']]               = $_POST['log_in_' . $lang['name']];
                 $params_arr['log_out_' . $lang['name']]              = $_POST['log_out_' . $lang['name']];
                 $params_arr['confirm_' . $lang['name']]              = $_POST['confirm_' . $lang['name']];

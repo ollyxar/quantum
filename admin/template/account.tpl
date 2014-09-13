@@ -145,7 +145,7 @@
                 <div class="hero-unit">
                     <h4><?php echo $language['titles'] ?></h4>
                     <div class="row-fluid">
-                        <div class="span6">
+                        <div class="span4">
                             <div class="control-group">
                                 <label class="control-label"><?php echo $language['registration_page'] ?></label>
                                 <div class="controls">
@@ -154,12 +154,21 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="span6">
+                        <div class="span4">
                             <div class="control-group">
                                 <label class="control-label"><?php echo $language['account_page'] ?></label>
                                 <div class="controls">
                                     <input type="text" class="span12" name="title_account_<?php echo $lang['name'] ?>"
                                            value="<?php echo $settings['title_account_' . $lang['name']] ?>"/>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="span4">
+                            <div class="control-group">
+                                <label class="control-label"><?php echo $language['login_page'] ?></label>
+                                <div class="controls">
+                                    <input type="text" class="span12" name="title_login_<?php echo $lang['name'] ?>"
+                                           value="<?php echo $settings['title_login_' . $lang['name']] ?>"/>
                                 </div>
                             </div>
                         </div>
