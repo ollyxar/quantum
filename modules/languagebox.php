@@ -13,7 +13,7 @@ class LanguageBox extends QModule {
                 $this->data['lang_box'][$lang]['description'] = $lang_arr['description'];
                 $this->data['lang_box'][$lang]['picture']     = $lang_arr['picture'];
             }
-            $this->template = TEMPLATE . 'languagebox.tpl';
+            $this->template = TEMPLATE . 'template/widgets/languagebox.tpl';
         }
     }
 }

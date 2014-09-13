@@ -14,6 +14,6 @@ class ReviewsWidget extends QModule {
         $this->data['reviews']   = $reviews;
         $this->data['rating']    = $rating;
         $this->data['count']     = $count;
-        $this->template          = TEMPLATE . 'reviews_widget.tpl';
+        $this->template          = TEMPLATE . 'template/widgets/reviews.tpl';
     }
 }

@@ -32,7 +32,7 @@ $engine = new QOllyxar();
 $engine->doRoute();
 
 // including template
-require_once(TEMPLATE . 'template.tpl');
+require_once(TEMPLATE . 'template/common/template.tpl');
 
 if (USE_COMPRESSION) {
     ob_end_flush();

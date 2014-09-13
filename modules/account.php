@@ -113,8 +113,13 @@ class Account extends QModule {
 
     public function index() {
         $this->engine->ERROR_404 = FALSE;
+        if (!isset($_GET['action'])) {
+            $_GET['action'] = '';
+        }
         if ($_GET['action'] == 'register') {
-
+            if ($this->engine->user->logged) {
+                $this->engine->url->redirect($this->engine->url->link('route=account'));
+            }
             if (isset($_POST['register'])) {
                 if (((bool)$this->params['captcha_required'] && $_SESSION['captcha'] == $_POST['captcha']) || !(bool)$this->params['captcha_required']) {
                     $result = $this->register($_POST['name'], $_POST['email'], $_POST['password']);
@@ -151,12 +156,12 @@ class Account extends QModule {
             $this->data['email']                = isset($_POST['email']) ? htmlspecialchars($_POST['email']) : '';
             $this->data['message']              = isset($_POST['message']) ? htmlspecialchars($_POST['message']) : '';
 
-            $template = 'account_register.tpl';
+            $template = 'template/account/register.tpl';
             if (isset($_SESSION['msg'])) {
                 if ($_SESSION['msg'] == 'success') {
                     $this->data['caption'] = $this->params['registration_finished_' . $_SESSION['lang']];
                     $this->data['text'] = $this->params['additional_text_' . $_SESSION['lang']];
-                    $template = 'success.tpl';
+                    $template = 'template/common/success.tpl';
                 } elseif ($_SESSION['msg'] == 'fail') {
                     $this->data['class_message'] = 'error';
                 } elseif ($_SESSION['msg'] == 'captcha_not_valid') {
@@ -166,15 +171,26 @@ class Account extends QModule {
                 unset($_SESSION['msg']);
             }
         } elseif ($_GET['action'] == 'confirm') {
+            if ($this->engine->user->logged) {
+                $this->engine->url->redirect($this->engine->url->link('route=account'));
+            }
             if (!isset($_GET['confirm_key']) || $_GET['confirm_key'] == '') {
                 $this->engine->url->redirect($this->engine->url->link('route=home'));
             }
             $this->confirm($_GET['confirm_key']);
             $this->data['caption'] = $this->params['account_confirmed_' . $_SESSION['lang']];
             $this->data['text'] = '';
-            $template = 'success.tpl';
+            $template = 'template/common/success.tpl';
+        } elseif ($_GET['action'] == 'login') {
+            if ($this->engine->user->logged) {
+                $this->engine->url->redirect($this->engine->url->link('route=account'));
+            }
+            $template = 'template/account/account_login.tpl';
         } else {
-            $template = 'account.tpl';
+            if (!$this->engine->user->logged) {
+                $this->engine->url->redirect($this->engine->url->link('route=account', 'action=login'));
+            }
+            $template = 'template/account/account.tpl';
         }
         $this->template = TEMPLATE . $template;
     }

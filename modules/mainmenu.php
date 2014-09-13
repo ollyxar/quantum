@@ -47,7 +47,7 @@ class MainMenu extends QModule {
     public function index() {
         $menu_box = $this->buildTreeEx();
         $this->data['menu_box'] = $menu_box;
-        $this->template = TEMPLATE.'mainmenu.tpl';
+        $this->template = TEMPLATE . 'template/widgets/mainmenu.tpl';
     }
 }
 

@@ -19,7 +19,7 @@ class Tpl_Manager extends \AUnit {
         if ($_SESSION['access'] > 2) {
             die('Access denied');
         }
-        $this->templates_path = dirname(dirname(dirname(__FILE__))) . ROOT_DIR . 'template';
+        $this->templates_path = dirname(dirname(dirname(__FILE__))) . ROOT_DIR . 'view';
         $this->tpl_file = isset($_GET['file']) ? $this->templates_path . $_GET['file'] : false;
 
         if (isset($_POST['action']) && $_POST['action'] == 'save' && ($this->tpl_file != false)) {

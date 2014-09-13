@@ -9,7 +9,7 @@ class Slider extends QModule {
             $this->engine->document->addScript(TEMPLATE . 'js/jquery.bxslider.min.js');
             $this->engine->document->addStyle(TEMPLATE . 'css/jquery.bxslider.css');
             $this->data['slides']    = $this->params['slides'];
-            $this->template          = TEMPLATE . 'slider.tpl';
+            $this->template          = TEMPLATE . 'template/widgets/slider.tpl';
         }
     }
 }

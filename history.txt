@@ -4,7 +4,7 @@
 /*  Author:                           |  Olexy Sviridenko (aka Alex Slipknot | alexslipknot@europe.com)     */
 /*  PHP, Database and JS development: |  Olexy Sviridenko                                                   */
 /*  HTML and CSS design:              |  Olexandra Bespalova, Olexy Sviridenko, Olexander Sharin            */
-/*  Date:                             |  31.08.2014                                                         */
+/*  Date:                             |  13.09.2014                                                         */
 /*==========================================================================================================*/
 
 /*==========================================   SPECIAL THANKS TO   =========================================*/
@@ -43,6 +43,7 @@ F - Frontend; B - Backend; C - Core; M - Modules
 - C: Fixed error when cache directory does not exists;
 - C: Optimized redirect from not existing pages to 404;
 - C: Added methods QDocument::addScript and QDocument::addStyle;
+- C: Changed template file structure;
 
 2.0.0:
 - C: Modified routing system:

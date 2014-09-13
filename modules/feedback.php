@@ -91,6 +91,6 @@ class Feedback extends QModule {
         $this->data['name_placeholder']     = $this->params['name_placeholder_' . $_SESSION['lang']];
         $this->data['phone_placeholder']    = $this->params['phone_placeholder_' . $_SESSION['lang']];
         $this->data['message_placeholder']  = $this->params['message_placeholder_' . $_SESSION['lang']];
-        $this->template = TEMPLATE . 'feedback.tpl';
+        $this->template = TEMPLATE . 'template/modules/feedback.tpl';
     }
 }

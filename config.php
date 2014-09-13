@@ -17,7 +17,7 @@ define('DB_NAME', 'dev');
 define('DB_USER', 'dev');
 define('DB_PASS', '5gKjxxm9');
 define('DB_PREF', '');
-define('TEMPLATE', 'template/default/');
+define('TEMPLATE', 'view/default/');
 define('ADM_PATH', '/admin/');
 define('CACHE_TIME', 1800);
 define('EMAIL', 'alexslipknot@europe.com');

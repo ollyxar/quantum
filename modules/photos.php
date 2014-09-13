@@ -48,7 +48,7 @@ class Photos extends QModule {
             $this->engine->document->addStyle(TEMPLATE . 'css/colorbox.css');
             $this->findPhoto();
             $this->data['photos'] = $this->findPhoto();
-            $this->template = TEMPLATE . 'photos.tpl';
+            $this->template = TEMPLATE . '/template/modules/photos.tpl';
         }
     }
 }

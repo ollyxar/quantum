@@ -185,9 +185,9 @@ class Materials extends QModule {
             $this->fillMaterial($_GET['material_id']);
         }
         if ($this->mode == 1) {
-            $this->template = TEMPLATE . 'material_list.tpl';
+            $this->template = TEMPLATE . 'template/materials/material_list.tpl';
         } elseif ($this->mode == 2) {
-            $this->template = TEMPLATE . 'material.tpl';
+            $this->template = TEMPLATE . 'template/materials/material.tpl';
         }
     }
 }

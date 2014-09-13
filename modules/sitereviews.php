@@ -80,7 +80,7 @@ class SiteReviews extends QModule {
                     'photo'     => resizeImage($review['photo'], 150, 150)
                 );
             }
-            $this->template = TEMPLATE . 'site_reviews.tpl';
+            $this->template = TEMPLATE . 'template/modules/site_reviews.tpl';
         }
     }
 }

@@ -58,6 +58,6 @@ class StaticPages extends QModule {
         if (!$this->engine->url->is_category) {
             $this->fillPage($_GET['page_id']);
         }
-        $this->template = TEMPLATE . 'static_page.tpl';
+        $this->template = TEMPLATE . 'template/modules/static_page.tpl';
     }
 }
