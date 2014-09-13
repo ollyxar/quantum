@@ -11,10 +11,12 @@ final class QOllyxar {
     public $host;
     public $user;
     public $ERROR_404 = true;
-    public $modules;
+    public $modules = array();
+    // $a_modules - reserved for backend
     public $a_modules = array();
     public $cache;
-    private $__modules;
+    private $available_modules = array();
+    private $modules_in_position = array();
 
     public function __construct($dont_load_modules = false) {
         $this->db = new DB(DB_DRIVER, DB_HOST, DB_USER, DB_PASS, DB_NAME);
@@ -55,43 +57,59 @@ final class QOllyxar {
         } else {
             $modules = $this->db->query("SELECT * FROM " . DB_PREF . "modules WHERE enabled=1 ORDER BY ordering")->rows;
             foreach ($modules as $module) {
-                $this->__modules[$module['position']][$module['id']] = $module['name'];
-                if (@include('modules/' . $module['name'] . '.php')) {
-                    $this->modules[$module['name']] = new $module['name']($this);
-                    $this->modules[$module['name']]->params = (@unserialize($module['params']) !== false) ? unserialize($module['params']) : array();
-                    $this->modules[$module['name']]->route = ($module['route'] != '') ? explode(',', $module['route']) : array('__all');
-                    $this->modules[$module['name']]->adm_access['rr'] = $module['rr'];
-                    $this->modules[$module['name']]->adm_access['rw'] = $module['rw'];
-                    $this->modules[$module['name']]->enabled = $module['enabled'];
-                    $this->modules[$module['name']]->has_ui = (bool)$module['has_ui'];
-                    $this->modules[$module['name']]->description = $module['description'];
-                } else {
-                    trigger_error("Module " . $module['name'] . " doesn't load!", E_NOTICE);
-                }
+                $this->modules_in_position[$module['position']][$module['id']] = $module['name'];
+                $this->available_modules[$module['name']] = array(
+                    'id'        => $module['id'],
+                    'name'      => $module['name'],
+                    'route'     => ($module['route'] != '') ? explode(',', $module['route']) : array('__all'),
+                    'params'    => (@unserialize($module['params']) !== false) ? unserialize($module['params']) : array(),
+                    'rr'        => $module['rr'],
+                    'rw'        => $module['rw'],
+                    'enabled'   => $module['enabled'],
+                    'has_ui'    => $module['has_ui'],
+                    'description' => $module['description']
+                );
             }
             return true;
         }
     }
 
     public function loadModules($position) {
-        $modules = isset($this->__modules[$position]) ? $this->__modules[$position] : array();
+        $modules = isset($this->modules_in_position[$position]) ? $this->modules_in_position[$position] : array();
         foreach ($modules as $module) {
-            $this->modules[$module]->output();
+            if (isset($this->modules[$module])) {
+                $this->modules[$module]->output();
+            }
+        }
+    }
+
+    private function appendModule($module_name) {
+        if (@include('modules/' . $module_name . '.php')) {
+            $this->modules[$module_name] = new $module_name($this);
+            $this->modules[$module_name]->params = $this->available_modules[$module_name]['params'];
+            $this->modules[$module_name]->route = $this->available_modules[$module_name]['route'];
+            $this->modules[$module_name]->adm_access['rr'] = $this->available_modules[$module_name]['rr'];
+            $this->modules[$module_name]->adm_access['rw'] = $this->available_modules[$module_name]['rw'];
+            $this->modules[$module_name]->enabled = $this->available_modules[$module_name]['enabled'];
+            $this->modules[$module_name]->has_ui = (bool)$this->available_modules[$module_name]['has_ui'];
+            $this->modules[$module_name]->description = $this->available_modules[$module_name]['description'];
+        } else {
+            trigger_error("Module " . $module_name . " doesn't load!", E_NOTICE);
         }
     }
 
     private function loadRouters() {
-        foreach ($this->modules as $module) {
-            if (in_array($_GET['route'], $module->route) || in_array('__all', $module->route)) {
+        foreach ($this->available_modules as $module) {
+            if (in_array($_GET['route'], $module['route']) || in_array('__all', $module['route'])) {
                 $this->url->correctUrl($_GET['_route_']);
-                $module->index();
+                $this->appendModule($module['name']);
+                $this->modules[$module['name']]->index();
             }
         }
     }
 
     public function addLanguage($language) {
-        $q = $this->db->query("SELECT data FROM " . DB_PREF . "settings WHERE id='1'");
-        $arr = $q->row;
+        $arr = $this->db->query("SELECT data FROM " . DB_PREF . "settings WHERE id='1'")->row;
         $arr = unserialize($arr['data']);
         $arr['site_name_' . $language]  = $arr['site_name_' . DEF_LANG];
         $arr['site_descr_' . $language] = $arr['site_descr_' . DEF_LANG];
@@ -137,6 +155,7 @@ final class QOllyxar {
 
     private function callMethod($module_name) {
         $method = substr($_GET['module'], strpos($_GET['module'], '/') + 1);
+        $this->appendModule($module_name);
         $this->modules[$module_name]->$method();
     }
 
@@ -242,6 +261,7 @@ final class QOllyxar {
             // starting home page from StaticPages.
             // remove code below if you don't need it
             $_GET['page_id'] = 2;
+            $this->appendModule('staticpages');
             $this->modules['staticpages']->index();
         }
 

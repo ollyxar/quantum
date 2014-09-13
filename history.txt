@@ -44,6 +44,9 @@ F - Frontend; B - Backend; C - Core; M - Modules
 - C: Optimized redirect from not existing pages to 404;
 - C: Added methods QDocument::addScript and QDocument::addStyle;
 - C: Changed template file structure;
+- C: Added QOllyxar::appendModule;
+- C: Modified QOllyxar::loadRouters;
+- C: Improved engine performance;
 
 2.0.0:
 - C: Modified routing system:
