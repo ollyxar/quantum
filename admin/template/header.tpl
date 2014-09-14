@@ -68,10 +68,10 @@
                                 <b class="caret"></b>
                             </a>
                             <ul class="dropdown-menu">
-                                <?php foreach ($engine->a_modules as $module) { ?>
-                                    <?php if ($_SESSION['access'] <= $module['rr'] && $module['has_ui'] && $module['enabled']) { ?>
-                                        <li><a href="<?php echo 'index.php?page=' . strtolower($module['name']) ?>">
-                                                <?php echo $module['description'] ?></a></li>
+                                <?php foreach ($engine->modules as $module) { ?>
+                                    <?php if ($_SESSION['access'] <= $module->adm_access['rr'] && $module->has_ui && $module->enabled) { ?>
+                                        <li><a href="<?php echo 'index.php?page=' . strtolower(get_class($module)) ?>">
+                                                <?php echo $module->description ?></a></li>
                                     <?php } ?>
                                 <?php } ?>
                                 <?php if ($_SESSION['access'] <= 2) { ?>

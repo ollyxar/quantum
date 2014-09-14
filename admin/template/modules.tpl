@@ -57,7 +57,7 @@
                     <td><?php echo $module['id'] ?></td>
                     <td><input type="text" name="modules[<?php echo $module['id'] ?>][description]"
                                value="<?php echo $module['description'] ?>"/></td>
-                    <td style="text-align: center"><?php echo $engine->a_modules[$module['id']]['version'] ?></td>
+                    <td style="text-align: center"><?php echo $engine->modules[$module['name']]->getVersion() ?></td>
                     <td style="text-align: center">
                         <?php if ((int)$module['enabled'] == 1) { ?>
                             <i class="icon-ok-sign"></i>

@@ -5,9 +5,7 @@ class Modules extends \AUnit {
 
     private function saveModules() {
         foreach ($_POST['modules'] as $id => $data) {
-            $this->engine->db->query("UPDATE " . DB_PREF . "modules SET `description`='" .
-                $this->engine->db->escape($data['description']) . "', `ordering`='" .
-                $this->engine->db->escape($data['ordering']) . "' WHERE id=" . (int)$id);
+            $this->engine->db->query("UPDATE " . DB_PREF . "modules SET `description`='" . $this->engine->db->escape($data['description']) . "', `ordering`='" . $this->engine->db->escape($data['ordering']) . "' WHERE id=" . (int)$id);
         }
         $_SESSION['msg'] = 'success';
         $_SESSION['msg_text'] = $this->language['changes_applied'];
@@ -18,12 +16,12 @@ class Modules extends \AUnit {
         foreach ($_POST['fp'] as $id) {
             switch ($_POST['action']) {
                 case 'activate':
-                    $this->engine->db->query("UPDATE " . DB_PREF . "modules SET `enabled`='1' WHERE id=" . $id);
+                    $this->engine->db->query("UPDATE " . DB_PREF . "modules SET `enabled`='1' WHERE id=" . (int)$id);
                     $_SESSION['msg'] = 'success';
                     $_SESSION['msg_text'] = $this->language['changes_applied'];
                     break;
                 case 'deactivate':
-                    $this->engine->db->query("UPDATE " . DB_PREF . "modules SET `enabled`='0' WHERE id=" . $id);
+                    $this->engine->db->query("UPDATE " . DB_PREF . "modules SET `enabled`='0' WHERE id=" . (int)$id);
                     $_SESSION['msg'] = 'success';
                     $_SESSION['msg_text'] = $this->language['changes_applied'];
                     break;
@@ -66,7 +64,7 @@ class Modules extends \AUnit {
             if (in_array($_FILES["file"]["type"], array('application/zip', 'application/x-zip-compressed'))) {
                 $m_name = pathinfo($_FILES["file"]["name"], PATHINFO_FILENAME);
                 if (!file_exists('../modules/app_data/' . $m_name)) {
-                    mkdir('../modules/app_data/' . $m_name, 0755, true);
+                    mkdir('../modules/app_data/' . $m_name, 0775, true);
                 }
                 if (move_uploaded_file($_FILES["file"]["tmp_name"], '../modules/app_data/' . $m_name . '/' .
                     $_FILES["file"]['name'])) {

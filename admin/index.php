@@ -42,29 +42,6 @@ if (isset($_GET['auth']) && isset($_SESSION['is_adm']) && $_SESSION['is_adm'] ==
     $engine->cache->path_to_system = dirname(getcwd()) . '/';
     $engine->loadConfig(dirname(getcwd()));
 
-    // get modules
-    $modules = $engine->db->query("SELECT id, name, position, description, rr, rw, has_ui, enabled, ordering FROM " . DB_PREF . "modules")->rows;
-    foreach ($modules as $module) {
-        include_once('../modules/' . $module['name'] . '.php');
-        $QModule = new $module['name']($engine);
-        $engine->a_modules[$module['id']] = array(
-            'id'            => $module['id'],
-            'name'          => $module['name'],
-            'position'      => $module['position'],
-            'description'   => $module['description'],
-            'rr'            => $module['rr'],
-            'rw'            => $module['rw'],
-            'has_ui'        => $module['has_ui'],
-            'enabled'       => (bool)$module['enabled'],
-            'ordering'      => $module['ordering'],
-            'version'       => $QModule->getVersion()
-        );
-        // language manager compatibility
-        $engine->modules[$module['name']] = new $module['name']($engine);
-        unset($QModule);
-    }
-    unset($modules);
-
     $engine->document->addHeaderString('<meta charset="utf-8">');
     $engine->document->addHeaderString('<script src="template/js/jquery-1.8.1.min.js"></script>');
     $engine->document->addHeaderString('<script src="template/js/jquery-ui-1.10.4.custom.min.js"></script>');

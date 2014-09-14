@@ -12,8 +12,6 @@ final class QOllyxar {
     public $user;
     public $ERROR_404 = true;
     public $modules = array();
-    // $a_modules - reserved for backend
-    public $a_modules = array();
     public $cache;
     private $available_modules = array();
     private $modules_in_position = array();
@@ -51,26 +49,28 @@ final class QOllyxar {
         $this->config = new QConfig($path);
     }
 
-    private function __loadModules($dont_load_modules = false) {
-        if ($dont_load_modules) {
-            return false;
+    private function __loadModules($load_and_init = false) {
+        if ($load_and_init) {
+            $modules = $this->db->query("SELECT * FROM " . DB_PREF . "modules ORDER BY ordering")->rows;
         } else {
             $modules = $this->db->query("SELECT * FROM " . DB_PREF . "modules WHERE enabled=1 ORDER BY ordering")->rows;
-            foreach ($modules as $module) {
-                $this->modules_in_position[$module['position']][$module['id']] = $module['name'];
-                $this->available_modules[$module['name']] = array(
-                    'id'        => $module['id'],
-                    'name'      => $module['name'],
-                    'route'     => ($module['route'] != '') ? explode(',', $module['route']) : array('__all'),
-                    'params'    => (@unserialize($module['params']) !== false) ? unserialize($module['params']) : array(),
-                    'rr'        => $module['rr'],
-                    'rw'        => $module['rw'],
-                    'enabled'   => $module['enabled'],
-                    'has_ui'    => $module['has_ui'],
-                    'description' => $module['description']
-                );
+        }
+        foreach ($modules as $module) {
+            $this->modules_in_position[$module['position']][$module['id']] = $module['name'];
+            $this->available_modules[$module['name']] = array(
+                'id'        => $module['id'],
+                'name'      => $module['name'],
+                'route'     => ($module['route'] != '') ? explode(',', $module['route']) : array('__all'),
+                'params'    => (@unserialize($module['params']) !== false) ? unserialize($module['params']) : array(),
+                'rr'        => $module['rr'],
+                'rw'        => $module['rw'],
+                'enabled'   => $module['enabled'],
+                'has_ui'    => $module['has_ui'],
+                'description' => $module['description']
+            );
+            if ($load_and_init) {
+                $this->appendModule($module['name']);
             }
-            return true;
         }
     }
 
@@ -84,17 +84,19 @@ final class QOllyxar {
     }
 
     private function appendModule($module_name) {
-        if (@include('modules/' . $module_name . '.php')) {
-            $this->modules[$module_name] = new $module_name($this);
-            $this->modules[$module_name]->params = $this->available_modules[$module_name]['params'];
-            $this->modules[$module_name]->route = $this->available_modules[$module_name]['route'];
-            $this->modules[$module_name]->adm_access['rr'] = $this->available_modules[$module_name]['rr'];
-            $this->modules[$module_name]->adm_access['rw'] = $this->available_modules[$module_name]['rw'];
-            $this->modules[$module_name]->enabled = $this->available_modules[$module_name]['enabled'];
-            $this->modules[$module_name]->has_ui = (bool)$this->available_modules[$module_name]['has_ui'];
-            $this->modules[$module_name]->description = $this->available_modules[$module_name]['description'];
-        } else {
-            trigger_error("Module " . $module_name . " doesn't load!", E_NOTICE);
+        if (!isset($this->modules[$module_name])) {
+            if (@include(dirname(dirname(dirname(__FILE__))) . '/modules/' . $module_name . '.php')) {
+                $this->modules[$module_name] = new $module_name($this);
+                $this->modules[$module_name]->params = $this->available_modules[$module_name]['params'];
+                $this->modules[$module_name]->route = $this->available_modules[$module_name]['route'];
+                $this->modules[$module_name]->adm_access['rr'] = $this->available_modules[$module_name]['rr'];
+                $this->modules[$module_name]->adm_access['rw'] = $this->available_modules[$module_name]['rw'];
+                $this->modules[$module_name]->enabled = $this->available_modules[$module_name]['enabled'];
+                $this->modules[$module_name]->has_ui = (bool)$this->available_modules[$module_name]['has_ui'];
+                $this->modules[$module_name]->description = $this->available_modules[$module_name]['description'];
+            } else {
+                trigger_error("Module " . $module_name . " doesn't load!", E_USER_WARNING);
+            }
         }
     }
 

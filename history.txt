@@ -47,6 +47,7 @@ F - Frontend; B - Backend; C - Core; M - Modules
 - C: Added QOllyxar::appendModule;
 - C: Modified QOllyxar::loadRouters;
 - C: Improved engine performance;
+- B: Optimized data usage;
 
 2.0.0:
 - C: Modified routing system:
