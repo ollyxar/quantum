@@ -78,6 +78,7 @@
     <div class="row-fluid">
         <div class="hero-unit span6">
             <h4><?php echo $language['captions'] ?></h4>
+            <div class="table">
             <table class="table table-bordered table-hover">
                 <thead>
                 <tr>
@@ -123,75 +124,11 @@
                 </tr>
                 </tbody>
             </table>
-        </div>
-        <div class="hero-unit span6">
-            <h4><?php echo $language['titles'] ?></h4>
-            <table class="table table-bordered table-hover">
-                <thead>
-                <tr>
-                    <th><?php echo $language['name'] ?></th>
-                    <th><?php echo $language['value'] ?></th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr>
-                    <td><?php echo $language['registration_page'] ?></td>
-                    <td><input type="text" class="span12" name="title_registration_<?php echo $lang['name'] ?>"
-                               value="<?php echo $settings['title_registration_' . $lang['name']] ?>"/></td>
-                </tr>
-                <tr>
-                    <td><?php echo $language['account_page'] ?></td>
-                    <td><input type="text" class="span12" name="title_account_<?php echo $lang['name'] ?>"
-                               value="<?php echo $settings['title_account_' . $lang['name']] ?>"/></td>
-                </tr>
-                <tr>
-                    <td><?php echo $language['login_page'] ?></td>
-                    <td><input type="text" class="span12" name="title_login_<?php echo $lang['name'] ?>"
-                               value="<?php echo $settings['title_login_' . $lang['name']] ?>"/></td>
-                </tr>
-                </tbody>
-            </table>
-        </div>
-    </div>
-    <div class="row-fluid">
-        <div class="hero-unit span6">
-            <h4><?php echo $language['buttons'] ?></h4>
-            <table class="table table-bordered table-hover">
-                <thead>
-                <tr>
-                    <th><?php echo $language['name'] ?></th>
-                    <th><?php echo $language['value'] ?></th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr>
-                    <td><?php echo $language['log_in'] ?></td>
-                    <td><input type="text" class="span12" name="log_in_<?php echo $lang['name'] ?>"
-                               value="<?php echo $settings['log_in_' . $lang['name']] ?>"/></td>
-                </tr>
-                <tr>
-                    <td><?php echo $language['log_out'] ?></td>
-                    <td><input type="text" class="span12"
-                               name="log_out_<?php echo $lang['name'] ?>"
-                               value="<?php echo $settings['log_out_' . $lang['name']] ?>"/></td>
-                </tr>
-                <tr>
-                    <td><?php echo $language['confirm'] ?></td>
-                    <td><input type="text" class="span12"
-                               name="confirm_<?php echo $lang['name'] ?>"
-                               value="<?php echo $settings['confirm_' . $lang['name']] ?>"/></td>
-                </tr>
-                <tr>
-                    <td><?php echo $language['save'] ?></td>
-                    <td><input type="text" class="span12"
-                               name="save_<?php echo $lang['name'] ?>"
-                               value="<?php echo $settings['save_' . $lang['name']] ?>"/></td>
-                </tr>
-                </tbody>
-            </table>
+            </div>
         </div>
         <div class="hero-unit span6">
             <h4><?php echo $language['messages'] ?></h4>
+            <div class="table">
             <table class="table table-bordered table-hover">
                 <thead>
                 <tr>
@@ -248,6 +185,77 @@
                 </tr>
                 </tbody>
             </table>
+            </div>
+        </div>
+    </div>
+    <div class="row-fluid">
+        <div class="hero-unit span6">
+            <h4><?php echo $language['buttons'] ?></h4>
+            <div class="table">
+                <table class="table table-bordered table-hover">
+                <thead>
+                <tr>
+                    <th><?php echo $language['name'] ?></th>
+                    <th><?php echo $language['value'] ?></th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td><?php echo $language['log_in'] ?></td>
+                    <td><input type="text" class="span12" name="log_in_<?php echo $lang['name'] ?>"
+                               value="<?php echo $settings['log_in_' . $lang['name']] ?>"/></td>
+                </tr>
+                <tr>
+                    <td><?php echo $language['log_out'] ?></td>
+                    <td><input type="text" class="span12"
+                               name="log_out_<?php echo $lang['name'] ?>"
+                               value="<?php echo $settings['log_out_' . $lang['name']] ?>"/></td>
+                </tr>
+                <tr>
+                    <td><?php echo $language['confirm'] ?></td>
+                    <td><input type="text" class="span12"
+                               name="confirm_<?php echo $lang['name'] ?>"
+                               value="<?php echo $settings['confirm_' . $lang['name']] ?>"/></td>
+                </tr>
+                <tr>
+                    <td><?php echo $language['save'] ?></td>
+                    <td><input type="text" class="span12"
+                               name="save_<?php echo $lang['name'] ?>"
+                               value="<?php echo $settings['save_' . $lang['name']] ?>"/></td>
+                </tr>
+                </tbody>
+            </table>
+            </div>
+        </div>
+        <div class="hero-unit span6">
+            <h4><?php echo $language['titles'] ?></h4>
+            <div class="table">
+            <table class="table table-bordered table-hover">
+                <thead>
+                <tr>
+                    <th><?php echo $language['name'] ?></th>
+                    <th><?php echo $language['value'] ?></th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td><?php echo $language['registration_page'] ?></td>
+                    <td><input type="text" class="span12" name="title_registration_<?php echo $lang['name'] ?>"
+                               value="<?php echo $settings['title_registration_' . $lang['name']] ?>"/></td>
+                </tr>
+                <tr>
+                    <td><?php echo $language['account_page'] ?></td>
+                    <td><input type="text" class="span12" name="title_account_<?php echo $lang['name'] ?>"
+                               value="<?php echo $settings['title_account_' . $lang['name']] ?>"/></td>
+                </tr>
+                <tr>
+                    <td><?php echo $language['login_page'] ?></td>
+                    <td><input type="text" class="span12" name="title_login_<?php echo $lang['name'] ?>"
+                               value="<?php echo $settings['title_login_' . $lang['name']] ?>"/></td>
+                </tr>
+                </tbody>
+            </table>
+            </div>
         </div>
     </div>
     </div>
@@ -255,13 +263,13 @@
 </div>
 </form>
 <script type="text/javascript">
-    jQuery('.hero-unit table').css('display', 'none');
+    jQuery('.hero-unit div.table').css('display', 'none');
     jQuery('.hero-unit h4').css('cursor', 'pointer').click(function() {
-        var table = jQuery(this).parent().find('table');
+        var table = jQuery(this).parent().find('div.table');
         if (table.css('display') == 'none') {
-            table.slideDown(200);
+            table.slideDown(500);
         } else {
-            table.slideUp(200);
+            table.slideUp(500);
         }
     });
     jQuery('#save').click(function () {
