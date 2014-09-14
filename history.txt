@@ -4,7 +4,7 @@
 /*  Author:                           |  Olexy Sviridenko (aka Alex Slipknot | alexslipknot@europe.com)     */
 /*  PHP, Database and JS development: |  Olexy Sviridenko                                                   */
 /*  HTML and CSS design:              |  Olexandra Bespalova, Olexy Sviridenko, Olexander Sharin            */
-/*  Date:                             |  13.09.2014                                                         */
+/*  Date:                             |  14.09.2014                                                         */
 /*==========================================================================================================*/
 
 /*==========================================   SPECIAL THANKS TO   =========================================*/
