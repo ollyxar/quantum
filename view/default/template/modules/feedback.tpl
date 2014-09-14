@@ -1,5 +1,5 @@
 <?php if (isset($text_message)) { ?>
-    <div class="alert bg-danger alert-<?php echo $class_message ?>">
+    <div class="alert bg-<?php echo $class_message ?> alert-<?php echo $class_message ?>">
         <?php echo $text_message ?>
         <button type="button" class="close" data-dismiss="alert">×</button>
     </div>
