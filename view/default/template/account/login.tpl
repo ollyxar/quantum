@@ -34,14 +34,14 @@
             },
             success: function (data) {
                 if (data == "1") {
-                    jQuery('#result').html('<div class="alert bg-danger"><?php echo '' ?></div>');
+                    jQuery('#result').html('<div class="alert bg-danger"><?php echo addslashes($data_incorrect) ?></div>');
                 } else if (data == "2") {
-                    jQuery('#result').html('<div class="alert bg-danger">Email is not confirmed</div>');
+                    jQuery('#result').html('<div class="alert bg-danger"><?php echo addslashes($email_not_confirmed) ?></div>');
                 } else if (data == "0") {
-                    jQuery('#result').html('<div class="alert bg-success">Login success</div>');
+                    jQuery('#result').html('<div class="alert bg-success"><?php echo addslashes($login_success) ?></div>');
                     window.location = '<?php echo htmlspecialchars($engine->url->link('route=account')) ?>';
                 } else {
-                    jQuery('#result').html('<div class="alert bg-danger">Other error</div>');
+                    jQuery('#result').html('<div class="alert bg-danger"><?php echo addslashes($unknown_error) ?></div>');
                 }
             },
             error: function() {
