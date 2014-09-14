@@ -34,7 +34,7 @@
             },
             success: function (data) {
                 if (data == "1") {
-                    jQuery('#result').html('<div class="alert bg-danger">Data incorrect</div>');
+                    jQuery('#result').html('<div class="alert bg-danger"><?php echo '' ?></div>');
                 } else if (data == "2") {
                     jQuery('#result').html('<div class="alert bg-danger">Email is not confirmed</div>');
                 } else if (data == "0") {

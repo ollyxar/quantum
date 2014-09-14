@@ -27,6 +27,10 @@ class Account extends QModule {
         $this->params['registration_finished_' . $lang] = $this->params['registration_finished_' . DEF_LANG];
         $this->params['additional_text_' . $lang]       = $this->params['additional_text_' . DEF_LANG];
         $this->params['account_confirmed_' . $lang]     = $this->params['account_confirmed_' . DEF_LANG];
+        $this->params['data_incorrect_' . $lang]        = $this->params['data_incorrect_' . DEF_LANG];
+        $this->params['email_not_confirmed_' . $lang]   = $this->params['email_not_confirmed_' . DEF_LANG];
+        $this->params['login_success_' . $lang]         = $this->params['login_success_' . DEF_LANG];
+        $this->params['unknown_error_' . $lang]         = $this->params['unknown_error_' . DEF_LANG];
         $q = $this->engine->db->query("UPDATE " . DB_PREF . "modules SET `params`='" . $this->engine->db->escape(serialize($this->params)) . "' WHERE name='account'");
         if ($q) return true; else return false;
     }
@@ -195,6 +199,10 @@ class Account extends QModule {
             $this->data['log_in']               = $this->params['log_in_' . $_SESSION['lang']];
             $this->data['password_not_valid']   = $this->params['not_valid_password_' . $_SESSION['lang']];
             $this->data['remember_me']          = $this->params['remember_me_' . $_SESSION['lang']];
+            $this->data['data_incorrect']       = $this->params['data_incorrect_' . $_SESSION['lang']];
+            $this->data['email_not_confirmed']  = $this->params['email_not_confirmed_' . $_SESSION['lang']];
+            $this->data['login_success']        = $this->params['login_success_' . $_SESSION['lang']];
+            $this->data['unknown_error']        = $this->params['unknown_error_' . $_SESSION['lang']];
             $this->data['password']             = isset($_POST['password']) ? htmlspecialchars($_POST['password']) : '';
             $this->data['email']                = isset($_POST['email']) ? htmlspecialchars($_POST['email']) : '';
             $template = 'template/account/login.tpl';

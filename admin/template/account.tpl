@@ -179,6 +179,30 @@
                                value="<?php echo $settings['not_valid_password_' . $lang['name']] ?>"/></td>
                 </tr>
                 <tr>
+                    <td><?php echo $language['data_incorrect'] ?></td>
+                    <td><input type="text" class="span12"
+                               name="data_incorrect_<?php echo $lang['name'] ?>"
+                               value="<?php echo $settings['data_incorrect_' . $lang['name']] ?>"/></td>
+                </tr>
+                <tr>
+                    <td><?php echo $language['email_not_confirmed'] ?></td>
+                    <td><input type="text" class="span12"
+                               name="email_not_confirmed_<?php echo $lang['name'] ?>"
+                               value="<?php echo $settings['email_not_confirmed_' . $lang['name']] ?>"/></td>
+                </tr>
+                <tr>
+                    <td><?php echo $language['login_success'] ?></td>
+                    <td><input type="text" class="span12"
+                               name="login_success_<?php echo $lang['name'] ?>"
+                               value="<?php echo $settings['login_success_' . $lang['name']] ?>"/></td>
+                </tr>
+                <tr>
+                    <td><?php echo $language['unknown_error'] ?></td>
+                    <td><input type="text" class="span12"
+                               name="unknown_error_<?php echo $lang['name'] ?>"
+                               value="<?php echo $settings['unknown_error_' . $lang['name']] ?>"/></td>
+                </tr>
+                <tr>
                     <td><?php echo $language['additional_text'] ?></td>
                     <td><textarea class="span12"
                                   name="additional_text_<?php echo $lang['name'] ?>"><?php echo $settings['additional_text_' . $lang['name']] ?></textarea></td>
@@ -277,7 +301,7 @@
         jQuery('#form').submit();
     });
     jQuery('.switcher').change(function () {
-        if ((jQuery(this).attr('checked') != undefined) && (jQuery(this).attr('checked') == 'checked')) {
+        if ((jQuery(this).is(':checked'))) {
             jQuery(this).parent().find('input:hidden').attr('value', '1');
         } else {
             jQuery(this).parent().find('input:hidden').attr('value', '0');

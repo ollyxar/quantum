@@ -70,10 +70,10 @@
                     <td>
                         <?php if ($module['has_ui']) { ?>
                         <a href="index.php?page=<?php echo $module['name'] ?>"
-                           class="btn btn-info btn-mini" style="display: block; margin: 0 auto"><i class="icon-edit icon-white"></i> <?php echo $language['manage'] ?></a>
+                           class="btn btn-info" style="display: block; margin: 0 auto"><i class="icon-edit icon-white"></i> <?php echo $language['manage'] ?></a>
                         <?php } ?>
                         <a href="index.php?page=modules&id=<?php echo $module['id'] ?>"
-                           class="btn btn-warning btn-mini" style="display: block; margin: 0 auto"><i class="icon-edit icon-white"></i> <?php echo $language['edit'] ?></a>
+                           class="btn btn-warning" style="display: block; margin: 0 auto"><i class="icon-edit icon-white"></i> <?php echo $language['edit'] ?></a>
                     </td>
                 </tr>
             <?php } ?>
