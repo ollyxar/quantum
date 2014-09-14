@@ -44,7 +44,6 @@
         </div>
     </div>
 
-
     <table class="table table-bordered table-striped table-hover">
         <thead>
         <tr>
@@ -79,6 +78,10 @@
         <tr>
             <td><?php echo $language['register_globals'] ?>:</td>
             <td><?php echo ini_get('register_globals') ? ini_get('register_globals') : ' - ' ?></td>
+        </tr>
+        <tr>
+            <td><?php echo $language['session_life_time'] ?>:</td>
+            <td><?php echo ini_get('session.gc_maxlifetime') ?> sec</td>
         </tr>
         <tr>
             <td><?php echo $language['post_max_size'] ?>:</td>

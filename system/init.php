@@ -13,23 +13,22 @@ session_name(SITE_CODE);
 if (isset($_POST['remember_me'])) {
 	session_set_cookie_params(1209600);
 	session_start();
-	setcookie(session_name(), session_id(), time() + 1209600);
+	setcookie(session_name(SITE_CODE), session_id(), time() + 1209600, '/');
 } else {
     session_start();
 }
-
-magicQuotesFix();
-
 if (!isset($_SESSION['lang'])) {
 	$_SESSION['lang'] = DEF_LANG;
 }
+
+magicQuotesFix();
 
 if (USE_COMPRESSION) {
     ob_start("compress");
 }
 
 $engine = new QOllyxar();
-$engine->doRoute();
+$engine->start();
 
 // including template
 require_once(TEMPLATE . 'template/common/template.tpl');

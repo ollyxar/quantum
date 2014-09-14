@@ -18,6 +18,7 @@ class Account extends QModule {
         $this->params['confirm_' . $lang]               = $this->params['confirm_' . DEF_LANG];
         $this->params['save_' . $lang]                  = $this->params['save_' . DEF_LANG];
         $this->params['agree_' . $lang]                 = $this->params['agree_' . DEF_LANG];
+        $this->params['remember_me_' . $lang]           = $this->params['remember_me_' . DEF_LANG];
         $this->params['account_exists_' . $lang]        = $this->params['account_exists_' . DEF_LANG];
         $this->params['not_valid_email_' . $lang]       = $this->params['not_valid_email_' . DEF_LANG];
         $this->params['not_valid_name_' . $lang]        = $this->params['not_valid_name_' . DEF_LANG];
@@ -112,6 +113,10 @@ class Account extends QModule {
         $this->engine->db->query("UPDATE " . DB_PREF . "users SET `confirm` = '' WHERE `confirm` = '" . $this->engine->db->escape($key) . "'");
     }
 
+    public function login() {
+        die(json_encode($this->engine->user->login($_POST['email'], $_POST['password'])));
+    }
+
     public function index() {
         $this->engine->ERROR_404 = FALSE;
         if (!isset($_GET['action'])) {
@@ -135,9 +140,7 @@ class Account extends QModule {
                     $_SESSION['msg'] = 'captcha_not_valid';
                 }
             }
-
             $this->engine->document->setTitle($this->params['title_registration_' . $_SESSION['lang']]);
-
             if ((bool)$this->params['captcha_required']) {
                 $captcha = new QCaptcha();
                 $this->data['captcha'] = $captcha->getContent();
@@ -153,9 +156,7 @@ class Account extends QModule {
             $this->data['password_not_valid']   = $this->params['not_valid_password_' . $_SESSION['lang']];
             $this->data['name']                 = isset($_POST['name']) ? htmlspecialchars($_POST['name']) : '';
             $this->data['password']             = isset($_POST['password']) ? htmlspecialchars($_POST['password']) : '';
-            $this->data['phone']                = isset($_POST['phone']) ? htmlspecialchars($_POST['phone']) : '';
             $this->data['email']                = isset($_POST['email']) ? htmlspecialchars($_POST['email']) : '';
-            $this->data['message']              = isset($_POST['message']) ? htmlspecialchars($_POST['message']) : '';
 
             $template = 'template/account/register.tpl';
             if (isset($_SESSION['msg'])) {
@@ -179,6 +180,7 @@ class Account extends QModule {
                 $this->engine->url->redirect($this->engine->url->link('route=home'));
             }
             $this->confirm($_GET['confirm_key']);
+            $this->engine->document->setTitle($this->params['account_confirmed_' . $_SESSION['lang']]);
             $this->data['caption'] = $this->params['account_confirmed_' . $_SESSION['lang']];
             $this->data['text'] = '';
             $template = 'template/common/success.tpl';
@@ -186,6 +188,15 @@ class Account extends QModule {
             if ($this->engine->user->logged) {
                 $this->engine->url->redirect($this->engine->url->link('route=account'));
             }
+            $this->engine->document->setTitle($this->params['title_login_' . $_SESSION['lang']]);
+            $this->data['caption']              = $this->params['title_login_' . $_SESSION['lang']];
+            $this->data['placeholder_email']    = $this->params['placeholder_email_' . $_SESSION['lang']];
+            $this->data['placeholder_password'] = $this->params['placeholder_password_' . $_SESSION['lang']];
+            $this->data['log_in']               = $this->params['log_in_' . $_SESSION['lang']];
+            $this->data['password_not_valid']   = $this->params['not_valid_password_' . $_SESSION['lang']];
+            $this->data['remember_me']          = $this->params['remember_me_' . $_SESSION['lang']];
+            $this->data['password']             = isset($_POST['password']) ? htmlspecialchars($_POST['password']) : '';
+            $this->data['email']                = isset($_POST['email']) ? htmlspecialchars($_POST['email']) : '';
             $template = 'template/account/login.tpl';
         } else {
             if (!$this->engine->user->logged) {

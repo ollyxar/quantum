@@ -5865,6 +5865,10 @@ a.badge:focus {
     line-height: 30px;
 }
 
+.hero-unit table {
+    font-size: 14px;
+}
+
 .pull-right {
     float: right;
 }

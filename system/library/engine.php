@@ -16,7 +16,7 @@ final class QOllyxar {
     private $available_modules = array();
     private $modules_in_position = array();
 
-    public function __construct($dont_load_modules = false) {
+    public function __construct($load_and_init = false) {
         $this->db = new DB(DB_DRIVER, DB_HOST, DB_USER, DB_PASS, DB_NAME);
         $this->db_queries = 0;
         $_GET['route'] = isset($_GET['route']) ? $_GET['route'] : '';
@@ -38,7 +38,7 @@ final class QOllyxar {
         $this->cache = new QCache();
         $this->url = new QUrl($this);
         $this->user = new QUser($this);
-        $this->__loadModules($dont_load_modules);
+        $this->__loadModules($load_and_init);
     }
 
     public static function getVersion() {
@@ -167,7 +167,11 @@ final class QOllyxar {
         die(json_encode($captcha->getContent()));
     }
 
-    public function doRoute() {
+    public function start() {
+        if (!isset($_SESSION['lang'])) {
+            $_SESSION['lang'] = DEF_LANG;
+        }
+
         // call system methods
         if (isset($_GET['system'])) {
             $method = 'public' . $_GET['system'];
@@ -176,7 +180,6 @@ final class QOllyxar {
                 exit();
             }
         }
-
         // call method of module if exists
         if (isset($_GET['module'])) {
             $module_name = substr($_GET['module'], 0, strpos($_GET['module'], '/'));
@@ -185,8 +188,8 @@ final class QOllyxar {
                 exit();
             }
         }
-        // redirecting to seo_lang
 
+        // redirecting to seo_lang
         if ((MULTILANG == true) && (SEO_MULTILANG == true) && (CLEAN_URL == true) &&
                 (substr($this->uri, strlen(ROOT_DIR), strlen($_SESSION['lang'])) != $_SESSION['lang'] ||
                     (strpos($this->uri, ROOT_DIR . $_SESSION['lang'] . '/') === false))) {
