@@ -98,10 +98,10 @@ function str_replace_once($search, $replace, $text) {
 }
 
 function makeRandomString($max = 9) {
-    $i = 0; //Reset the counter.
+    $i = 0;
     $possible_keys = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
     $keys_length = strlen($possible_keys);
-    $str = ""; //Let's declare the string, to add later.
+    $str = "";
     while ($i < $max) {
         $rand = mt_rand(1, $keys_length - 1);
         $str .= $possible_keys[$rand];

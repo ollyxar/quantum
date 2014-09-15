@@ -207,6 +207,11 @@
                     <td><textarea class="span12"
                                   name="additional_text_<?php echo $lang['name'] ?>"><?php echo $settings['additional_text_' . $lang['name']] ?></textarea></td>
                 </tr>
+                <tr>
+                    <td><?php echo $language['confirmation_mail'] ?></td>
+                    <td><textarea class="span12"
+                                  name="confirmation_mail_<?php echo $lang['name'] ?>"><?php echo $settings['confirmation_mail_' . $lang['name']] ?></textarea></td>
+                </tr>
                 </tbody>
             </table>
             </div>

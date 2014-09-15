@@ -25,8 +25,9 @@ class Account extends \AUnit {
                 $params_arr['not_valid_name_' . $lang['name']]       = $_POST['not_valid_name_' . $lang['name']];
                 $params_arr['not_valid_password_' . $lang['name']]   = $_POST['not_valid_password_' . $lang['name']];
                 $params_arr['not_valid_captcha_' . $lang['name']]    = $_POST['not_valid_captcha_' . $lang['name']];
-                $params_arr['registration_finished_' . $lang['name']]= $_POST['registration_finished_' . $lang['name']];
+                $params_arr['registration_finished_' . $lang['name']] = $_POST['registration_finished_' . $lang['name']];
                 $params_arr['additional_text_' . $lang['name']]      = htmlspecialchars($_POST['additional_text_' . $lang['name']]);
+                $params_arr['confirmation_mail_' . $lang['name']]    = htmlspecialchars($_POST['confirmation_mail_' . $lang['name']]);
                 $params_arr['account_confirmed_' . $lang['name']]    = $_POST['account_confirmed_' . $lang['name']];
                 $params_arr['data_incorrect_' . $lang['name']]       = $_POST['data_incorrect_' . $lang['name']];
                 $params_arr['email_not_confirmed_' . $lang['name']]  = $_POST['email_not_confirmed_' . $lang['name']];

@@ -26,6 +26,7 @@ class Account extends QModule {
         $this->params['not_valid_captcha_' . $lang]     = $this->params['not_valid_captcha_' . DEF_LANG];
         $this->params['registration_finished_' . $lang] = $this->params['registration_finished_' . DEF_LANG];
         $this->params['additional_text_' . $lang]       = $this->params['additional_text_' . DEF_LANG];
+        $this->params['confirmation_mail_' . $lang]     = $this->params['confirmation_mail_' . DEF_LANG];
         $this->params['account_confirmed_' . $lang]     = $this->params['account_confirmed_' . DEF_LANG];
         $this->params['data_incorrect_' . $lang]        = $this->params['data_incorrect_' . DEF_LANG];
         $this->params['email_not_confirmed_' . $lang]   = $this->params['email_not_confirmed_' . DEF_LANG];
@@ -41,7 +42,7 @@ class Account extends QModule {
             $name = $this->engine->db->escape($name);
             $email = $this->engine->db->escape(strtolower($email));
             $password = md5(md5($this->engine->db->escape($password)));
-            if ($this->engine->db->query("INSERT INTO " . DB_PREF . "users (`name`, `email`, `password`, `user_group`, `joined`, `enabled`) VALUES ('" . $name . "', '" . $email . "', '" . $password . "', '5', '" . strtotime(date("Y-m-d H:i:s")) . "', '1')")) {
+            if ($this->engine->db->query("INSERT INTO " . DB_PREF . "users (`name`, `email`, `password`, `user_group`, `joined`, `enabled`) VALUES ('" . $name . "', '" . $email . "', '" . $password . "', '5', '" . strtotime(date("Y-m-d H:i:s")) . "', '0')")) {
                 $this->sendConfirm($email);
             }
             return true;
@@ -104,17 +105,15 @@ class Account extends QModule {
     }
 
     private function sendConfirm($email) {
-        $confirm_key = md5(md5($email));
+        $confirm_key = md5(md5(makeRandomString()));
         $this->engine->db->query("UPDATE " . DB_PREF . "users SET `confirm` = '" . $confirm_key . "' WHERE LOWER(email) = '" . strtolower($email) . "' ");
-        $message = '<h1>Congratulations! You have successfully registered on ' . $_SERVER['HTTP_HOST'] . '</h1>';
-        $message .= '<p>To finish your registration just follow the link.</p>';
-        $message .= '<p><a href="' . $this->engine->url->link('route=account&action=confirm' , 'confirm_key=' . $confirm_key) . '">Confirm registration</a></p>';
-        $message .= '<p>If it was not You just ignore this message.</p>';
+        $message = html_entity_decode($this->params['confirmation_mail_' . $_SESSION['lang']]);
+        $message = str_replace('{confirm_link}', $this->engine->url->link('route=account&action=confirm' , 'confirm_key=') . $confirm_key, $message);
         $this->engine->sendMail($email, 'system@' . $_SERVER['HTTP_HOST'], $_SERVER['HTTP_HOST'] . ' - Notification system', 'Please confirm your account', $message);
     }
 
     public function confirm($key) {
-        $this->engine->db->query("UPDATE " . DB_PREF . "users SET `confirm` = '' WHERE `confirm` = '" . $this->engine->db->escape($key) . "'");
+        $this->engine->db->query("UPDATE " . DB_PREF . "users SET `confirm` = '', `enabled` = '1' WHERE `confirm` = '" . $this->engine->db->escape($key) . "'");
     }
 
     public function login() {
