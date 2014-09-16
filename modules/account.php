@@ -32,6 +32,9 @@ class Account extends QModule {
         $this->params['email_not_confirmed_' . $lang]   = $this->params['email_not_confirmed_' . DEF_LANG];
         $this->params['login_success_' . $lang]         = $this->params['login_success_' . DEF_LANG];
         $this->params['unknown_error_' . $lang]         = $this->params['unknown_error_' . DEF_LANG];
+        $this->params['restore_password_' . $lang]      = $this->params['restore_password_' . DEF_LANG];
+        $this->params['instructions_sent_' . $lang]     = $this->params['instructions_sent_' . DEF_LANG];
+        $this->params['restore_mail_' . $lang]          = $this->params['restore_mail_' . DEF_LANG];
         $q = $this->engine->db->query("UPDATE " . DB_PREF . "modules SET `params`='" . $this->engine->db->escape(serialize($this->params)) . "' WHERE name='account'");
         if ($q) return true; else return false;
     }
@@ -69,7 +72,7 @@ class Account extends QModule {
         $email = isset($_POST['email']) ? $_POST['email'] : '';
         $result = '';
         if (preg_match('/\w+@\w+?\.[a-zA-Z]{2,6}/', $email) && strlen($email) < 40) {
-            $exists = $this->engine->db->query("SELECT id FROM " . DB_PREF . "users WHERE  email = '" . $email . "'")->row;
+            $exists = $this->engine->db->query("SELECT id FROM " . DB_PREF . "users WHERE email = '" . $email . "'")->row;
             if (!empty($exists)) {
                 $result = $this->params['account_exists_' . $_SESSION['lang']];
             }
@@ -77,6 +80,24 @@ class Account extends QModule {
             $result = $this->params['not_valid_email_' . $_SESSION['lang']];
         }
         die(json_encode($result));
+    }
+
+    public function restoreCheck() {
+        $email = isset($_POST['email']) ? $_POST['email'] : '';
+        $status = false;
+        if (preg_match('/\w+@\w+?\.[a-zA-Z]{2,6}/', $email) && strlen($email) < 40) {
+            $exists = $this->engine->db->query("SELECT id FROM " . DB_PREF . "users WHERE email = '" . $email . "'")->row;
+            if (!empty($exists)) {
+                $this->sendRestore($email);
+                $message = $this->params['instructions_sent_' . $_SESSION['lang']];
+                $status = true;
+            } else {
+                $message = $this->params['data_incorrect_' . $_SESSION['lang']];
+            }
+        } else {
+            $message = $this->params['not_valid_email_' . $_SESSION['lang']];
+        }
+        die(json_encode(array($status, $message)));
     }
 
     private function validate($name, $email, $password) {
@@ -112,8 +133,26 @@ class Account extends QModule {
         $this->engine->sendMail($email, 'system@' . $_SERVER['HTTP_HOST'], $_SERVER['HTTP_HOST'] . ' - Notification system', 'Please confirm your account', $message);
     }
 
+    private function sendRestore($email) {
+        $confirm_key = md5(md5(makeRandomString()));
+        $this->engine->db->query("UPDATE " . DB_PREF . "users SET `confirm` = '" . $confirm_key . "' WHERE LOWER(email) = '" . strtolower($email) . "' ");
+        $message = html_entity_decode($this->params['restore_mail_' . $_SESSION['lang']]);
+        $message = str_replace('{restore_link}', $this->engine->url->link('route=account&action=restore' , 'confirm_key=') . $confirm_key, $message);
+        $this->engine->sendMail($email, 'system@' . $_SERVER['HTTP_HOST'], $_SERVER['HTTP_HOST'] . ' - Notification system', 'Password restore', $message);
+    }
+
     public function confirm($key) {
         $this->engine->db->query("UPDATE " . DB_PREF . "users SET `confirm` = '', `enabled` = '1' WHERE `confirm` = '" . $this->engine->db->escape($key) . "'");
+    }
+
+    private function restore($key, $password) {
+        $result = false;
+        $user = $this->engine->db->query("SELECT `email` FROM " . DB_PREF . "users WHERE `confirm` = '" . $this->engine->db->escape($key) . "'")->row;
+        if (!empty($user)) {
+            $this->engine->db->query("UPDATE " . DB_PREF . "users SET `confirm` = '', `password` = '" . md5(md5(trim($password))) . "' WHERE `confirm` = '" . $this->engine->db->escape($key) . "'");
+            $result = $user['email'];
+        }
+        return $result;
     }
 
     public function login() {
@@ -187,6 +226,25 @@ class Account extends QModule {
             $this->data['caption'] = $this->params['account_confirmed_' . $_SESSION['lang']];
             $this->data['text'] = '';
             $template = 'template/common/success.tpl';
+        } elseif ($_GET['action'] == 'restore') {
+            if ($this->engine->user->logged) {
+                $this->engine->url->redirect($this->engine->url->link('route=account'));
+            }
+            if (!isset($_GET['confirm_key']) || $_GET['confirm_key'] == '') {
+                $this->engine->url->redirect($this->engine->url->link('route=home'));
+            }
+            $this->engine->document->setTitle($this->params['restore_password_' . $_SESSION['lang']]);
+            $this->data['caption']  = $this->params['restore_password_' . $_SESSION['lang']];
+            $this->data['new_pass'] = $this->params['new_pass_' . $_SESSION['lang']];
+            $this->data['confirm']  = $this->params['confirm_' . $_SESSION['lang']];
+            if (isset($_POST['password'])) {
+                $email = $this->restore($_GET['confirm_key'], $_POST['password']);
+                if ($email !== false) {
+                    $this->engine->user->login($email, $_POST['password']);
+                }
+                $this->engine->url->redirect($this->engine->url->link('route=account'));
+            }
+            $template = 'template/account/restore.tpl';
         } elseif ($_GET['action'] == 'login') {
             if ($this->engine->user->logged) {
                 $this->engine->url->redirect($this->engine->url->link('route=account'));
@@ -202,6 +260,9 @@ class Account extends QModule {
             $this->data['email_not_confirmed']  = $this->params['email_not_confirmed_' . $_SESSION['lang']];
             $this->data['login_success']        = $this->params['login_success_' . $_SESSION['lang']];
             $this->data['unknown_error']        = $this->params['unknown_error_' . $_SESSION['lang']];
+            $this->data['restore_password']     = $this->params['restore_password_' . $_SESSION['lang']];
+            $this->data['instructions_sent']    = $this->params['instructions_sent_' . $_SESSION['lang']];
+            $this->data['confirm']              = $this->params['confirm_' . $_SESSION['lang']];
             $this->data['password']             = isset($_POST['password']) ? htmlspecialchars($_POST['password']) : '';
             $this->data['email']                = isset($_POST['email']) ? htmlspecialchars($_POST['email']) : '';
             $template = 'template/account/login.tpl';

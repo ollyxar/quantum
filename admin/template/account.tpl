@@ -122,6 +122,11 @@
                     <td><input type="text" class="span12" name="agree_<?php echo $lang['name'] ?>"
                                value="<?php echo $settings['agree_' . $lang['name']] ?>"/></td>
                 </tr>
+                <tr>
+                    <td><?php echo $language['restore_password'] ?></td>
+                    <td><input type="text" class="span12" name="restore_password_<?php echo $lang['name'] ?>"
+                               value="<?php echo $settings['restore_password_' . $lang['name']] ?>"/></td>
+                </tr>
                 </tbody>
             </table>
             </div>
@@ -203,6 +208,12 @@
                                value="<?php echo $settings['unknown_error_' . $lang['name']] ?>"/></td>
                 </tr>
                 <tr>
+                    <td><?php echo $language['instructions_sent'] ?></td>
+                    <td><input type="text" class="span12"
+                               name="instructions_sent_<?php echo $lang['name'] ?>"
+                               value="<?php echo $settings['instructions_sent_' . $lang['name']] ?>"/></td>
+                </tr>
+                <tr>
                     <td><?php echo $language['additional_text'] ?></td>
                     <td><textarea class="span12"
                                   name="additional_text_<?php echo $lang['name'] ?>"><?php echo $settings['additional_text_' . $lang['name']] ?></textarea></td>
@@ -211,6 +222,11 @@
                     <td><?php echo $language['confirmation_mail'] ?></td>
                     <td><textarea class="span12"
                                   name="confirmation_mail_<?php echo $lang['name'] ?>"><?php echo $settings['confirmation_mail_' . $lang['name']] ?></textarea></td>
+                </tr>
+                <tr>
+                    <td><?php echo $language['restore_mail'] ?></td>
+                    <td><textarea class="span12"
+                                  name="restore_mail_<?php echo $lang['name'] ?>"><?php echo $settings['restore_mail_' . $lang['name']] ?></textarea></td>
                 </tr>
                 </tbody>
             </table>

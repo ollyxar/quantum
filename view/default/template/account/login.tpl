@@ -4,12 +4,14 @@
         <div id="result"></div>
         <div class="form-group">
             <label><?php echo $placeholder_email ?></label>
-            <input class="form-control" name="email" type="email" placeholder="<?php echo $placeholder_email ?>" value="<?php echo $email ?>">
+            <input class="form-control" name="email" type="email" placeholder="<?php echo $placeholder_email ?>"
+                   value="<?php echo $email ?>">
         </div>
 
         <div class="form-group">
             <label><?php echo $placeholder_password ?></label>
-            <input class="form-control" name="password" type="password" placeholder="<?php echo $placeholder_password ?>" value="<?php echo $password ?>">
+            <input class="form-control" name="password" type="password"
+                   placeholder="<?php echo $placeholder_password ?>" value="<?php echo $password ?>">
         </div>
 
         <div class="form-group">
@@ -19,10 +21,45 @@
         </div>
 
         <input type="button" id="send" class="btn btn-primary form-control" value="<?php echo $log_in ?>">
+        <a class="link-login"><?php echo $restore_password ?></a>
+    </form>
+    <form id="restore-block" method="post" style="margin: 0 auto; width:300px">
+        <a class="link-login"><?php echo $log_in ?></a>
+        <div id="result-r"></div>
+        <div class="form-group">
+            <label><?php echo $placeholder_email ?></label>
+            <input class="form-control" id="email-r" type="email" placeholder="<?php echo $placeholder_email ?>">
+        </div>
+        <input type="button" id="send-r" class="btn btn-primary form-control" value="<?php echo $confirm ?>">
     </form>
 </div>
 
 <script type="text/javascript">
+    jQuery('.link-login').click(function () {
+        jQuery('#restore-block, #login-form').slideToggle(200);
+    });
+    jQuery('#send-r').click(function() {
+        jQuery.ajax({
+            type: 'POST',
+            url: '?module=account/restoreCheck',
+            dataType: 'json',
+            data: 'email=' + encodeURIComponent(jQuery('#email-r').val()),
+            beforeSend: function () {
+                jQuery('#result-r').html('');
+            },
+            success: function (data) {
+                if (data[0] == false) {
+                    jQuery('#result-r').html('<div class="alert bg-danger">' + data[1] + '</div>');
+                } else  {
+                    jQuery('#result-r').html('<div class="alert bg-success">' + data[1] + '</div>');
+                    jQuery('#send-r').remove();
+                }
+            },
+            error: function () {
+                jQuery('#result-r').html('<div class="alert bg-danger">Error while sending data</div>');
+            }
+        });
+    });
     jQuery('#send').click(function () {
         jQuery.ajax({
             type: 'POST',
@@ -44,7 +81,7 @@
                     jQuery('#result').html('<div class="alert bg-danger"><?php echo addslashes($unknown_error) ?></div>');
                 }
             },
-            error: function() {
+            error: function () {
                 jQuery('#result').html('<div class="alert bg-danger">Error while sending data</div>');
             }
         });

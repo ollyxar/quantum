@@ -33,6 +33,9 @@ class Account extends \AUnit {
                 $params_arr['email_not_confirmed_' . $lang['name']]  = $_POST['email_not_confirmed_' . $lang['name']];
                 $params_arr['login_success_' . $lang['name']]        = $_POST['login_success_' . $lang['name']];
                 $params_arr['unknown_error_' . $lang['name']]        = $_POST['unknown_error_' . $lang['name']];
+                $params_arr['restore_password_' . $lang['name']]     = $_POST['restore_password_' . $lang['name']];
+                $params_arr['instructions_sent_' . $lang['name']]    = $_POST['instructions_sent_' . $lang['name']];
+                $params_arr['restore_mail_' . $lang['name']]         = htmlspecialchars($_POST['restore_mail_' . $lang['name']]);
             }
             $params_arr['captcha_required'] = $_POST['captcha_required'];
             $params_arr['agreement']        = $_POST['agreement'];

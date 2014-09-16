@@ -133,3 +133,12 @@ div.inner {
 #captcha:hover {
     opacity: 0.5;
 }
+.link-login {
+    display: block;
+    cursor: pointer;
+    margin: 0 auto;
+    text-align: center;
+}
+#restore-block {
+    display: none;
+}
