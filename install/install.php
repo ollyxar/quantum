@@ -114,7 +114,7 @@ if (isset($_POST['get_status'])) {
                 }, 200, function() {
                     $(this).remove();
                     var html = '<div id="second-step"><h1>Downloading package...</h1><p class="caption">Please wait</p>';
-                    html += '<div class="progress"><div style="width: 0%" class="progress-bar progress-bar-striped active"></div></div></div>'
+                    html += '<div class="progress"><div style="width: 0" class="progress-bar progress-bar-striped active"></div></div></div>';
                     $('.content').append(html);
                 });
             });
@@ -125,7 +125,10 @@ if (isset($_POST['get_status'])) {
             dataType: 'json',
             data: 'download=1'
         });
-        progress = setInterval(function(){downloadTimer()}, 400);
+        /* You should continue with timeout because downloading on some server is too fast */
+        setTimeout(function() {
+            progress = setInterval(function(){downloadTimer()}, 400);
+        }, 1000);
     });
 
     function downloadTimer() {
@@ -146,7 +149,7 @@ if (isset($_POST['get_status'])) {
                     }, 200, function() {
                         $(this).remove();
                         var html = '<div id="third-step"><h1>Extracting data...</h1><p class="caption">Please wait</p>';
-                        html += '<div class="unzip"></div></div>'
+                        html += '<div class="unzip"></div></div>';
                         $('.content').append(html);
                         $.ajax({
                             url: 'install.php',
