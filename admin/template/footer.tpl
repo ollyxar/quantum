@@ -42,6 +42,13 @@
     setTimeout(function(){
         jQuery('.alert.text-center.alert-success').fadeOut(500);
     }, 3000);
+
+    $(".icon-info-sign").mouseenter(function(){
+        var tooltip = $(this).data("tooltip");
+        $(this).append('<span class="tooltip">' + tooltip + '</span>');
+    }).mouseleave(function(){
+        $(".tooltip").remove();
+    });
 </script>
 </body>
 </html>

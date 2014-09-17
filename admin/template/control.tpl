@@ -64,7 +64,7 @@
             </tr>
             <tr>
                 <td>
-                    <?php echo $language['curl'] ?>
+                    <?php echo $language['curl'] ?><span data-tooltip="<?php echo $language['clean_url'] ?>" class="icon-info-sign"></span>
                 </td>
                 <td>
                     <input id="curl" type="hidden" name="curl"
@@ -77,7 +77,7 @@
             </tr>
             <tr>
                 <td>
-                    <?php echo $language['use_compression'] ?>
+                    <?php echo $language['use_compression'] ?><span data-tooltip="<?php echo $language['compression'] ?>" class="icon-info-sign"></span>
                 </td>
                 <td>
                     <input id="uc" type="hidden" name="use_compression"
@@ -129,7 +129,7 @@
             </tr>
             <tr>
                 <td>
-                    <?php echo $language['seomultilang'] ?>
+                    <?php echo $language['seomultilang'] ?><span data-tooltip="<?php echo $language['seolang'] ?>" class="icon-info-sign"></span>
                 </td>
                 <td>
                     <input id="seomultilang" type="hidden" name="seomultilang"

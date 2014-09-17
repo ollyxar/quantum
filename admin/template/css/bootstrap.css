@@ -5027,11 +5027,15 @@ input[type="submit"].btn.btn-mini {
     position: absolute;
     z-index: 1030;
     display: block;
-    font-size: 11px;
+    font-size: 12px;
     line-height: 1.4;
-    opacity: 0;
-    filter: alpha(opacity=0);
     visibility: visible;
+    -webkit-transition: .5s;
+    transition: .5s;
+    background: #fff;
+    border-radius: 3px;
+    padding: 5px;
+    border: 1px solid #999999;
 }
 
 .tooltip.in {
@@ -6039,4 +6043,10 @@ div.debug {
     padding: 40px 0 0;
     font-size: 12px;
     text-align: center;
+}
+
+.table .icon-info-sign:before {
+    color: #005580;
+    margin-left: 10px;
+    font-size: 16px;
 }
