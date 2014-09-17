@@ -37,15 +37,29 @@ if (isset($_GET['download'])) {
 
     $targetFile = fopen('quantum.zip', 'w');
 
-    function callback($resource, $download_size, $downloaded_size, $upload_size, $uploaded_size) {
-        if ($download_size == 0) {
-            $download_size = 1;
+    if (version_compare(phpversion(), '5.5.0', '>') == true) {
+        function callback($resource, $download_size, $downloaded_size, $upload_size, $uploaded_size) {
+            if ($download_size == 0) {
+                $download_size = 1;
+            }
+            $progress = $downloaded_size / $download_size * 100;
+            $fp = fopen('install.tmp', 'w');
+            fwrite($fp, "$progress");
+            fclose($fp);
         }
-        $progress = $downloaded_size / $download_size * 100;
-        $fp = fopen('install.tmp', 'w');
-        fwrite($fp, "$progress");
-        fclose($fp);
+    } else {
+        function callback($download_size, $downloaded_size, $upload_size, $uploaded_size) {
+            if ($download_size == 0) {
+                $download_size = 1;
+            }
+            $progress = $downloaded_size / $download_size * 100;
+            $fp = fopen('install.tmp', 'w');
+            fwrite($fp, "$progress");
+            fclose($fp);
+        }
     }
+
+
 
     $ch = curl_init('http://update.ollyxar.com/quantum/quantum.zip');
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
