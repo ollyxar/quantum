@@ -6049,4 +6049,5 @@ div.debug {
     color: #005580;
     margin-left: 10px;
     font-size: 16px;
+    cursor: pointer;
 }
