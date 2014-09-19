@@ -50,6 +50,7 @@ F - Frontend; B - Backend; C - Core; M - Modules
 - B: Optimized data usage;
 - C: Renamed QOllyxar::doRoute to QOllyxar::start;
 - C: Added password restore feature;
+- B: Added hints;
 
 2.0.0:
 - C: Modified routing system:
