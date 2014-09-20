@@ -85,5 +85,10 @@
                 jQuery('#result').html('<div class="alert bg-danger">Error while sending data</div>');
             }
         });
-    })
+    });
+    jQuery('input[name="password"]').keydown(function(e) {
+        if (e.keyCode == 13) {
+            jQuery('#send').trigger('click');
+        }
+    });
 </script>                                        
