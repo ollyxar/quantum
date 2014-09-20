@@ -270,6 +270,19 @@ class Account extends QModule {
             if (!$this->engine->user->logged) {
                 $this->engine->url->redirect($this->engine->url->link('route=account', 'action=login'));
             }
+            $this->engine->document->setTitle($this->params['title_account_' . $_SESSION['lang']]);
+
+            $user_data = $this->engine->user->getData();
+
+            $this->data['caption']              = $this->params['title_account_' . $_SESSION['lang']];
+            $this->data['placeholder_name']     = $this->params['placeholder_name_' . $_SESSION['lang']];
+            $this->data['placeholder_email']    = $this->params['placeholder_email_' . $_SESSION['lang']];
+            $this->data['old_pass_caption']     = $this->params['old_pass_' . $_SESSION['lang']];
+            $this->data['new_pass_caption']     = $this->params['new_pass_' . $_SESSION['lang']];
+            $this->data['old_pass']             = isset($_POST['old_pass']) ? htmlspecialchars($_POST['old_pass']) : '';
+            $this->data['new_pass']             = isset($_POST['new_pass']) ? htmlspecialchars($_POST['new_pass']) : '';
+            $this->data['name']                 = $user_data['name'];
+            $this->data['email']                = $user_data['email'];
             $template = 'template/account/account.tpl';
         }
         $this->template = TEMPLATE . $template;
