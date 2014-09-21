@@ -37,6 +37,7 @@ class Account extends QModule {
         $this->params['restore_mail_' . $lang]          = $this->params['restore_mail_' . DEF_LANG];
         $this->params['change_my_pass_' . $lang]        = $this->params['change_my_pass_' . DEF_LANG];
         $this->params['cancel_' . $lang]                = $this->params['cancel_' . DEF_LANG];
+        $this->params['changes_applied_' . $lang]       = $this->params['changes_applied_' . DEF_LANG];
         $q = $this->engine->db->query("UPDATE " . DB_PREF . "modules SET `params`='" . $this->engine->db->escape(serialize($this->params)) . "' WHERE name='account'");
         if ($q) return true; else return false;
     }
@@ -57,10 +58,10 @@ class Account extends QModule {
     }
 
     public function nameCheck() {
-        $name = isset($_POST['name']) ? $_POST['name'] : '';
+        $name = isset($_POST['name']) ? $this->engine->db->escape($_POST['name']) : '';
         $result = '';
         if (strlen($name) > 2 && strlen($name) < 255) {
-            $exists = $this->engine->db->query("SELECT id FROM " . DB_PREF . "users WHERE  name = '" . $name . "'")->row;
+            $exists = $this->engine->db->query("SELECT id FROM " . DB_PREF . "users WHERE name = '" . $name . "'")->row;
             if (!empty($exists)) {
                 $result = $this->params['account_exists_' . $_SESSION['lang']];
             }
@@ -68,6 +69,11 @@ class Account extends QModule {
             $result = $this->params['not_valid_name_' . $_SESSION['lang']];
         }
         die(json_encode($result));
+    }
+
+    public function changePass() {
+        $this->engine->db->query("UPDATE " . DB_PREF . "users SET password = '" . md5(md5(trim($_POST['new_pass']))) . "' WHERE id = '" . (int)$_SESSION['user_id'] . "' AND password = '" . $this->engine->db->escape(md5(md5(trim($_POST['old_pass'])))) . "'");
+        die(json_encode($this->engine->db->countAffected()));
     }
 
     public function emailCheck() {
@@ -164,6 +170,16 @@ class Account extends QModule {
     public function logout() {
         $this->engine->user->logout();
         exit();
+    }
+
+    public function save() {
+        $name = isset($_POST['name']) ? $this->engine->db->escape($_POST['name']) : '';
+        $result = 0;
+        if (strlen($name) > 2 && strlen($name) < 255) {
+            $this->engine->db->query("UPDATE " . DB_PREF . "users SET `name` = '" . $name . "' WHERE id = '" . (int)$_SESSION['user_id'] . "'");
+            $result = 1;
+        }
+        die(json_encode($result));
     }
 
     public function index() {
@@ -273,6 +289,11 @@ class Account extends QModule {
             $this->data['password']             = isset($_POST['password']) ? htmlspecialchars($_POST['password']) : '';
             $this->data['email']                = isset($_POST['email']) ? htmlspecialchars($_POST['email']) : '';
             $template = 'template/account/login.tpl';
+        } elseif ($_GET['action'] == 'logout') {
+            if ($this->engine->user->logged) {
+                $this->engine->user->logout();
+            }
+            $this->engine->url->redirect($this->engine->url->link('route=home'));
         } else {
             if (!$this->engine->user->logged) {
                 $this->engine->url->redirect($this->engine->url->link('route=account', 'action=login'));
@@ -291,6 +312,10 @@ class Account extends QModule {
             $this->data['log_out']              = $this->params['log_out_' . $_SESSION['lang']];
             $this->data['change_my_pass']       = $this->params['change_my_pass_' . $_SESSION['lang']];
             $this->data['cancel']               = $this->params['cancel_' . $_SESSION['lang']];
+            $this->data['login_success']        = $this->params['login_success_' . $_SESSION['lang']];
+            $this->data['data_incorrect']       = $this->params['data_incorrect_' . $_SESSION['lang']];
+            $this->data['unknown_error']        = $this->params['unknown_error_' . $_SESSION['lang']];
+            $this->data['changes_applied']      = $this->params['changes_applied_' . $_SESSION['lang']];
             $this->data['name']                 = $user_data['name'];
             $this->data['email']                = $user_data['email'];
             $this->data['photo']                = resizeImage($user_data['photo'], 150, 150);

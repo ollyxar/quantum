@@ -20,7 +20,7 @@
             <div class="logo">
                 <a href="<?php echo $engine->url->link('route=home') ?>"></a>
             </div>
-            <?php $engine->loadModules('header') ?>
+            <div class="pull-right"><?php $engine->loadModules('top-right') ?></div>
         </div>
 
         <?php $engine->loadModules('top-menu') ?>

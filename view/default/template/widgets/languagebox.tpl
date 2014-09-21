@@ -1,5 +1,5 @@
 <?php if (isset($lang_box)) { ?>
-    <div class="languagebox">
+    <div class="pull-right">
         <?php if (SEO_MULTILANG) { ?>
             <?php foreach ($lang_box as $lang_i) { ?>
                 <a href="<?php echo $lang_i['link'] ?>"><?php echo $lang_i['description'] ?></a>

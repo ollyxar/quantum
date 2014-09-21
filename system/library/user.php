@@ -14,8 +14,12 @@ class QUser {
         }
     }
 
-    public function getData() {
-        return $this->data;
+    public function getData($key = false) {
+        if (!$key) {
+            return $this->data;
+        } else {
+            return isset($this->data[$key]) ? $this->data[$key] : 'Parameter does not exists';
+        }
     }
 
     /**

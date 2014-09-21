@@ -219,6 +219,12 @@
                                value="<?php echo $settings['instructions_sent_' . $lang['name']] ?>"/></td>
                 </tr>
                 <tr>
+                    <td><?php echo $language['changes_applied'] ?></td>
+                    <td><input type="text" class="span12"
+                               name="changes_applied_<?php echo $lang['name'] ?>"
+                               value="<?php echo $settings['changes_applied_' . $lang['name']] ?>"/></td>
+                </tr>
+                <tr>
                     <td><?php echo $language['additional_text'] ?></td>
                     <td><textarea class="span12"
                                   name="additional_text_<?php echo $lang['name'] ?>"><?php echo $settings['additional_text_' . $lang['name']] ?></textarea></td>
