@@ -35,6 +35,8 @@ class Account extends QModule {
         $this->params['restore_password_' . $lang]      = $this->params['restore_password_' . DEF_LANG];
         $this->params['instructions_sent_' . $lang]     = $this->params['instructions_sent_' . DEF_LANG];
         $this->params['restore_mail_' . $lang]          = $this->params['restore_mail_' . DEF_LANG];
+        $this->params['change_my_pass_' . $lang]        = $this->params['change_my_pass_' . DEF_LANG];
+        $this->params['cancel_' . $lang]                = $this->params['cancel_' . DEF_LANG];
         $q = $this->engine->db->query("UPDATE " . DB_PREF . "modules SET `params`='" . $this->engine->db->escape(serialize($this->params)) . "' WHERE name='account'");
         if ($q) return true; else return false;
     }
@@ -159,6 +161,11 @@ class Account extends QModule {
         die(json_encode($this->engine->user->login($_POST['email'], $_POST['password'])));
     }
 
+    public function logout() {
+        $this->engine->user->logout();
+        exit();
+    }
+
     public function index() {
         $this->engine->ERROR_404 = FALSE;
         if (!isset($_GET['action'])) {
@@ -277,12 +284,16 @@ class Account extends QModule {
             $this->data['caption']              = $this->params['title_account_' . $_SESSION['lang']];
             $this->data['placeholder_name']     = $this->params['placeholder_name_' . $_SESSION['lang']];
             $this->data['placeholder_email']    = $this->params['placeholder_email_' . $_SESSION['lang']];
-            $this->data['old_pass_caption']     = $this->params['old_pass_' . $_SESSION['lang']];
-            $this->data['new_pass_caption']     = $this->params['new_pass_' . $_SESSION['lang']];
-            $this->data['old_pass']             = isset($_POST['old_pass']) ? htmlspecialchars($_POST['old_pass']) : '';
-            $this->data['new_pass']             = isset($_POST['new_pass']) ? htmlspecialchars($_POST['new_pass']) : '';
+            $this->data['old_pass']             = $this->params['old_pass_' . $_SESSION['lang']];
+            $this->data['new_pass']             = $this->params['new_pass_' . $_SESSION['lang']];
+            $this->data['save']                 = $this->params['save_' . $_SESSION['lang']];
+            $this->data['confirm']              = $this->params['confirm_' . $_SESSION['lang']];
+            $this->data['log_out']              = $this->params['log_out_' . $_SESSION['lang']];
+            $this->data['change_my_pass']       = $this->params['change_my_pass_' . $_SESSION['lang']];
+            $this->data['cancel']               = $this->params['cancel_' . $_SESSION['lang']];
             $this->data['name']                 = $user_data['name'];
             $this->data['email']                = $user_data['email'];
+            $this->data['photo']                = resizeImage($user_data['photo'], 150, 150);
             $template = 'template/account/account.tpl';
         }
         $this->template = TEMPLATE . $template;

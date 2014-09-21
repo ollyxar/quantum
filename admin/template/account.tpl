@@ -127,6 +127,11 @@
                     <td><input type="text" class="span12" name="restore_password_<?php echo $lang['name'] ?>"
                                value="<?php echo $settings['restore_password_' . $lang['name']] ?>"/></td>
                 </tr>
+                <tr>
+                    <td><?php echo $language['change_pass'] ?></td>
+                    <td><input type="text" class="span12" name="change_my_pass_<?php echo $lang['name'] ?>"
+                               value="<?php echo $settings['change_my_pass_' . $lang['name']] ?>"/></td>
+                </tr>
                 </tbody>
             </table>
             </div>
@@ -267,6 +272,12 @@
                     <td><input type="text" class="span12"
                                name="save_<?php echo $lang['name'] ?>"
                                value="<?php echo $settings['save_' . $lang['name']] ?>"/></td>
+                </tr>
+                <tr>
+                    <td><?php echo $language['cancel'] ?></td>
+                    <td><input type="text" class="span12"
+                               name="cancel_<?php echo $lang['name'] ?>"
+                               value="<?php echo $settings['cancel_' . $lang['name']] ?>"/></td>
                 </tr>
                 </tbody>
             </table>
