@@ -1,7 +1,8 @@
 <div class="otziv">
     <div class="clearfix bor">
         <div class="pull-right">
-            <a href="#" class="href" data-toggle="modal" data-target="#modal"><span class="icon-otz"></span><?php echo $leave_review_btn ?></a>
+            <a href="#" class="href" data-toggle="modal" data-target="#modal"><span
+                    class="icon-otz"></span><?php echo $leave_review_btn ?></a>
         </div>
     </div>
     <div class="reviews">
@@ -100,8 +101,3 @@
         }
     });
 </script>
-<div>
-
-</div>
-
-
