@@ -61,7 +61,7 @@
 <script type="text/javascript">
     jQuery('#send-review').on('click', function () {
         var go = true;
-        jQuery('#r_results').html();
+        jQuery('#r_results').html('');
         if (jQuery('input[name=review_name]').val() == "") {
             jQuery('#r_results').html('<div class="alert bg-danger"><?php echo addslashes($error_name) ?></div>');
             jQuery('input[name=review_name]').parent().addClass('has-error has-feedback').append('<span class="glyphicon glyphicon-remove form-control-feedback"></span>');
@@ -85,7 +85,7 @@
                 url: '?module=sitereviews/add',
                 data: jQuery('#site-review').serialize(),
                 beforeSend: function () {
-                    jQuery('#review_loader').attr('display', 'block');
+                    jQuery('#review_loader').css('display', 'block');
                 },
                 success: function (data) {
                     jQuery('#r_results').html(data);
@@ -95,7 +95,7 @@
                     jQuery("#r_results").html(data);
                 },
                 complete: function () {
-                    jQuery('#review_loader').attr('display', 'none');
+                    jQuery('#review_loader').css('display', 'none');
                 }
             });
         }
