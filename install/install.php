@@ -5,6 +5,15 @@ error_reporting(E_ALL);
 ini_set('display_errors', 'on');
 ini_set('display_startup_errors', 'on');
 
+// check for existing application
+if (file_exists('config.php')) {
+    include_once('config.php');
+    if (defined('SITE_CODE')) {
+        header('Location: http://' . $_SERVER['HTTP_HOST'] . '/');
+        exit();
+    }
+}
+
 function compatibilityCheck() {
     $error = '';
     if (!function_exists('curl_init')) {
@@ -13,11 +22,7 @@ function compatibilityCheck() {
     if (!class_exists('ZipArchive')) {
         $error .= 'Extension for Zip-archives does not installed!<br />';
     }
-    if ($error == '') {
-        return true;
-    } else {
-        return $error;
-    }
+    return $error;
 }
 
 if (isset($_GET['unzip'])) {
@@ -59,8 +64,6 @@ if (isset($_GET['download'])) {
         }
     }
 
-
-
     $ch = curl_init('http://update.ollyxar.com/quantum/quantum.zip');
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
     curl_setopt($ch, CURLOPT_NOPROGRESS, false);
@@ -87,7 +90,7 @@ if (isset($_POST['get_status'])) {
     <div class="logo"></div>
     <div id="first-step">
         <h1>Welcome to QUANTUM Setup Wizard</h1>
-        <?php if (compatibilityCheck() === true) { ?>
+        <?php if (compatibilityCheck() === '') { ?>
         <p class="caption">Press &quot;Install&quot; button to continue installation</p>
         <input class="btn centered" id="install-button" value="Install" type="button">
         <?php } else { ?>
