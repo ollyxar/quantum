@@ -110,35 +110,50 @@ define('DB_HOST', '" . $db_host . "');
 define('DB_NAME', '" . $db_name . "');
 define('DB_USER', '" . $db_user . "');
 define('DB_PASS', '" . $db_pass . "');
-define('DB_PREF', '');
+define('DB_PREF', '" . $db_pref . "');
 define('TEMPLATE', 'view/default/');
 define('ADM_PATH', '/admin/');
 define('CACHE_TIME', 1800);
 define('EMAIL', '" . $email . "');
 define('PRTCL', 'http');";
     file_put_contents('config.php', $config);
-    $db_query = file_get_contents('install.sql');
-    $db_query = str_replace("CREATE TABLE IF NOT EXISTS `lang_details`", "CREATE TABLE IF NOT EXISTS `" . $db_pref . "lang_details`", $db_query);
-    $db_query = str_replace("INSERT INTO `lang_details`", "INSERT INTO `" . $db_pref . "lang_details`", $db_query);
-    $db_query = str_replace("CREATE TABLE IF NOT EXISTS `main_menu`", "CREATE TABLE IF NOT EXISTS `" . $db_pref . "main_menu`", $db_query);
-    $db_query = str_replace("INSERT INTO `main_menu`", "INSERT INTO `" . $db_pref . "main_menu`", $db_query);
-    $db_query = str_replace("CREATE TABLE IF NOT EXISTS `materials`", "CREATE TABLE IF NOT EXISTS `" . $db_pref . "materials`", $db_query);
-    $db_query = str_replace("INSERT INTO `materials`", "INSERT INTO `" . $db_pref . "materials`", $db_query);
-    $db_query = str_replace("CREATE TABLE IF NOT EXISTS `modules`", "CREATE TABLE IF NOT EXISTS `" . $db_pref . "modules`", $db_query);
-    $db_query = str_replace("INSERT INTO `modules`", "INSERT INTO `" . $db_pref . "modules`", $db_query);
-    $db_query = str_replace("CREATE TABLE IF NOT EXISTS `settings`", "CREATE TABLE IF NOT EXISTS `" . $db_pref . "settings`", $db_query);
-    $db_query = str_replace("INSERT INTO `settings`", "INSERT INTO `" . $db_pref . "settings`", $db_query);
-    $db_query = str_replace("CREATE TABLE IF NOT EXISTS `site_reviews`", "CREATE TABLE IF NOT EXISTS `" . $db_pref . "site_reviews`", $db_query);
-    $db_query = str_replace("INSERT INTO `site_reviews`", "INSERT INTO `" . $db_pref . "site_reviews`", $db_query);
-    $db_query = str_replace("CREATE TABLE IF NOT EXISTS `static_pages`", "CREATE TABLE IF NOT EXISTS `" . $db_pref . "static_pages`", $db_query);
-    $db_query = str_replace("INSERT INTO `static_pages`", "INSERT INTO `" . $db_pref . "static_pages`", $db_query);
-    $db_query = str_replace("CREATE TABLE IF NOT EXISTS `url_alias`", "CREATE TABLE IF NOT EXISTS `" . $db_pref . "url_alias`", $db_query);
-    $db_query = str_replace("INSERT INTO `url_alias`", "INSERT INTO `" . $db_pref . "url_alias`", $db_query);
-    $db_query = str_replace("CREATE TABLE IF NOT EXISTS `users`", "CREATE TABLE IF NOT EXISTS `" . $db_pref . "users`", $db_query);
-    $db_query = str_replace("INSERT INTO `users`", "INSERT INTO `" . $db_pref . "users`", $db_query);
-    $db_query = str_replace("CREATE TABLE IF NOT EXISTS `user_group`", "CREATE TABLE IF NOT EXISTS `" . $db_pref . "user_group`", $db_query);
-    $db_query = str_replace("INSERT INTO `user_group`", "INSERT INTO `" . $db_pref . "user_group`", $db_query);
-    mysqli_query($link, $db_query);
+
+    function addPrefix($db_query, $db_pref) {
+        $db_query = str_replace("CREATE TABLE IF NOT EXISTS `lang_details`", "CREATE TABLE IF NOT EXISTS `" . $db_pref . "lang_details`", $db_query);
+        $db_query = str_replace("INSERT INTO `lang_details`", "INSERT INTO `" . $db_pref . "lang_details`", $db_query);
+        $db_query = str_replace("CREATE TABLE IF NOT EXISTS `main_menu`", "CREATE TABLE IF NOT EXISTS `" . $db_pref . "main_menu`", $db_query);
+        $db_query = str_replace("INSERT INTO `main_menu`", "INSERT INTO `" . $db_pref . "main_menu`", $db_query);
+        $db_query = str_replace("CREATE TABLE IF NOT EXISTS `materials`", "CREATE TABLE IF NOT EXISTS `" . $db_pref . "materials`", $db_query);
+        $db_query = str_replace("INSERT INTO `materials`", "INSERT INTO `" . $db_pref . "materials`", $db_query);
+        $db_query = str_replace("CREATE TABLE IF NOT EXISTS `modules`", "CREATE TABLE IF NOT EXISTS `" . $db_pref . "modules`", $db_query);
+        $db_query = str_replace("INSERT INTO `modules`", "INSERT INTO `" . $db_pref . "modules`", $db_query);
+        $db_query = str_replace("CREATE TABLE IF NOT EXISTS `settings`", "CREATE TABLE IF NOT EXISTS `" . $db_pref . "settings`", $db_query);
+        $db_query = str_replace("INSERT INTO `settings`", "INSERT INTO `" . $db_pref . "settings`", $db_query);
+        $db_query = str_replace("CREATE TABLE IF NOT EXISTS `site_reviews`", "CREATE TABLE IF NOT EXISTS `" . $db_pref . "site_reviews`", $db_query);
+        $db_query = str_replace("INSERT INTO `site_reviews`", "INSERT INTO `" . $db_pref . "site_reviews`", $db_query);
+        $db_query = str_replace("CREATE TABLE IF NOT EXISTS `static_pages`", "CREATE TABLE IF NOT EXISTS `" . $db_pref . "static_pages`", $db_query);
+        $db_query = str_replace("INSERT INTO `static_pages`", "INSERT INTO `" . $db_pref . "static_pages`", $db_query);
+        $db_query = str_replace("CREATE TABLE IF NOT EXISTS `url_alias`", "CREATE TABLE IF NOT EXISTS `" . $db_pref . "url_alias`", $db_query);
+        $db_query = str_replace("INSERT INTO `url_alias`", "INSERT INTO `" . $db_pref . "url_alias`", $db_query);
+        $db_query = str_replace("CREATE TABLE IF NOT EXISTS `users`", "CREATE TABLE IF NOT EXISTS `" . $db_pref . "users`", $db_query);
+        $db_query = str_replace("INSERT INTO `users`", "INSERT INTO `" . $db_pref . "users`", $db_query);
+        $db_query = str_replace("CREATE TABLE IF NOT EXISTS `user_group`", "CREATE TABLE IF NOT EXISTS `" . $db_pref . "user_group`", $db_query);
+        $db_query = str_replace("INSERT INTO `user_group`", "INSERT INTO `" . $db_pref . "user_group`", $db_query);
+        return $db_query;
+    }
+
+    $templine = '';
+    $lines = file('install.sql');
+    foreach ($lines as $line) {
+        if (substr($line, 0, 2) == '--' || $line == '')
+            continue;
+        $templine .= $line;
+        if (substr(trim($line), -1, 1) == ';') {
+            mysqli_query($link, addPrefix($templine, $db_pref)) or trigger_error('Error: ' . mysqli_error($link) . '<br />Error No: ' . mysqli_errno($link));
+            $templine = '';
+        }
+    }
+
     mysqli_query($link, "UPDATE " . $db_pref . "users SET name = '" . $name . "', password = '" . $pass . "', email = '" . $email . "' WHERE id = '1'");
     die(json_encode(1));
 }
@@ -248,7 +263,7 @@ define('PRTCL', 'http');";
                     }, 200, function() {
                         $('#third-step').remove();
                         var html = '<div id="fours-step"><h1>Configuration.</h1><p class="caption">Please configure your project:</p>';
-                        html += '<div style="margin: 0 auto; width: 580px"><div style="float:left"><form id="config"><table>' +
+                        html += '<div style="margin: 0 auto; width: 580px"><form id="config"><div style="float:left"><table>' +
                         '<tr><td>DB host:</td><td><input type="text" name="db_host" value="localhost"></td></tr>' +
                         '<tr><td>DB name:</td><td><input type="text" name="db_name"></td></tr>' +
                         '<tr><td>DB prefix:</td><td><input type="text" name="db_pref"></td></tr>' +
@@ -258,7 +273,7 @@ define('PRTCL', 'http');";
                         '<tr><td>Admin name:</td><td><input type="text" name="name" value="admin"></td></tr>' +
                         '<tr><td>Admin password:</td><td><input type="text" name="pass" value="1111"></td></tr>' +
                         '<tr><td>Admin email:</td><td><input type="text" name="email" value="user@example.com"></td></tr>' +
-                        '</table></form></div></div><div style="clear:both; margin-bottom: 10px"></div>' +
+                        '</table></div></form></div><div style="clear:both; margin-bottom: 10px"></div>' +
                         '<input class="btn centered" id="save" value="Finish" type="button">' +
                         '</div>';
                         $('.content').append(html);
