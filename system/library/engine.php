@@ -280,6 +280,7 @@ final class QOllyxar {
             $this->ERROR_404 = false;
             $this->url->is_category = false;
             $_GET['page_id'] = 4;
+            $this->appendModule('staticpages');
             $this->modules['staticpages']->index();
             header("HTTP/1.1 404 Not Found");
             header("Status: 404 Not Found");
