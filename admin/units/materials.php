@@ -206,7 +206,7 @@ class Materials extends \AUnit {
     }
 
     private function getMaterial() {
-        $material = $this->engine->db->query("SELECT m.*, ua.keyword as alias FROM " . DB_PREF . "materials m LEFT JOIN url_alias ua ON ua.query = CONCAT ('route=materials&material_id=', m.id) WHERE m.id=" . (int)$_GET['id'])->row;
+        $material = $this->engine->db->query("SELECT m.*, ua.keyword as alias FROM " . DB_PREF . "materials m LEFT JOIN " . DB_PREF . "url_alias ua ON ua.query = CONCAT ('route=materials&material_id=', m.id) WHERE m.id=" . (int)$_GET['id'])->row;
         $material['preview'] = ($material['preview'] <> '') ? $material['preview'] : ROOT_DIR . 'upload/images/no-image.jpg';
         resizeImage(ROOT_DIR . 'upload/images/no-image.jpg', 150, 130, false);
         $material['thumb'] = resizeImage($material['preview'], 150, 130, false);

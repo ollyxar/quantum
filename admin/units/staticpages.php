@@ -119,7 +119,7 @@ class StaticPages extends \AUnit {
     }
 
     private function getPage() {
-        $q = $this->engine->db->query("SELECT sp.*, ua.keyword as alias FROM " . DB_PREF . "static_pages sp LEFT JOIN url_alias ua ON ua.query = CONCAT ('route=pages&page_id=', sp.id) WHERE sp.id=" . (int)$_GET['id']);
+        $q = $this->engine->db->query("SELECT sp.*, ua.keyword as alias FROM " . DB_PREF . "static_pages sp LEFT JOIN " . DB_PREF . "url_alias ua ON ua.query = CONCAT ('route=pages&page_id=', sp.id) WHERE sp.id=" . (int)$_GET['id']);
         return $q->row;
     }
 
