@@ -6044,10 +6044,11 @@ div.debug {
     font-size: 12px;
     text-align: center;
 }
-
 .table .icon-info-sign:before {
     color: #005580;
     margin-left: 10px;
     font-size: 16px;
+}
+.table .icon-info-sign {
     cursor: pointer;
 }
