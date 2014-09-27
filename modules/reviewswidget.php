@@ -5,6 +5,7 @@ class ReviewsWidget extends QModule {
     protected $version = '1.0';
 
     public function index() {
+        $this->engine->appendModule('sitereviews');
         $reviews = $this->engine->modules['sitereviews']->getReviews(0, 2);
         $rating = $this->engine->modules['sitereviews']->getAverageRating();
         $count = $this->engine->modules['sitereviews']->getReviewCount();

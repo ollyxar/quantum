@@ -5,8 +5,7 @@
     queries: <?php echo $engine->db->db_queries ?>. Memory
     usage: <?php echo round((memory_get_usage(true) / 1024 / 1024), 2) ?>MB
 </div>
-<div class="copyright"><a href="http://quantum.ollyxar.com" rel="nofollow" target="_blank"><?php echo '&copy;' . $language['cms-title'] ?></a> |
-    <a href="http://ollyxar.com" rel="nofollow" target="_blank"><?php echo '&copy;' . $language['engine-title'] ?></a></div>
+<div class="copyright"><a href="http://ollyxar.com" rel="nofollow" target="_blank">Ollyxar&reg;</a> | <a href="http://quantum.ollyxar.com" rel="nofollow" target="_blank"><?php echo $language['cms-title'] ?></a></div>
 <div id="change-pass" class="modal hide fade" tabindex="-1">
     <form method="post" id="chp">
         <div class="modal-header">

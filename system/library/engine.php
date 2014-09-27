@@ -83,7 +83,7 @@ final class QOllyxar {
         }
     }
 
-    private function appendModule($module_name) {
+    public function appendModule($module_name) {
         if (!isset($this->modules[$module_name])) {
             if (@include(dirname(dirname(dirname(__FILE__))) . '/modules/' . $module_name . '.php')) {
                 $this->modules[$module_name] = new $module_name($this);
