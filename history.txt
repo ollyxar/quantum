@@ -3,7 +3,7 @@
 /*  Author:                           |  Olexy Sviridenko (aka Alex Slipknot | alexslipknot@europe.com)     */
 /*  PHP, Database and JS development: |  Olexy Sviridenko                                                   */
 /*  HTML and CSS design:              |  Olexandra Bespalova, Olexy Sviridenko, Olexander Sharin            */
-/*  Date:                             |  24.09.2014                                                         */
+/*  Date:                             |  28.09.2014                                                         */
 /*==========================================================================================================*/
 
 /*==========================================   SPECIAL THANKS TO   =========================================*/
@@ -52,6 +52,11 @@ F - Frontend; B - Backend; C - Core; M - Modules
 - B: Added hints;
 - C: Account module has been released;
 - C: Added installation system;
+- C: Moved unused library;
+- C: QOllyxar::appendModule is public now;
+- B: Fixed installation directory error;
+- B: Fixed DB_PREFIX error;
+- C: Fixed 404 error;
 
 2.0.0:
 - C: Modified routing system:
