@@ -3,6 +3,7 @@
 final class QInstaller {
 
     const version = '1.3';
+    private $root_dir = '../';
     private $language;
     private $engine;
 
@@ -18,6 +19,7 @@ final class QInstaller {
     public function __construct(QOllyxar &$engine, &$language) {
         $this->engine = $engine;
         $this->language = $language;
+        $this->root_dir = dirname(dirname(dirname(__FILE__)));
     }
 
     public function uninstallModule($id) {
@@ -33,11 +35,11 @@ final class QInstaller {
             return false;
         }
         $m_name = $q->row['name'];
-        if (file_exists(getcwd() . '/modules/app_data/' . $m_name . '/qms.ini')) {
-            $ini = parse_ini_file(getcwd() . '/modules/app_data/' . $m_name . '/qms.ini', true);
+        if (file_exists($this->root_dir . '/modules/app_data/' . $m_name . '/qms.ini')) {
+            $ini = parse_ini_file($this->root_dir . '/modules/app_data/' . $m_name . '/qms.ini', true);
             for ($i = 1; $i <= $ini['setup']['files_count']; $i++) {
-                if (file_exists(getcwd() . $this->normalizePath($ini['file_' . $i]['dest'])) && (!$ini['file_' . $i]['dont_uninstall'])) {
-                    @unlink(getcwd() . $this->normalizePath($ini['file_' . $i]['dest']));
+                if (file_exists($this->root_dir . $this->normalizePath($ini['file_' . $i]['dest'])) && (!$ini['file_' . $i]['dont_uninstall'])) {
+                    @unlink($this->root_dir . $this->normalizePath($ini['file_' . $i]['dest']));
                 }
             }
         }
@@ -77,13 +79,13 @@ final class QInstaller {
                 }
                 try {
                     for ($i = 1; $i <= $ini['setup']['files_count']; $i++) {
-                        if (file_exists(getcwd() . $this->normalizePath($ini['file_' . $i]['dest'])) && $ini['file_' . $i]['skip_if_exists']) {
+                        if (file_exists($this->root_dir . $this->normalizePath($ini['file_' . $i]['dest'])) && $ini['file_' . $i]['skip_if_exists']) {
                             @unlink($path . '/' . $ini['file_' . $i]['src']);
                             continue;
                         }
-                        if (!copy($path . '/' . $ini['file_' . $i]['src'], getcwd() . $this->normalizePath($ini['file_' . $i]['dest']))) {
+                        if (!copy($path . '/' . $ini['file_' . $i]['src'], $this->root_dir . $this->normalizePath($ini['file_' . $i]['dest']))) {
                             $_SESSION['msg'] = 'error_install';
-                            $_SESSION['msg_text'] = $this->language['mi_cant_copy'] . getcwd() . $this->normalizePath($ini['file_' . $i]['dest']);
+                            $_SESSION['msg_text'] = $this->language['mi_cant_copy'] . $this->root_dir . $this->normalizePath($ini['file_' . $i]['dest']);
                             return false;
                         }
                         @unlink($path . '/' . $ini['file_' . $i]['src']);
