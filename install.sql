@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Хост: localhost
--- Час створення: Вер 24 2014 р., 20:41
+-- Час створення: Вер 28 2014 р., 17:57
 -- Версія сервера: 5.1.73-log
 -- Версія PHP: 5.3.3
 
@@ -318,7 +318,7 @@ CREATE TABLE IF NOT EXISTS `users` (
 
 INSERT INTO `users` (`id`, `name`, `description`, `password`, `email`, `photo`, `phone`, `country`, `region`, `city`, `address`, `user_group`, `joined`, `birth`, `enabled`, `last_login`, `adm_last_login`, `confirm`) VALUES
 (1, 'admin', 'Site administrator', '2f7b52aacfbf6f44e13d27656ecb1f59', 'user@example.com', '/upload/images/users/me.jpg', '0', 0, 0, 0, '0', 1, 0, -10800, 1, 1411331337, 1411326322, ''),
-(2, 'moder', 'Site moderator (password = pas1238)', 'b7db217f31d96690363c3f41191eb2a8', '', '/upload/images/no-image.jpg', '0', 0, 1, 1, '1', 3, 1, -3600, 1, 0, 1384287396, '');
+(2, 'moder', 'Site moderator (password = pas1238)', 'b7db217f31d96690363c3f41191eb2a8', '', '/upload/images/no-image.jpg', '0', 0, 1, 1, '1', 3, 1, -3600, 0, 0, 1384287396, '');
 
 -- --------------------------------------------------------
 
