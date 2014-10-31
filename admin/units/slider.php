@@ -16,7 +16,7 @@ class Slider extends \AUnit {
     }
 
     public function index() {
-        if ($_SESSION['access'] >= $this->access['rr']) {
+        if ($_SESSION['access'] > $this->access['rr']) {
             die('Access denied');
         }
 
