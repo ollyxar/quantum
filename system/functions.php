@@ -110,24 +110,60 @@ function makeRandomString($max = 9) {
     return $str;
 }
 
-function printPagination($page_count, $url, $centered = true, $backend = false) {
+function printPagination($page_count, $url, $centered = true, $backend = false, $visible_pages = 10) {
+    // minus first, last and current number
+    $visible_pages = $visible_pages - 3;
+
+    // prevent incorrect current page number
+    $_GET['page_n'] = intval($_GET['page_n']);
+    $_GET['page_n'] = $_GET['page_n'] > 0 ? $_GET['page_n'] : 1;
+
+    // calculating left-side numbers
+    $left_numbers_count = floor($visible_pages / 2);
+
+    // calculating right-side numbers
+    $right_numbers_count = ceil($visible_pages / 2);
+
+    // calculating left number
+    $left_number = $_GET['page_n'] - $left_numbers_count;
+    if ($left_number < 2) {
+        $right_numbers_count += 2 - $left_number;
+        $left_number = 2;
+    }
+
+    // calculating right number
+    $right_number = $_GET['page_n'] + $right_numbers_count;
+    if ($right_number > $page_count - 1) {
+        $left_numbers_count += $right_number - $page_count - 1;
+
+        // correcting left number
+        $left_number = ($_GET['page_n'] - $left_numbers_count > 1) ? $_GET['page_n'] - $left_numbers_count : 2;
+        $right_number = $page_count - 1;
+    }
+
+    // processing href
     $url = str_replace('page_n=' . $_GET['page_n'], '', $url);
     $url = isset($_GET['lang']) ? str_replace('&lang=' . $_GET['lang'], '', $url) : $url;
+    $last_s = substr($url, -1);
     if (strpos($url, '?') === false) {
         $url .= '?';
-    } elseif (substr($url, -1) != '?') {
+    } elseif ($last_s != '?' && $last_s != '&') {
         $url .= '&';
     }
+
+    // building result
     if ($page_count == 0) $page_count = 1;
     if ($backend) {
+        // adding wrapper for bootstrap2
         if ($centered) $cls = ' pagination-centered'; else $cls = '';
-        $tmp_res = '<div class="pagination' . $cls . '">
-        <ul>';
+        $tmp_res = '<div class="pagination' . $cls . '"><ul>';
     } else {
+        // adding wrapper for bootstrap3
         if ($centered) $cls = ' center-block text-center'; else $cls = '';
-        $tmp_res = '<div class="' . $cls . '">
-        <ul class="pagination">';
+        $tmp_res = '<div class="paginations ' . $cls . '"><ul class="pagination">';
     }
+
+    // adding first item (arrow-left)
     $tmp_res .= '<li ';
     if ($_GET["page_n"] == 1) $tmp_res .= 'class="disabled"';
     $tmp_res .= '><a ';
@@ -139,24 +175,42 @@ function printPagination($page_count, $url, $centered = true, $backend = false) 
         }
     }
     $tmp_res .= '>&laquo;</a></li><li ';
+
+    // adding item "first page"
     if ($_GET["page_n"] == 1) $tmp_res .= 'class="active"';
     $tmp_res .= '><a ';
     if ($_GET["page_n"] > 1) $tmp_res .= 'href="' . substr($url, 0, -1) . '"';
     $tmp_res .= '>1</a></li>';
-    if ($page_count <= 5 && $_GET["page_n"] <> 2 && $page_count > 2) $tmp_res .= '<li><a href="' . $url . 'page_n=2">2</a></li>';
-    if ($page_count <= 5 && $_GET["page_n"] > 3 && $page_count > 3) $tmp_res .= '<li><a href="' . $url . 'page_n=3">3</a></li>';
-    if ($page_count <= 5 && $_GET["page_n"] > 4 && $page_count > 4) $tmp_res .= '<li><a href="' . $url . 'page_n=4">4</a></li>';
-    if ($page_count > 5 && $_GET["page_n"] > 2) $tmp_res .= '<li class="disable"><a>..</a></li>';
-    if ($_GET["page_n"] > 1) $tmp_res .= '<li class="active"><a>' . $_GET["page_n"] . '</a></li>';
-    if ($page_count <= 5 && $_GET["page_n"] < 3 && $page_count > 3) $tmp_res .= '<li><a href="' . $url . 'page_n=3">3</a></li>';
-    if ($page_count <= 5 && $_GET["page_n"] < 4 && $page_count > 4) $tmp_res .= '<li><a href="' . $url . 'page_n=4">4</a></li>';
-    if ($page_count > 5 && $_GET["page_n"] < ($page_count - 1)) $tmp_res .= '<li class="disable"><a>..</a></li>';
-    if ($page_count > 1 && $_GET["page_n"] <> $page_count) $tmp_res .= '<li><a href="' . $url . 'page_n=' . $page_count . '">' . $page_count . '</a></li>';
+
+    // adding item ".." or "2"
+    if ($left_number > 3) {
+        $tmp_res .= '<li class="disable"><a>..</a></li>';
+    } elseif ($left_number == 3) {
+        $tmp_res .= '<li><a href="' . $url . 'page_n=2">2</a></li>';
+    }
+
+    // adding numbers
+    for ($i = $left_number; $i <= $right_number; $i++) {
+        $active = $i == $_GET['page_n'] ? ' class="active"' : '';
+        $tmp_res .= '<li' . $active . '><a href="' . $url . 'page_n=' . $i . '">' . $i . '</a></li>';
+    }
+
+    // adding item ".." or "pre-last"
+    if ($right_number < $page_count - 2) {
+        $tmp_res .= '<li class="disable"><a>..</a></li>';
+    } elseif ($right_number == $page_count - 2) {
+        $tmp_res .= '<li><a href="' . $url . 'page_n=' . ($page_count - 1) . '">' . ($page_count - 1) . '</a></li>';
+    }
+
+    // adding item "last page"
+    if ($page_count > 1) $tmp_res .= '<li><a href="' . $url . 'page_n=' . $page_count . '">' . $page_count . '</a></li>';
+
+    // adding last item (arrow-right)
     $tmp_res .= '<li ';
     if ($page_count == 1 || $_GET["page_n"] == $page_count) $tmp_res .= 'class="disabled"';
     $tmp_res .= '><a ';
     if ($_GET["page_n"] < $page_count) $tmp_res .= 'href="' . $url . 'page_n=' . ($_GET["page_n"] + 1) . '"';
-    $tmp_res .= '>&raquo;</a></li></ul></div>';
+    $tmp_res .= ">&raquo;</a></li></ul></div>";
     return $tmp_res;
 }
 
