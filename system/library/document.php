@@ -29,11 +29,15 @@ class QDocument {
     }
 
     public function addScript($str) {
-        $this->scripts[] = $str;
+        if (!in_array($str, $this->scripts)) {
+            $this->scripts[] = $str;
+        }
     }
 
     public function addStyle($str) {
-        $this->styles[] = $str;
+        if (!in_array($str, $this->styles)) {
+            $this->styles[] = $str;
+        }
     }
 
     public function render() {
