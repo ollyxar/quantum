@@ -10,7 +10,6 @@ class Photos extends \AUnit {
                 $params_arr['kw_' . $lang['name']] = $_POST['kw_' . $lang['name']];
                 $params_arr['descr_' . $lang['name']] = $_POST['descr_' . $lang['name']];
             }
-            $params_arr['page'] = $_POST['page'];
             $this->engine->db->query("UPDATE " . DB_PREF . "modules SET `params`='" .
                 $this->engine->db->escape(serialize($params_arr)) . "' WHERE name='photos'");
 
