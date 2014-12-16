@@ -21,7 +21,7 @@ final class QOllyxar {
         $this->db_queries = 0;
         $_GET['route'] = isset($_GET['route']) ? $_GET['route'] : '';
         $_GET['_route_'] = isset($_GET['_route_']) ? $_GET['_route_'] : '';
-        $languages = $this->db->query("SELECT id, name, description, picture, ordering FROM " . DB_PREF . "lang_details ORDER BY 'ordering' ASC")->rows;
+        $languages = $this->db->query("SELECT id, name, description, picture, ordering FROM " . DB_PREF . "lang_details ORDER BY ordering ASC")->rows;
         foreach ($languages as $language) {
             $this->languages[$language['name']] = array(
                 'name'          => $language['name'],
