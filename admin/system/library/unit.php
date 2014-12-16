@@ -15,7 +15,7 @@ abstract class AUnit {
         $this->access['rr'] = 3;
         $this->access['rw'] = 3;
         $q = $this->engine->db->query("SELECT * FROM " . DB_PREF . "modules WHERE `name` = '" .
-            strtolower(substr(get_class($this), 1)) . "'");
+            strtolower(substr(get_class($this), 2)) . "'");
         if (!empty($q->row)) {
             $this->params = unserialize($q->row['params']);
             $this->access['rr'] = (int)$q->row['rr'];
