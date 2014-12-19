@@ -5,6 +5,7 @@ class Slider extends \AUnit {
 
     private function updateSlider() {
         if ($this->access['rw'] >= $_SESSION['access']) {
+            $_POST['slides'] = isset($_POST['slides']) ? $_POST['slides'] : array();
             $params_arr = array('slides' => $_POST['slides']);
             $this->engine->db->query("UPDATE " . DB_PREF . "modules SET `params`='" .
                 $this->engine->db->escape(serialize($params_arr)) . "' WHERE name='slider'");
@@ -20,7 +21,7 @@ class Slider extends \AUnit {
             die('Access denied');
         }
 
-        if (isset($_POST['slides']) && $_POST['action'] == 'save') {
+        if (isset($_POST['action']) && $_POST['action'] == 'save') {
             $this->updateSlider();
         }
 
@@ -35,9 +36,10 @@ class Slider extends \AUnit {
             unset($_SESSION['msg']);
         }
 
-        $this->engine->document->addHeaderString('<script type="text/javascript" src="template/js/qfinder/qfinder.js"></script>');
+        $this->engine->document->addScript('template/js/qfinder/qfinder.js');
 
         $slides = isset($this->params['slides']) ? $this->params['slides'] : array();
+        $this->data['slides'] = $slides;
 
         resizeImage(ROOT_DIR . 'upload/images/no-image.jpg', 90, 80, false);
         foreach ($slides as $id => $slide) {
