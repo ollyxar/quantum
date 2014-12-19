@@ -34,40 +34,35 @@
             <table class="table table-bordered table-striped" id="sl">
                 <thead>
                 <tr>
-                    <th><?php echo $language['id'] ?></th>
                     <th><?php echo $language['picture'] ?></th>
                     <th><?php echo $language['link'] ?></th>
                     <th><?php echo $language['action'] ?></th>
                 </tr>
                 </thead>
-                <?php $id = -1; ?>
                 <?php foreach ($slides as $id => $slide) { ?>
-                    <tbody id="slide<?php echo $id ?>">
+                    <tbody data-id="<?php echo $id ?>">
                     <tr>
-                        <td><?php echo $id ?></td>
                         <td>
                             <div class="img" id="slides[<?php echo $id ?>]">
                                 <img src="<?php echo $slide['thumb'] ?>" alt="">
 
                                 <div class="links">
-                                    <a href="#"
-                                       onclick="openQFinder(this)"><?php echo $language['browse'] ?></a> |
-                                    <a href="#"
-                                       onclick="clearImage(this)"><?php echo $language['clear'] ?></a>
+                                    <a onclick="openQFinder(this)"><?php echo $language['browse'] ?></a> |
+                                    <a onclick="clearImage(this)"><?php echo $language['clear'] ?></a>
                                 </div>
                             </div>
                             <input id="slides[<?php echo $id ?>][src]" type="hidden" name="slides[<?php
                             echo $id ?>][src]" value="<?php echo $slide['src'] ?>"></td>
                         <td><input type="text" name="slides[<?php echo $id ?>][link]"
                                    value="<?php echo $slide['link'] ?>"/></td>
-                        <td><a onclick="jQuery('#slide<?php echo $id ?>').remove();" class="btn btn-danger"><?php
+                        <td><a onclick="$(this).parent().parent().parent().remove();" class="btn btn-danger"><?php
                                 echo $language['text_remove'] ?></a></td>
                     </tr>
                     </tbody>
                 <?php } ?>
                 <tfoot>
                 <tr>
-                    <td colspan="3"></td>
+                    <td colspan="2"></td>
                     <td><a onclick="addSlide();" class="btn btn-success pull-right"><?php
                             echo $language['text_add'] ?></a></td>
                 </tr>
@@ -78,25 +73,25 @@
 </form>
 <script type="text/javascript">
     function clearImage(a) {
-        var div = jQuery(a).parent().parent();
+        var div = $(a).parent().parent();
         div.find('img').replaceWith('<img src="<?php echo ROOT_DIR ?>upload/cache/images/no-image-90x80a.jpg" />');
-        jQuery('input[name=\'' + div.attr('id') + '[src]\']').val('<?php echo ROOT_DIR ?>upload/images/no-image.jpg');
+        $('input[name=\'' + div.attr('id') + '[src]\']').val('<?php echo ROOT_DIR ?>upload/images/no-image.jpg');
     }
     function openQFinder(a) {
         function onSelect(fileUrl, data, allFiles) {
-            var div = jQuery(a).parent().parent();
+            var div = $(a).parent().parent();
             div.find('img').replaceWith('<img src="template/images/ajax-loader.gif" alt="processing..." />');
             var img = new Image();
             img.src = fileUrl;
             img.onload = function () {
                 div.find('img').replaceWith('<img src="' + fileUrl + '" />');
-                jQuery('input[name=\'' + div.attr('id') + '[src]\']').val(fileUrl);
+                $('input[name=\'' + div.attr('id') + '[src]\']').val(fileUrl);
             };
-            jQuery('#qfm').remove();
+            $('#qfm').remove();
         }
 
-        jQuery('#form').before('<div id="qfm"></div>');
-        var qfm = jQuery('#qfm');
+        $('#form').before('<div id="qfm"></div>');
+        var qfm = $('#qfm');
         qfm.html('<div id="qfinder"></div>');
         qfm.dialog({
             height: 450,
@@ -109,32 +104,30 @@
         finder.resourceType = "Images";
         finder.replace('qfinder', config);
 
-        jQuery('.ui-dialog-titlebar-close').live('click', function () {
-            jQuery('#qfinder').remove();
-            jQuery('#qfm').remove();
+        $('.ui-dialog-titlebar-close').live('click', function () {
+            $('#qfinder').remove();
+            $('#qfm').remove();
         });
     }
 </script>
 <script type="text/javascript">
-    var id = <?php echo $id ?>;
     function addSlide() {
+        var id = $('#sl tbody:last').attr('data-id') || 0;
         id++;
-        var html = '<tbody id="slide' + id + '"><tr>';
-        html += '<td>' + id + '</td>';
+        var html = '<tbody data-id="' + id + '"><tr>';
         html += '<td><div class="img" id="slides[' + id + ']">';
         html += '<img src="<?php echo ROOT_DIR ?>upload/cache/images/no-image-90x80a.jpg" alt="">';
         html += '<div class="links">';
-        html += '<a href="#" onclick="openQFinder(this)"><?php echo $language['browse'] ?></a> | ';
-        html += '<a href="#" onclick="clearImage(this)"><?php echo $language['clear'] ?></a></div></div>';
+        html += '<a onclick="openQFinder(this)"><?php echo $language['browse'] ?></a> | ';
+        html += '<a onclick="clearImage(this)"><?php echo $language['clear'] ?></a></div></div>';
         html += '<input id="slides[' + id + '][src]" type="hidden" name="slides[' + id + '][src]" value="<?php echo ROOT_DIR ?>upload/images/no-image.jpg" /></td>';
         html += '<td><input type="text" name="slides[' + id + '][link]"></td>';
-        html += '<td><a onclick="jQuery(\'#slide' + id + '\').remove();" class="btn btn-danger"><?php
-                                    echo $language['text_remove'] ?></a></td>';
+        html += '<td><a onclick="$(this).parent().parent().parent().remove();" class="btn btn-danger"><?php echo $language['text_remove'] ?></a></td>';
         html += '</tr></tbody>';
-        jQuery('#sl tfoot').before(html);
+        $('#sl tfoot').before(html);
     }
-    jQuery('#save').click(function () {
-        jQuery('#action').val('save');
-        jQuery('#form').submit();
+    $('#save').click(function () {
+        $('#action').val('save');
+        $('#form').submit();
     });
 </script>
