@@ -233,7 +233,7 @@ class Materials extends \AUnit {
         }
 
         if (isset($_POST['action']) && $_POST['action'] == 'remove_cat') {
-            $this->removeCategory($_GET['category']);
+            $this->removeCategory($_GET['parent']);
         }
 
         if (isset($_POST['parent']) && (int)$_GET['id'] > 0) {
