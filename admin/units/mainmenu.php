@@ -185,7 +185,7 @@ class MainMenu extends \AUnit {
             $this->data['class_message'] = 'error';
             unset($_SESSION['msg']);
         }
-
+        $_GET['parent'] = isset($_GET['parent']) ? (int)$_GET['parent'] : 0;
         $this->data['menu_id'] = isset($_GET['menu_id']) ? $_GET['menu_id'] : 0;
         $this->data['menu_item'] = $this->getItem($this->data['menu_id']);
         $this->data['menu'] = array('0' => array('caption' => 'root', 'subs' => $this->buildTree()));
