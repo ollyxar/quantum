@@ -21,7 +21,7 @@ abstract class QModule {
         }
     }
 
-    abstract public function index();
+    abstract protected function index();
 
     public function addLanguage($lang) {}
 
