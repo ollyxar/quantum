@@ -169,7 +169,7 @@ class Materials extends \AUnit {
             $this->engine->cache->delete('materials_breadcrumbs');
             $this->engine->cache->delete('materials_categories');
             $_SESSION['msg'] = 'success';
-            $this->engine->url->redirect(PRTCL . "://" . $this->engine->host . "index.php?page=materials&view=tiny&id=" . (int)$id);
+            $this->engine->url->redirect(PRTCL . "://" . $this->engine->host . "/index.php?page=materials&view=tiny&id=" . (int)$id);
         } else {
             $_SESSION['msg'] = 'denied';
             $this->engine->url->redirect($this->engine->url->full);
