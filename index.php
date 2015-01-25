@@ -3,8 +3,8 @@
 global $start_time;
 $start_time = microtime(true);
 if (!file_exists('config.php')) {
-  require_once('install.php');
-	exit();
+    require_once('install.php');
+    exit();
 }
 // including main configuration
 require_once('config.php');

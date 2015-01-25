@@ -100,6 +100,10 @@ final class QOllyxar {
         }
     }
 
+    public function getModuleParams($module_name) {
+        return unserialize($this->db->query("SELECT params FROM " . DB_PREF . "modules WHERE `name` = '" . $this->db->escape($module_name) . "'")->row['params']);
+    }
+
     private function loadRouters() {
         foreach ($this->available_modules as $module) {
             if (in_array($_GET['route'], $module['route']) || in_array('__all', $module['route'])) {
