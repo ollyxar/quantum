@@ -119,24 +119,16 @@ class StaticPages extends \AUnit {
     }
 
     private function getPage() {
-        $q = $this->engine->db->query("SELECT sp.*, ua.keyword as alias FROM " . DB_PREF . "static_pages sp LEFT JOIN " . DB_PREF . "url_alias ua ON ua.query = CONCAT ('route=pages&page_id=', sp.id) WHERE sp.id=" . (int)$_GET['id']);
-        return $q->row;
+        return $this->engine->db->query("SELECT sp.*, ua.keyword as alias FROM " . DB_PREF . "static_pages sp LEFT JOIN " . DB_PREF . "url_alias ua ON ua.query = CONCAT ('route=pages&page_id=', sp.id) WHERE sp.id=" . (int)$_GET['id'])->row;
     }
 
     private function getPageCount($search_query, $limit) {
-        $q = $this->engine->db->query("SELECT COUNT(1) as count FROM " . DB_PREF . "static_pages " . $search_query);
-        $all_vals = 0;
-        if ($q->num_rows > 0) {
-            $f = $q->row;
-            $all_vals = (int)$f['count'];
-        }
-        return ceil($all_vals / $limit) > 1 ? ceil($all_vals / $limit) : 1;
+        $count = $this->engine->db->query("SELECT COUNT(1) as count FROM " . DB_PREF . "static_pages " . $search_query)->row['count'];
+        return ceil($count / $limit) > 1 ? ceil($count / $limit) : 1;
     }
 
     private function getPages($query, $search_query, $start, $limit) {
-        $q = $this->engine->db->query("SELECT id, enabled, " . $query . " FROM " . DB_PREF .
-            "static_pages " . $search_query . " LIMIT $start, $limit");
-        return $q->rows;
+        return $this->engine->db->query("SELECT id, enabled, " . $query . " FROM " . DB_PREF . "static_pages " . $search_query . " LIMIT $start, $limit")->rows;
     }
 
     public function index() {
