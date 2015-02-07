@@ -118,7 +118,7 @@
         html += '<div class="links">';
         html += '<a onclick="openQFinder(this)"><?php echo $language['browse'] ?></a> | ';
         html += '<a onclick="clearImage(this)"><?php echo $language['clear'] ?></a></div></div>';
-        html += '<input id="slides[' + id + '][src]" type="hidden" name="slides[' + id + '][src]" value="<?php echo ROOT_DIR ?>upload/images/no-image.jpg" /></td>';
+        html += '<input type="hidden" name="slides[' + id + '][src]" value="<?php echo ROOT_DIR ?>upload/images/no-image.jpg" /></td>';
         html += '<td><input type="text" name="slides[' + id + '][link]"></td>';
         html += '<td><a onclick="$(this).parent().parent().parent().remove();" class="btn btn-danger"><?php echo $language['text_remove'] ?></a></td>';
         html += '</tr></tbody>';
