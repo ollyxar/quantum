@@ -43,16 +43,16 @@
                     <tbody data-id="<?php echo $id ?>">
                     <tr>
                         <td>
-                            <div class="img" id="slides[<?php echo $id ?>]">
+                            <div class="img">
                                 <img src="<?php echo $slide['thumb'] ?>" alt="">
 
                                 <div class="links">
                                     <a onclick="openQFinder(this)"><?php echo $language['browse'] ?></a> |
                                     <a onclick="clearImage(this)"><?php echo $language['clear'] ?></a>
                                 </div>
+                                <input id="slides[<?php echo $id ?>][src]" type="hidden" name="slides[<?php echo $id ?>][src]" value="<?php echo $slide['src'] ?>">
                             </div>
-                            <input id="slides[<?php echo $id ?>][src]" type="hidden" name="slides[<?php
-                            echo $id ?>][src]" value="<?php echo $slide['src'] ?>"></td>
+                            </td>
                         <td><input type="text" name="slides[<?php echo $id ?>][link]"
                                    value="<?php echo $slide['link'] ?>"/></td>
                         <td><a onclick="$(this).parent().parent().parent().remove();" class="btn btn-danger"><?php
@@ -75,7 +75,7 @@
     function clearImage(a) {
         var div = $(a).parent().parent();
         div.find('img').replaceWith('<img src="<?php echo ROOT_DIR ?>upload/cache/images/no-image-90x80a.jpg" />');
-        $('input[name=\'' + div.attr('id') + '[src]\']').val('<?php echo ROOT_DIR ?>upload/images/no-image.jpg');
+        div.find('input[type=hidden]').val('<?php echo ROOT_DIR ?>upload/images/no-image.jpg');
     }
     function openQFinder(a) {
         function onSelect(fileUrl, data, allFiles) {
@@ -85,11 +85,11 @@
             img.src = fileUrl;
             img.onload = function () {
                 div.find('img').replaceWith('<img src="' + fileUrl + '" />');
-                $('input[name=\'' + div.attr('id') + '[src]\']').val(fileUrl);
+                div.find('input[type=hidden]').val(fileUrl);
             };
             $('#qfm').remove();
         }
-
+        if ($('#qfm').length > 0) return false;
         $('#form').before('<div id="qfm"></div>');
         var qfm = $('#qfm');
         qfm.html('<div id="qfinder"></div>');
@@ -109,8 +109,6 @@
             $('#qfm').remove();
         });
     }
-</script>
-<script type="text/javascript">
     function addSlide() {
         var id = $('#sl tbody:last').attr('data-id') || 0;
         id++;

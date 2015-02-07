@@ -105,12 +105,10 @@
                         <?php if ($_GET['menu_id'] == 'new') { ?>
                             <tr>
                                 <td><?php echo $language['new'] ?></td>
-                                <td><input id="path" onclick="getPages()" type="text" name="menu[path]"/>
-                                    <div id="hint"><ul></ul></div>
-                                    <div id="real-path"></div>
+                                <td><input onclick="getPages(this)" type="text" name="menu[path]"/>
                                 </td>
                                 <td>
-                                    <table class="table-bordered span12">
+                                    <table class="table-bordered">
                                         <?php foreach ($engine->languages as $lang) { ?>
                                             <tr>
                                                 <td><?php echo $lang['description'] ?>
@@ -148,13 +146,10 @@
                         <?php } else { ?>
                             <tr>
                                 <td><?php echo $menu_item['id'] ?></td>
-                                <td><input id="path" onclick="getPages()" type="text" name="menu[<?php echo $menu_item['id'] ?>][path]"
-                                           value="<?php echo $menu_item['path'] ?>"/>
-                                    <div id="hint"><ul></ul></div>
-                                    <div id="real-path"></div>
+                                <td><input onclick="getPages(this)" type="text" name="menu[<?php echo $menu_item['id'] ?>][path]" value="<?php echo $menu_item['path'] ?>"/>
                                 </td>
                                 <td>
-                                    <table class="table-bordered span12">
+                                    <table class="table-bordered">
                                         <tbody>
                                         <?php foreach ($engine->languages as $lang) { ?>
                                             <tr>
@@ -244,52 +239,57 @@
         getRealPath(jQuery('#path').attr('value'));
     });
 
-    jQuery('#path').keyup(function() {
-        getRealPath(jQuery(this).attr('value'));
-    });
-    jQuery('#path').change(function() {
-        getRealPath(jQuery(this).attr('value'));
-    });
-
-    jQuery('#hint ul').mouseleave(function() {
-        jQuery(this).html('');
-    });
-
-    jQuery('#hint ul li').live('click', function() {
-        jQuery('#path').attr('value', jQuery(this).attr('data-route'));
-        getRealPath(jQuery('#path').attr('value'));
-        jQuery('#hint ul').html('');
-    });
-
-    function getPages() {
-        var res_box = jQuery('#hint ul');
+    function getPages(elem) {
+        var res_box = '';
         jQuery.ajax({
             url: 'index.php?page=mainmenu',
             type: 'POST',
             dataType: 'json',
             data: 'get_pages=1',
-            beforeSend: function() {
-                res_box.slideUp(200);
-                res_box.html('');
+            beforeSend: function () {
+                $('#hint').remove();
             },
-            success: function(data) {
+            success: function (data) {
                 var m = '';
-                jQuery.each(data['materials'], function(){
-                    m += '<li data-route="' + this['route'] + '">' + this['caption'] + '</li>';
+                var current = jQuery(elem).val();
+                var active = '';
+                jQuery.each(data['materials'], function () {
+                    active = '';
+                    if (this['route'] == current) {
+                        active = ' class="active" ';
+                    }
+                    m += '<li' + active + ' data-route="' + this['route'] + '">' + this['caption'] + '</li>';
                 });
                 var s = '';
-                jQuery.each(data['s_pages'], function(){
-                    s += '<li data-route="' + this['route'] + '">' + this['caption'] + '</li>';
+                jQuery.each(data['s_pages'], function () {
+                    active = '';
+                    if (this['route'] == current) {
+                        active = ' class="active" ';
+                    }
+                    s += '<li' + active + ' data-route="' + this['route'] + '">' + this['caption'] + '</li>';
                 });
-                res_box.append('<li class="caption"><?php echo $language['static_pages'] ?></li>');
-                res_box.append(s);
-                res_box.append('<li class="caption"><?php echo $language['materials'] ?></li>');
-                res_box.append(m);
+                res_box += '<li class="caption"><?php echo $language['static_pages'] ?></li>';
+                res_box += s;
+                res_box += '<li class="caption"><?php echo $language['materials'] ?></li>';
+                res_box += m;
             },
-            complete: function() {
-                res_box.slideDown(200);
+            complete: function () {
+                var mw = jQuery(elem).width();
+                $(elem).after('<div id="hint"><div style="height: 300px; min-width: ' + mw + 'px; overflow-y: scroll"><ul>' + res_box + '</ul></div></div>');
+                jQuery('#hint').slideDown(200).on('click', 'li', function () {
+                    jQuery(elem).attr('value', jQuery(this).attr('data-route'));
+                    jQuery('#hint').remove();
+                    jQuery('#real_path').remove();
+                    jQuery(elem).parent().append('<span id="real_path"></span>');
+                    getRealPath(jQuery(this).attr('data-route'));
+                });
+                $(elem).blur(function () {
+                    setTimeout(function () {
+                        jQuery('#hint').remove();
+                    }, 100);
+                });
             },
-            error: function() {
+            error: function () {
                 console.log('error occurred');
             }
         });
@@ -302,10 +302,7 @@
             dataType: 'json',
             data: 'get_real_path=' + encodeURIComponent(path),
             success: function(data) {
-                jQuery('#real-path').html(data);
-            },
-            complete: function() {
-                console.log('complete');
+                jQuery('#real_path').text(data);
             },
             error: function(data, status) {
                 console.log('damn' + data + status);
