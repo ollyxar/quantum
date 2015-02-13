@@ -252,61 +252,61 @@
 </div>
 </form>
 <script type="text/javascript">
-    jQuery('#callback-toggle-button').toggleButtons({
+    $('#callback-toggle-button').toggleButtons({
         onChange: function ($el, status, e) {
             if (status == true) {
-                jQuery('#curl').val('1');
+                $('#curl').val('1');
             } else {
-                jQuery('#curl').val('0');
+                $('#curl').val('0');
             }
         }
     });
-    jQuery('#callback-toggle-uc').toggleButtons({
+    $('#callback-toggle-uc').toggleButtons({
         onChange: function ($el, status, e) {
             if (status == true) {
-                jQuery('#uc').val('1');
+                $('#uc').val('1');
             } else {
-                jQuery('#uc').val('0');
+                $('#uc').val('0');
             }
         }
     });
-    jQuery('#callback-toggle-button-4').toggleButtons({
+    $('#callback-toggle-button-4').toggleButtons({
         onChange: function ($el, status, e) {
             if (status == true) {
-                jQuery('#use404r').val('1');
+                $('#use404r').val('1');
             } else {
-                jQuery('#use404r').val('0');
+                $('#use404r').val('0');
             }
         }
     });
-    jQuery('#callback-toggle-button-ml').toggleButtons({
+    $('#callback-toggle-button-ml').toggleButtons({
         onChange: function ($el, status, e) {
             if (status == true) {
-                jQuery('#multilang').val('1');
+                $('#multilang').val('1');
             } else {
-                jQuery('#multilang').val('0');
+                $('#multilang').val('0');
             }
         }
     });
-    jQuery('#callback-toggle-button-sml').toggleButtons({
+    $('#callback-toggle-button-sml').toggleButtons({
         onChange: function ($el, status, e) {
             if (status == true) {
-                jQuery('#seomultilang').val('1');
+                $('#seomultilang').val('1');
             } else {
-                jQuery('#seomultilang').val('0');
+                $('#seomultilang').val('0');
             }
         }
     });
-    jQuery('#save').click(function () {
-        jQuery('#action').val('save');
-        jQuery('#form').submit();
+    $('#save').click(function () {
+        $('#action').val('save');
+        $('#form').submit();
     });
-    jQuery('#create_backup').click(function () {
-        jQuery('#action').val('backup');
-        jQuery('#form').submit();
+    $('#create_backup').click(function () {
+        $('#action').val('backup');
+        $('#form').submit();
     });
-    jQuery('#create_db_backup').click(function () {
-        jQuery('#action').val('backup_db');
-        jQuery('#form').submit();
+    $('#create_db_backup').click(function () {
+        $('#action').val('backup_db');
+        $('#form').submit();
     });
 </script>

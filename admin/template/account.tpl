@@ -315,24 +315,24 @@
 </div>
 </form>
 <script type="text/javascript">
-    jQuery('.hero-unit div.table').css('display', 'none');
-    jQuery('.hero-unit h4').css('cursor', 'pointer').click(function() {
-        var table = jQuery(this).parent().find('div.table');
+    $('.hero-unit div.table').css('display', 'none');
+    $('.hero-unit h4').css('cursor', 'pointer').click(function() {
+        var table = $(this).parent().find('div.table');
         if (table.css('display') == 'none') {
             table.slideDown(500);
         } else {
             table.slideUp(500);
         }
     });
-    jQuery('#save').click(function () {
-        jQuery('#action').val('save');
-        jQuery('#form').submit();
+    $('#save').click(function () {
+        $('#action').val('save');
+        $('#form').submit();
     });
-    jQuery('.switcher').change(function () {
-        if ((jQuery(this).is(':checked'))) {
-            jQuery(this).parent().find('input:hidden').attr('value', '1');
+    $('.switcher').change(function () {
+        if ($(this).is(':checked')) {
+            $(this).parent().find('input:hidden').attr('value', '1');
         } else {
-            jQuery(this).parent().find('input:hidden').attr('value', '0');
+            $(this).parent().find('input:hidden').attr('value', '0');
         }
     });
 </script>

@@ -70,7 +70,7 @@
     </div>
 </form>
 <script type="text/javascript">
-    jQuery('#save').click(function () {
-        jQuery('#form').submit();
+    $('#save').click(function () {
+        $('#form').submit();
     });
 </script>

@@ -278,15 +278,15 @@
 
 </form>
 <script type="text/javascript">
-    jQuery('#save').click(function () {
-        jQuery('#action').val('save');
-        jQuery('#form').submit();
+    $('#save').click(function () {
+        $('#action').val('save');
+        $('#form').submit();
     });
-    jQuery('.switcher').change(function () {
-        if ((jQuery(this).attr('checked') != undefined) && (jQuery(this).attr('checked') == 'checked')) {
-            jQuery(this).parent().parent().children().attr('value', '1');
+    $('.switcher').change(function () {
+        if (($(this).attr('checked') != undefined) && ($(this).attr('checked') == 'checked')) {
+            $(this).parent().parent().children().attr('value', '1');
         } else {
-            jQuery(this).parent().parent().children().attr('value', '0');
+            $(this).parent().parent().children().attr('value', '0');
         }
     })
 </script>

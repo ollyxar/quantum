@@ -56,14 +56,11 @@
                     <div class="img" style="width: 150px; height: 155px; overflow: hidden;border: 1px solid #919191;">
                         <img src="<?php echo $user['thumb']; ?>">
                         <div class="links">
-                            <a href="#"
-                               onclick="openQFinder(this)"><?php echo $language['browse'] ?></a> |
-                            <a href="#"
-                               onclick="clearImage(this)"><?php echo $language['clear'] ?></a>
+                            <a onclick="openQFinder(this)"><?php echo $language['browse'] ?></a> |
+                            <a onclick="clearImage(this)"><?php echo $language['clear'] ?></a>
                         </div>
+                        <input type="hidden" name="photo" value="<?php echo $user['photo'] ?>">
                     </div>
-                    <input id="photo" type="hidden" name="photo"
-                           value="<?php echo $user['photo'] ?>">
                 </div>
             </div>
             <div class="clearfix"></div>
@@ -123,25 +120,25 @@
 </form>
 <script type="text/javascript">
     function clearImage(a) {
-        var div = jQuery(a).parent().parent();
-        div.find('img').replaceWith('<img src="<?php echo ROOT_DIR ?>upload/cache/images/no-image-150x130a.jpg" />');
-        jQuery('#photo').val('<?php echo ROOT_DIR ?>upload/images/no-image.jpg');
+        var div = $(a).parent().parent();
+        div.find('img').replaceWith('<img src="<?php echo ROOT_DIR ?>upload/cache/images/no-image-90x80a.jpg" />');
+        div.find('input[type=hidden]').val('<?php echo ROOT_DIR ?>upload/images/no-image.jpg');
     }
     function openQFinder(a) {
         function onSelect(fileUrl, data, allFiles) {
-            var div = jQuery(a).parent().parent();
+            var div = $(a).parent().parent();
             div.find('img').replaceWith('<img src="template/images/ajax-loader.gif" alt="processing..." />');
             var img = new Image();
             img.src = fileUrl;
             img.onload = function () {
                 div.find('img').replaceWith('<img src="' + fileUrl + '" />');
-                jQuery('#photo').val(fileUrl);
+                div.find('input[type=hidden]').val(fileUrl);
             };
-            jQuery('#qfm').remove();
+            $('#qfm').remove();
         }
-
-        jQuery('#form').before('<div id="qfm"></div>');
-        var qfm = jQuery('#qfm');
+        if ($('#qfm').length > 0) return false;
+        $('#form').before('<div id="qfm"></div>');
+        var qfm = $('#qfm');
         qfm.html('<div id="qfinder"></div>');
         qfm.dialog({
             height: 450,
@@ -154,25 +151,23 @@
         finder.resourceType = "Images";
         finder.replace('qfinder', config);
 
-        jQuery('.ui-dialog-titlebar-close').live('click', function () {
-            jQuery('#qfinder').remove();
-            jQuery('#qfm').remove();
+        $('body').on('click', '.ui-dialog-titlebar-close', function () {
+            $('#qfinder').remove();
+            $('#qfm').remove();
         });
     }
-</script>
-<script type="text/javascript">
-    jQuery("#datepicker").datepicker({ dateFormat: "dd-mm-yy" });
-    jQuery('#save').click(function () {
-        if (jQuery('input:text[name=uname]').val() == '') {
-            jQuery('input:text[name=uname]').addClass("alert-value");
+    $("#datepicker").datepicker({ dateFormat: "dd-mm-yy" });
+    $('#save').click(function () {
+        if ($('input:text[name=uname]').val() == '') {
+            $('input:text[name=uname]').addClass("alert-value");
             alert('<?php echo $language['name_required'] ?>');
         } else {
-            jQuery('#form').submit();
+            $('#form').submit();
         }
     });
     <?php if (!empty($user)) { ?>
-    jQuery('#chp').click(function () {
-        var p = jQuery('input[name=\'pass\']');
+    $('#chp').click(function () {
+        var p = $('input[name=\'pass\']');
         if (p.attr('disabled') !== undefined) {
             p.removeAttr('disabled');
         } else {
@@ -180,7 +175,7 @@
         }
     });
     <?php } ?>
-    jQuery('input:text[name=uname]').keypress(function () {
-        jQuery('input:text[name=uname]').removeClass("alert-value");
+    $('input:text[name=uname]').keypress(function () {
+        $('input:text[name=uname]').removeClass("alert-value");
     })
 </script>

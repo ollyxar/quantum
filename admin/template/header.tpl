@@ -30,7 +30,7 @@
                     <ul class="nav">
                         <?php if ($_SESSION['access'] <= 2) { ?>
                         <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown"><?php echo $language['system'] ?>
+                            <a class="dropdown-toggle" data-toggle="dropdown"><?php echo $language['system'] ?>
                                 <b class="caret"></b>
                             </a>
                             <ul class="dropdown-menu">
@@ -47,7 +47,7 @@
                             </ul>
                         </li>
                         <li class="dropdown">
-                            <a href="" class="dropdown-toggle" data-toggle="dropdown"><?php echo $language['users'] ?>
+                            <a class="dropdown-toggle" data-toggle="dropdown"><?php echo $language['users'] ?>
                                 <b class="caret"></b>
                             </a>
                             <ul class="dropdown-menu">
@@ -63,7 +63,7 @@
                         </li>
                         <?php } ?>
                         <li class="dropdown">
-                            <a href="#" class="dropdown-toggle"
+                            <a class="dropdown-toggle"
                                data-toggle="dropdown"><?php echo $language['modules'] ?>
                                 <b class="caret"></b>
                             </a>
@@ -92,7 +92,7 @@
                                     class="icon-share-alt icon-white"></i> <?php echo $language['go_to_site'] ?></a>
                         </li>
                         <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                            <a class="dropdown-toggle" data-toggle="dropdown">
                                 <i class="icon-user icon-white"></i> <?php echo $_SESSION['adm_name'] ?>
                                 <b class="caret"></b>
                             </a>

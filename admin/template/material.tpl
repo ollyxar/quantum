@@ -57,10 +57,8 @@
                 <div class="img" style="width: 150px; height: 155px; overflow: hidden;border: 1px solid #919191;">
                     <img src="<?php echo $material['thumb']; ?>">
                     <div class="links">
-                        <a href="#"
-                           onclick="openQFinder(this)"><?php echo $language['browse'] ?></a> |
-                        <a href="#"
-                           onclick="clearImage(this)"><?php echo $language['clear'] ?></a>
+                        <a onclick="openQFinder(this)"><?php echo $language['browse'] ?></a> |
+                        <a onclick="clearImage(this)"><?php echo $language['clear'] ?></a>
                     </div>
                 </div>
                 <input id="preview" type="hidden" name="preview" value="<?php echo $material['preview'] ?>">
@@ -138,25 +136,25 @@
 
 <script type="text/javascript">
     function clearImage(a) {
-        var div = jQuery(a).parent().parent();
+        var div = $(a).parent().parent();
         div.find('img').replaceWith('<img src="<?php echo ROOT_DIR ?>upload/cache/images/no-image-150x130a.jpg" />');
-        jQuery('#photo').val('<?php echo ROOT_DIR ?>upload/images/no-image.jpg');
+        $('#photo').val('<?php echo ROOT_DIR ?>upload/images/no-image.jpg');
     }
     function openQFinder(a) {
         function onSelect(fileUrl, data, allFiles) {
-            var div = jQuery(a).parent().parent();
+            var div = $(a).parent().parent();
             div.find('img').replaceWith('<img src="template/images/ajax-loader.gif" alt="processing..." />');
             var img = new Image();
             img.src = fileUrl;
             img.onload = function () {
                 div.find('img').replaceWith('<img src="' + fileUrl + '" />');
-                jQuery('#preview').val(fileUrl);
+                $('#preview').val(fileUrl);
             };
-            jQuery('#qfm').remove();
+            $('#qfm').remove();
         }
 
-        jQuery('#form').before('<div id="qfm"></div>');
-        var qfm = jQuery('#qfm');
+        $('#form').before('<div id="qfm"></div>');
+        var qfm = $('#qfm');
         qfm.html('<div id="qfinder"></div>');
         qfm.dialog({
             height: 450,
@@ -169,14 +167,14 @@
         finder.resourceType = "Images";
         finder.replace('qfinder', config);
 
-        jQuery('.ui-dialog-titlebar-close').live('click', function () {
-            jQuery('#qfinder').remove();
-            jQuery('#qfm').remove();
+        $('body').on('click', '.ui-dialog-titlebar-close', function () {
+            $('#qfinder').remove();
+            $('#qfm').remove();
         });
     }
 </script>
 <script type="text/javascript">
-    jQuery('#save').click(function () {
-        jQuery('#form').submit();
+    $('#save').click(function () {
+        $('#form').submit();
     })
 </script>

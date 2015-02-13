@@ -81,8 +81,8 @@
 
 </form>
 <script type="text/javascript">
-    jQuery('#save').click(function () {
-        jQuery('#action').val('save');
-        jQuery('#form').submit();
+    $('#save').click(function () {
+        $('#action').val('save');
+        $('#form').submit();
     });
 </script>

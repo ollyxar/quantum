@@ -6011,9 +6011,6 @@ a.badge:focus {
     margin: 0 auto;
     text-align: center;
 }
-.links a {
-    cursor: pointer;
-}
 #hint {
     position: absolute;
     font-size: 12px;
@@ -6060,5 +6057,8 @@ div.debug {
     font-size: 16px;
 }
 .table .icon-info-sign {
+    cursor: pointer;
+}
+a {
     cursor: pointer;
 }

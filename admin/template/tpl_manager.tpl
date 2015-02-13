@@ -87,16 +87,16 @@ function fnLink($filename, $path) {
         enterMode: "keep",
         tabMode: "shift"
     });
-    jQuery(document).ready(function () {
-        jQuery("#red").treeview({
+    $(document).ready(function () {
+        $("#red").treeview({
             animated: "fast",
             collapsed: false,
             unique: true,
             persist: "cookie"
         });
     });
-    jQuery('#save').click(function () {
-        jQuery('#action').val('save');
-        jQuery('#form').submit();
+    $('#save').click(function () {
+        $('#action').val('save');
+        $('#form').submit();
     });
 </script>

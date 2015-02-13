@@ -107,40 +107,40 @@
     <?php echo printPagination($page_count, 'index.php?page=staticpages' . $s . '&per_page=' . (int)$_GET['per_page'], false, true) ?>
 </div>
 <script type="text/javascript">
-    jQuery('#chk').change(function () {
-        if (jQuery('#chk').attr("checked") == "checked") {
-            jQuery('.ids').attr('checked', 'checked');
+    $('#chk').change(function () {
+        if ($(this).is(':checked')) {
+            $('.ids').attr('checked', 'checked');
         } else {
-            jQuery('.ids').removeAttr('checked');
+            $('.ids').removeAttr('checked');
         }
     });
-    jQuery('#save').click(function () {
-        jQuery('#action').val('save');
-        jQuery('#form').submit();
+    $('#save').click(function () {
+        $('#action').val('save');
+        $('#form').submit();
     });
-    jQuery('#activate').click(function () {
-        jQuery('#action').val('activate');
-        jQuery('#form').submit();
+    $('#activate').click(function () {
+        $('#action').val('activate');
+        $('#form').submit();
     });
-    jQuery('#deactivate').click(function () {
-        jQuery('#action').val('deactivate');
-        jQuery('#form').submit();
+    $('#deactivate').click(function () {
+        $('#action').val('deactivate');
+        $('#form').submit();
     });
-    jQuery('#remove').click(function () {
+    $('#remove').click(function () {
         if (confirm("<?php echo $language['confirm_delete'] ?>") == true) {
-            jQuery('#action').val('remove');
-            jQuery('#form').submit();
+            $('#action').val('remove');
+            $('#form').submit();
         }
     });
-    jQuery('#button-search').click(function () {
-        var srch = jQuery('input[name=\'search\']').attr('value');
-        window.location = 'index.php?page=staticpages&search=' + srch;
+    $('#button-search').click(function () {
+        var search = $('input[name=\'search\']').attr('value');
+        window.location = 'index.php?page=staticpages&search=' + search;
         return false;
     });
-    jQuery('input[name=\'search\']').keydown(function (e) {
+    $('input[name=\'search\']').keydown(function (e) {
         if (e.keyCode == 13) {
-            var srch = jQuery(this).attr('value');
-            window.location = 'index.php?page=staticpages&search=' + srch;
+            var search = $(this).attr('value');
+            window.location = 'index.php?page=staticpages&search=' + search;
             return false;
         }
     });

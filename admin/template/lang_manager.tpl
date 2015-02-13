@@ -101,18 +101,18 @@
 <script type="text/javascript">
     function openQFinder(div) {
         function onSelect(fileUrl, data, allFiles) {
-            jQuery(div).find('img').replaceWith('<img src="template/images/ajax-loader.gif" alt="processing..." />');
+            $(div).find('img').replaceWith('<img src="template/images/ajax-loader.gif" alt="processing..." />');
             var img = new Image();
             img.src = fileUrl;
             img.onload = function () {
-                jQuery(div).find('img').replaceWith('<img src="' + fileUrl + '" />');
-                jQuery('input[name=\'' + jQuery(div).attr('id') + '\']').val(fileUrl);
+                $(div).find('img').replaceWith('<img src="' + fileUrl + '" />');
+                $('input[name=\'' + $(div).attr('id') + '\']').val(fileUrl);
             };
-            jQuery('#qfm').remove();
+            $('#qfm').remove();
         }
-
-        jQuery('#language-form').before('<div id="qfm"></div>');
-        var qfm = jQuery('#qfm');
+        if ($('#qfm').length > 0) return false;
+        $('#language-form').before('<div id="qfm"></div>');
+        var qfm = $('#qfm');
         qfm.html('<div id="qfinder"></div>');
         qfm.dialog({
             height: 450,
@@ -121,46 +121,41 @@
         var finder = new QFinder();
         var config = {};
         config.height = '380px';
-        console.log('ok');
         finder.selectActionFunction = onSelect;
         finder.resourceType = "Images";
         finder.replace('qfinder', config);
 
-        jQuery('.ui-dialog-titlebar-close').live('click', function () {
-            jQuery('#qfinder').remove();
-            jQuery('#qfm').remove();
+        $('body').on('click', '.ui-dialog-titlebar-close', function () {
+            $('#qfinder').remove();
+            $('#qfm').remove();
         });
     }
-</script>
-<script type="text/javascript">
-    jQuery('#lang-adder').click(function () {
-        if (jQuery('input:text[name="language[code]"]').val() == '') {
-            jQuery('input:text[name="language[code]"]').addClass("alert-value");
+    $('#lang-adder').click(function () {
+        if ($('input:text[name="language[code]"]').val() == '') {
+            $('input:text[name="language[code]"]').addClass("alert-value");
             alert('<?php echo $language['lang_code_required'] ?>');
         } else {
-            jQuery('#lang-new').submit();
+            $('#lang-new').submit();
         }
     });
-    jQuery('input:text[name="language[code]"]').keypress(function () {
-        jQuery('input:text[name="language[code]"]').removeClass("alert-value");
-    })
-</script>
-<script type="text/javascript">
-    jQuery('#chk').change(function () {
-        if (jQuery('#chk').attr("checked") == "checked") {
-            jQuery('.ids').attr('checked', 'checked');
+    $('input:text[name="language[code]"]').keypress(function () {
+        $('input:text[name="language[code]"]').removeClass("alert-value");
+    });
+    $('#chk').change(function () {
+        if ($(this).is(':checked')) {
+            $('.ids').attr('checked', 'checked');
         } else {
-            jQuery('.ids').removeAttr('checked');
+            $('.ids').removeAttr('checked');
         }
     });
-    jQuery('#language-save').click(function () {
-        jQuery('#language-action').val('save');
-        jQuery('#language-form').submit();
+    $('#language-save').click(function () {
+        $('#language-action').val('save');
+        $('#language-form').submit();
     });
-    jQuery('#language-remove').click(function () {
+    $('#language-remove').click(function () {
         if (confirm('<?php echo $language['confirm_delete'] ?>') == true) {
-            jQuery('#language-action').val('remove');
-            jQuery('#language-form').submit();
+            $('#language-action').val('remove');
+            $('#language-form').submit();
         }
     });
 </script>

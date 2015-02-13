@@ -55,8 +55,7 @@
             <ul id="red" class="treeview">
                 <?php
                 function printMenu($menu, $menu_id) {
-                    foreach ($menu as $id => $menu_item) {
-                        ?>
+                    foreach ($menu as $id => $menu_item) { ?>
                         <li><span
                                 onclick="document.location.href='index.php?page=mainmenu&menu_id=<?php
                                 echo $id ?>'" class="<?php if ($menu_id == $id) {
@@ -198,45 +197,45 @@
 
 <script type="text/javascript">
 
-    jQuery('#sts').toggleButtons({
+    $('#sts').toggleButtons({
         onChange: function ($el, status, e) {
             if (status == true) {
-                jQuery('#sts_h').val('1');
+                $('#sts_h').val('1');
             } else {
-                jQuery('#sts_h').val('0');
+                $('#sts_h').val('0');
             }
         }
     });
 
-    jQuery('#save').click(function () {
-        jQuery('#action').val('save');
-        jQuery('#form').submit();
+    $('#save').click(function () {
+        $('#action').val('save');
+        $('#form').submit();
     });
 
-    jQuery('#save-settings').click(function () {
-        jQuery('#action-settings').val('save-settings');
-        jQuery('#form-settings').submit();
+    $('#save-settings').click(function () {
+        $('#action-settings').val('save-settings');
+        $('#form-settings').submit();
     });
 
-    jQuery('#settings').click(function () {
-        jQuery('#settings-block').slideToggle(200);
+    $('#settings').click(function () {
+        $('#settings-block').slideToggle(200);
     });
 
-    jQuery('#remove').click(function () {
+    $('#remove').click(function () {
         if (confirm("<?php echo $language['confirm_delete'] ?>") == true) {
-            jQuery('#action').val('remove');
-            jQuery('#form').submit();
+            $('#action').val('remove');
+            $('#form').submit();
         }
     });
 
-    jQuery(document).ready(function () {
-        jQuery("#red").treeview({
+    $(document).ready(function () {
+        $("#red").treeview({
             animated: "fast",
             collapsed: false,
             unique: true,
             persist: "cookie"
         });
-        getRealPath(jQuery('#path').attr('value'));
+        getRealPath($('#path').attr('value'));
     });
 
     function getPages(elem) {
@@ -251,7 +250,7 @@
             },
             success: function (data) {
                 var m = '';
-                var current = jQuery(elem).val();
+                var current = $(elem).val();
                 var active = '';
                 jQuery.each(data['materials'], function () {
                     active = '';
@@ -274,18 +273,18 @@
                 res_box += m;
             },
             complete: function () {
-                var mw = jQuery(elem).width();
+                var mw = $(elem).width();
                 $(elem).after('<div id="hint"><div style="height: 300px; min-width: ' + mw + 'px; overflow-y: scroll"><ul>' + res_box + '</ul></div></div>');
-                jQuery('#hint').slideDown(200).on('click', 'li', function () {
-                    jQuery(elem).attr('value', jQuery(this).attr('data-route'));
-                    jQuery('#hint').remove();
-                    jQuery('#real_path').remove();
-                    jQuery(elem).parent().append('<span id="real_path"></span>');
-                    getRealPath(jQuery(this).attr('data-route'));
+                $('#hint').slideDown(200).on('click', 'li', function () {
+                    $(elem).attr('value', $(this).attr('data-route'));
+                    $('#hint').remove();
+                    $('#real_path').remove();
+                    $(elem).parent().append('<span id="real_path"></span>');
+                    getRealPath($(this).attr('data-route'));
                 });
                 $(elem).blur(function () {
                     setTimeout(function () {
-                        jQuery('#hint').remove();
+                        $('#hint').remove();
                     }, 100);
                 });
             },
@@ -302,7 +301,7 @@
             dataType: 'json',
             data: 'get_real_path=' + encodeURIComponent(path),
             success: function(data) {
-                jQuery('#real_path').text(data);
+                $('#real_path').text(data);
             },
             error: function(data, status) {
                 console.log('damn' + data + status);

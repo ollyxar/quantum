@@ -43,8 +43,8 @@
     </div>
 </div>
 <script type="text/javascript">
-    jQuery(document).ready(function () {
-        jQuery('.admin').fadeIn(900);
+    $(document).ready(function () {
+        $('.admin').fadeIn(900);
     });
 </script>
 </body>

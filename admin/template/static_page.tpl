@@ -96,12 +96,12 @@
     </div>
 </form>
 <script type="text/javascript">
-    jQuery('#save').click(function () {
-        jQuery('input:hidden[name=action]').val('save');
-        jQuery('#form').submit();
+    $('#save').click(function () {
+        $('input:hidden[name=action]').val('save');
+        $('#form').submit();
     });
-    jQuery('#apply').click(function () {
-        jQuery('input:hidden[name=action]').val('apply');
-        jQuery('#form').submit();
+    $('#apply').click(function () {
+        $('input:hidden[name=action]').val('apply');
+        $('#form').submit();
     })
 </script>

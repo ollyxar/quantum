@@ -104,7 +104,7 @@
         finder.resourceType = "Images";
         finder.replace('qfinder', config);
 
-        $('.ui-dialog-titlebar-close').live('click', function () {
+        $('body').on('click', '.ui-dialog-titlebar-close', function () {
             $('#qfinder').remove();
             $('#qfm').remove();
         });

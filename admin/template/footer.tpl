@@ -33,25 +33,25 @@
             </div>
         </div>
         <div class="modal-footer">
-            <input type="button" class="btn btn-primary" onclick="jQuery('#chp').submit()"
+            <input type="button" class="btn btn-primary" onclick="$('#chp').submit()"
                    value="<?php echo $language['submit'] ?>"></div>
     </form>
 </div>
 <script type="text/javascript">
     setTimeout(function(){
-        jQuery('.alert.text-center.alert-success').fadeOut(500);
+        $('.alert.text-center.alert-success').fadeOut(500);
     }, 3000);
 
-    jQuery(".icon-info-sign").mouseenter(function(){
-        var tooltip = jQuery(this).data("tooltip");
-        jQuery(this).append('<span class="tooltip">' + tooltip + '</span>');
+    $(".icon-info-sign").mouseenter(function(){
+        var tooltip = $(this).data("tooltip");
+        $(this).append('<span class="tooltip">' + tooltip + '</span>');
     }).mouseleave(function(){
-        jQuery(".tooltip").remove();
+        $(".tooltip").remove();
     });
 
-    jQuery(document).ready(function () {
-        jQuery('.nav.nav-tabs').each(function () {
-            jQuery(this).find('li:first > a').trigger('click');
+    $(document).ready(function () {
+        $('.nav.nav-tabs').each(function () {
+            $(this).find('li:first > a').trigger('click');
         });
     });
 </script>
