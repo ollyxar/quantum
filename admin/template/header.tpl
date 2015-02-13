@@ -3,14 +3,14 @@
 <head>
     <link rel="shortcut icon" href="favicon.ico" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <?php $engine->document->addHeaderString('<link href="template/css/bootstrap.css" rel="stylesheet" media="screen">') ?>
-    <?php $engine->document->addHeaderString('<link href="template/css/bootstrap-responsive.css" rel="stylesheet" media="screen">') ?>
-    <?php $engine->document->addHeaderString('<link href="template/css/font-awesome.css" rel="stylesheet" media="screen">') ?>
-    <?php $engine->document->addHeaderString('<link href="template/css/jquery-ui-1.10.4.custom.css" rel="stylesheet" media="screen">') ?>
+    <?php $engine->document->addStyle('template/css/bootstrap.css') ?>
+    <?php $engine->document->addStyle('template/css/bootstrap-responsive.css') ?>
+    <?php $engine->document->addStyle('template/css/font-awesome.css') ?>
+    <?php $engine->document->addStyle('template/css/jquery-ui-1.10.4.custom.css') ?>
     <!--[if IE 7]>
-    <?php $engine->document->addHeaderString('<link href="template/css/font-awesome-ie7.css" rel="stylesheet" media="screen">') ?>
+    <?php $engine->document->addStyle('template/css/font-awesome-ie7.css') ?>
 	<![endif]-->
-    <?php $engine->document->addHeaderString('<script src="template/js/bootstrap.js"></script>') ?>
+    <?php $engine->document->addScript('template/js/bootstrap.js') ?>
     <?php echo $engine->document->render() ?>
 </head>
 <body>

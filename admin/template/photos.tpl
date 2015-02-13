@@ -38,23 +38,13 @@
         </div>
     </div>
     <ul class="nav nav-tabs">
-        <?php $dou = true; ?>
         <?php foreach ($engine->languages as $lang) { ?>
-            <li <?php if ($dou) {
-                echo 'class="active"';
-                $dou = false;
-            } ?>>
-                <a data-toggle="tab" href="#<?php echo $lang['name'] ?>">
-                    <?php echo $lang['description'] ?></a></li>
+            <li><a data-toggle="tab" href="#<?php echo $lang['name'] ?>"><?php echo $lang['description'] ?></a></li>
         <?php } ?>
     </ul>
     <div class="tab-content">
-        <?php $dou = true; ?>
         <?php foreach ($engine->languages as $lang) { ?>
-            <div class="tab-pane<?php if ($dou) {
-                echo ' active';
-                $dou = false;
-            } ?>" id="<?php echo $lang['name'] ?>">
+            <div class="tab-pane" id="<?php echo $lang['name'] ?>">
                 <div class="row-fluid">
                     <div class="span12">
                         <div class="control-group">

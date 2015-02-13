@@ -42,11 +42,17 @@
         jQuery('.alert.text-center.alert-success').fadeOut(500);
     }, 3000);
 
-    $(".icon-info-sign").mouseenter(function(){
-        var tooltip = $(this).data("tooltip");
-        $(this).append('<span class="tooltip">' + tooltip + '</span>');
+    jQuery(".icon-info-sign").mouseenter(function(){
+        var tooltip = jQuery(this).data("tooltip");
+        jQuery(this).append('<span class="tooltip">' + tooltip + '</span>');
     }).mouseleave(function(){
-        $(".tooltip").remove();
+        jQuery(".tooltip").remove();
+    });
+
+    jQuery(document).ready(function () {
+        jQuery('.nav.nav-tabs').each(function () {
+            jQuery(this).find('li:first > a').trigger('click');
+        });
     });
 </script>
 </body>
