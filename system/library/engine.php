@@ -1,7 +1,7 @@
 <?php
 
 final class QOllyxar {
-    const version = '2.0.1';
+    const version = '2.0.2';
     public $config;
     public $db;
     public $languages = array();
