@@ -1,6 +1,6 @@
 QUANTUM Framework
 ======================
-+ Version: 2.0.1
++ Version: 2.0.2
 + Author: Olexy Sviridenko (aka Alex Slipknot | alexslipknot@europe.com)
 + HTML and CSS design: Olexandra Bespalova, Olexy Sviridenko, Olexander Sharin
 + URL: http://ollyxar.com
