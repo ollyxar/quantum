@@ -13,7 +13,7 @@ RewriteBase /
 #RewriteRule ^(.*)$ http://%1/$1 [R=301,L]
 #Options +SymLinksIfOwnerMatch
 #RewriteCond %{THE_REQUEST} ^[A-Z]{3,9}\ /index\.php\ HTTP/
-#RewriteRule ^index\.php$ http://yousite.com/ [R=301,L]
+#RewriteRule ^index\.php$ /$1 [R=301,L]
 
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
