@@ -14,32 +14,32 @@
 /*  CodeMirror - web text editor                                                    http://codemirror.net/  */
 /*===============================================   HISTORY   ==============================================*/
 
-F - Frontend; B - Backend; C - Core; M - Modules
+F - Front; A - Administration; C - Core; M - Modules
 
 2.0.2:
-- B: Template javascript improvement;
-- B: Replaced php code $dou to javascript event;
-- B: Improved OpenQFinder, Improved selecting url;
-- B: Optimized getPageCount() and getPage();
+- A: Template javascript improvement;
+- A: Replaced php code $dou to javascript event;
+- A: Improved OpenQFinder, Improved selecting url;
+- A: Optimized getPageCount() and getPage();
 - C: Added QOllyxar->getModuleParams method Added QBarcode library;
-- B: Fixed redirect on insert new material;
+- A: Fixed redirect on insert new material;
 - C: Added case when config file does not exists;
 - C: index() method access changed to protected;
-- B: Excluded possible "Undefined parent";
-- B: Fixed removing category;
-- B: Fixed query for selecting params of module;
-- B: Fixed language ordering;
-- B: Excluded availability of multiple insertion of style or script
+- A: Excluded possible "Undefined parent";
+- A: Fixed removing category;
+- A: Fixed query for selecting params of module;
+- A: Fixed language ordering;
+- A: Excluded availability of multiple insertion of style or script
 
 2.0.1:
 - C: Modified QCaptcha;
 - M: Added captcha support for Feedback module;
 - C: Modified QOllyxar->sendMail() - added additional parameters to work with attachment;
-- B: Improved compatibility for servers without mod_rewrite - links that contains ADM_PATH now has index.php;
+- A: Improved compatibility for servers without mod_rewrite - links that contains ADM_PATH now has index.php;
 - C: Modified QCache - added optional $path_to_system - to call cache from other directories;
-- B: Added "Manage" button on Modules page;
+- A: Added "Manage" button on Modules page;
 - M: Improved Reviews - multilanguage system;
-- B: Added Ukrainian localization;
+- A: Added Ukrainian localization;
 - F: Added Russian localization;
 - C: Modified printPagination - added additional parameter for old stylesheet;
 - F: Replaced old template with new;
@@ -61,16 +61,16 @@ F - Frontend; B - Backend; C - Core; M - Modules
 - C: Added QOllyxar->appendModule;
 - C: Modified QOllyxar->loadRouters;
 - C: Improved engine performance;
-- B: Optimized data usage;
+- A: Optimized data usage;
 - C: Renamed QOllyxar->doRoute to QOllyxar->start;
 - C: Added password restore feature;
-- B: Added hints;
+- A: Added hints;
 - C: Account module has been released;
 - C: Added installation system;
 - C: Moved unused library;
 - C: QOllyxar->appendModule is public now;
-- B: Fixed installation directory error;
-- B: Fixed DB_PREFIX error;
+- A: Fixed installation directory error;
+- A: Fixed DB_PREFIX error;
 - C: Fixed 404 error;
 
 2.0.0:
@@ -97,7 +97,7 @@ F - Frontend; B - Backend; C - Core; M - Modules
 - M: Added addLanguage to modules that should have it;
 - C: Added support for application/x-zip-compressed QInstaller;
 - M: Modified MainMenu (added path-hint select box);
-- B: Added breadcrumbs;
+- A: Added breadcrumbs;
 - C: Improved compatibility for root directories that is not '/';
 
 1.1.4:
@@ -108,11 +108,11 @@ F - Frontend; B - Backend; C - Core; M - Modules
 - C: Fixed error when language deleted and user still has session with deleted language;
 - C: Moved code from init of QModule to __construct;
 - C: Removed method initModules from QOllyxar;
-- B: Backend: Replaced KCFinder with QFinder;
-- B: Modified displaying of file manager - in main frame of CMS;
-- B: Modified module slider: added additional buttons for pictures;
-- B: Fixed displaying none of elements of "system" in main menu for Moderator or lower;
-- B: Modified language system. Replaced php-files with ini-files;
+- A: Backend: Replaced KCFinder with QFinder;
+- A: Modified displaying of file manager - in main frame of CMS;
+- A: Modified module slider: added additional buttons for pictures;
+- A: Fixed displaying none of elements of "system" in main menu for Moderator or lower;
+- A: Modified language system. Replaced php-files with ini-files;
 
 1.1.3:
 - C: Modified response for not-found-pages;
@@ -136,9 +136,9 @@ F - Frontend; B - Backend; C - Core; M - Modules
 - C: Added new instance of QUrl in QOllyxar->doRoute;
 - M: Modified Materials: optimized file structure, added breadcrumbs;
 - C: Added class QCaptcha;
-- B: Modified AMaterials;
+- A: Modified AMaterials;
 - M: Fixed onRoute methods of StaticPages, Materials when CLEAN_URL is turned off;
-- B: Added site settings: added default meta data, modified control panel in back-end;
+- A: Added site settings: added default meta data, modified control panel in back-end;
 - M: Modified Materials and StaticPages - filled with default meta data if not defined;
 
 1.1.0:
