@@ -90,6 +90,7 @@ class Materials extends QModule {
             }
             $this->data['details_caption']  = $this->params['details_' . $_SESSION['lang']];
             $page_count = $this->getPageCount((int)$category_id, (int)$this->params['count_per_page']);
+            $page_count = $page_count > 0 ? $page_count : 1;
             $this->data['pagination'] = printPagination($page_count, $this->engine->uri);
             $this->mode = 1;
             $this->engine->ERROR_404 = false;
